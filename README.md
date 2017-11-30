@@ -1,5 +1,4 @@
 # TS3 Social AI
-================
 
 ## Currently Implemented:
 
