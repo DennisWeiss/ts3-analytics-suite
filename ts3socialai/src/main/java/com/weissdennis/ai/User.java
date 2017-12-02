@@ -1,5 +1,6 @@
 package com.weissdennis.ai;
 
+import com.weissdennis.database.DbRelationLoader;
 import com.weissdennis.database.Location;
 
 public class User {
@@ -150,12 +151,16 @@ public class User {
         }
 
         private void setChannelRelation() {
-            //Get amount of matches in same channel
+            DbRelationLoader dbRelationLoader = new DbRelationLoader();
 
+            //Get amount of matches in same channel
+            int amount = dbRelationLoader.usersInSameChannel(User.this, otherUser);
 
             //Get total amount of matches with all users
+            int totalAmount = dbRelationLoader.totalUsersInSameChannel(User.this);
 
             //Result is the quotient of these two values
+            channelRelation = (double) amount / totalAmount;
         }
 
         private void setGeoRelation() {
