@@ -143,11 +143,13 @@ public class User {
         private User otherUser;
         private double geoRelation;
         private double channelRelation;
+        private IpMatch ipMatch;
 
         public Relation(User otherUser) {
             this.otherUser = otherUser;
             setChannelRelation();
             setGeoRelation();
+            setIpMatch();
         }
 
         private void setChannelRelation() {
@@ -164,15 +166,32 @@ public class User {
         }
 
         private void setGeoRelation() {
-            //Get user's location
+            //Gets the distance between user's location and other user's location
+            //Uses a linear function with result >= 0 to calculate the geo relation
+            geoRelation = Math.max(0, -1 / 500 * location.distanceTo(otherUser.getLocation()) + 1);
+        }
 
-            //Get other user's location
-
-            //users a linear function with result >= 0 to calculate the geo relation
+        private void setIpMatch() {
+            String[] ipParts1 = User.this.getIp().split("\\.");
+            String[] ipParts2 = otherUser.getIp().split("\\.");
+            int matches = 0;
+            for (int i = 0; i < 4; i++) {
+                if (!ipParts1[i].equals(ipParts2[i])) {
+                    break;
+                }
+                matches++;
+            }
+            if (matches == 3) {
+                ipMatch = IpMatch.FIRST_THREE_MATCH;
+            } else if (matches == 4) {
+                ipMatch = IpMatch.MATCH;
+            } else {
+                ipMatch = IpMatch.NOT_MATCH;
+            }
         }
 
         public double totalRelation() {
-            return channelRelation + 0.1 * geoRelation;
+            return channelRelation + 0.1 * geoRelation + ipMatch.getValue();
         }
 
         public User getOtherUser() {
