@@ -10,7 +10,7 @@
 ## TODO:
 
 - Building a small AI that finds out how close one user is related to another one
-- Building website, where data about:
+- Building website, where the following data is depicted:
     - TS3 server usage (amount of users connected),
     - their origins (including heatmap),
     - user relations visually depicted as a weighted graph
