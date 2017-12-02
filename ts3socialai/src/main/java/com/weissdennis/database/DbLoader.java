@@ -1,7 +1,7 @@
 package com.weissdennis.database;
 
 import com.weissdennis.ts3socialai.Configuration;
-import com.weissdennis.ts3socialai.User;
+import com.weissdennis.ai.User;
 
 import java.sql.*;
 import java.util.ArrayList;

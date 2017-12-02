@@ -1,5 +1,6 @@
 package com.weissdennis.ts3socialai;
 
+import com.weissdennis.ai.User;
 import com.weissdennis.database.DbLoader;
 import org.springframework.web.bind.annotation.*;
 

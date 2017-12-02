@@ -1,4 +1,4 @@
-package com.weissdennis.ai;
+package com.weissdennis.database;
 
 public class Client {
    private int id;
