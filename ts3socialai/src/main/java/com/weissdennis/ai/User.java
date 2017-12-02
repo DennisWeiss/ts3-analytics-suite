@@ -1,5 +1,6 @@
 package com.weissdennis.ai;
 
+import com.weissdennis.application.Configuration;
 import com.weissdennis.database.DbRelationLoader;
 import com.weissdennis.database.Location;
 
@@ -17,6 +18,8 @@ public class User {
     private Location location;
     private String postalCode;
     private String associatedOrg;
+
+    private static DbRelationLoader dbRelationLoader = new DbRelationLoader();
 
     public User(int id, String uniqueID, String nickname, int totalUpload, int totalDownload, String ip, String hostName,
                 String city, String region, String country, Location location, String postalCode, String associatedOrg) {
@@ -153,7 +156,6 @@ public class User {
         }
 
         private void setChannelRelation() {
-            DbRelationLoader dbRelationLoader = new DbRelationLoader();
 
             //Get amount of matches in same channel
             int amount = dbRelationLoader.usersInSameChannel(User.this, otherUser);
@@ -190,7 +192,7 @@ public class User {
             }
         }
 
-        public double totalRelation() {
+        public double getTotalRelation() {
             return channelRelation + 0.1 * geoRelation + ipMatch.getValue();
         }
 
@@ -204,6 +206,14 @@ public class User {
 
         public double getChannelRelation() {
             return channelRelation;
+        }
+
+        public IpMatch getIpMatch() {
+            return ipMatch;
+        }
+
+        public String getUniqueIdOfUser() {
+            return User.this.getUniqueID();
         }
     }
 }

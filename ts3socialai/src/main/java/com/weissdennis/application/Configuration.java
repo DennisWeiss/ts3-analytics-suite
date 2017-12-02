@@ -1,4 +1,4 @@
-package com.weissdennis.ts3socialai;
+package com.weissdennis.application;
 
 import com.weissdennis.ai.Channel;
 import com.weissdennis.database.ClientIpInfo;

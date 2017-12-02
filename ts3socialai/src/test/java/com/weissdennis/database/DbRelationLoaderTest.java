@@ -1,7 +1,7 @@
 package com.weissdennis.database;
 
 import com.weissdennis.ai.User;
-import com.weissdennis.ts3socialai.Configuration;
+import com.weissdennis.application.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

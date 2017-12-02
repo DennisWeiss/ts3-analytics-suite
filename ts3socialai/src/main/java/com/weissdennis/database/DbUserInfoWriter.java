@@ -1,6 +1,6 @@
 package com.weissdennis.database;
 
-import com.weissdennis.ts3socialai.Configuration;
+import com.weissdennis.application.Configuration;
 
 import java.sql.*;
 import java.util.Arrays;

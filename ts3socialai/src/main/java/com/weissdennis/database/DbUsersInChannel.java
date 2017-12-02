@@ -1,9 +1,8 @@
 package com.weissdennis.database;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
-import com.github.theholywaffle.teamspeak3.api.wrapper.Channel;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
-import com.weissdennis.ts3socialai.Configuration;
+import com.weissdennis.application.Configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

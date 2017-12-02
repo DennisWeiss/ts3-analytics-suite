@@ -1,12 +1,10 @@
-package com.weissdennis.ts3socialai;
+package com.weissdennis.application;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
-import com.weissdennis.database.DbUserInfoWriter;
 import com.weissdennis.database.DbUsersInChannel;
 
-import java.sql.SQLException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;

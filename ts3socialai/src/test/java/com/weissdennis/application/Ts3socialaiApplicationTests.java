@@ -1,4 +1,4 @@
-package com.weissdennis.ts3socialai;
+package com.weissdennis.application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

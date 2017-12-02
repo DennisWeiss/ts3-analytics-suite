@@ -1,7 +1,7 @@
 package com.weissdennis.database;
 
 import com.weissdennis.ai.User;
-import com.weissdennis.ts3socialai.Configuration;
+import com.weissdennis.application.Configuration;
 
 import java.sql.*;
 
@@ -29,10 +29,11 @@ public class DbRelationLoader {
                 "GROUP BY user_in_channel.unique_id, channels2.unique_id " + "ORDER BY amount DESC;";
         try {
             ResultSet resultSet = statement.executeQuery(query);
+            System.out.println(resultSet.getFetchSize());
             resultSet.next();
             return resultSet.getInt(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
         return 0;
     }
@@ -53,6 +54,6 @@ public class DbRelationLoader {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;
+        return 1;
     }
 }
