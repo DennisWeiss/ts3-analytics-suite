@@ -145,17 +145,20 @@ public class User {
 
         public Relation(User otherUser) {
             this.otherUser = otherUser;
+            setChannelRelation();
+            setGeoRelation();
         }
 
-        public void setChannelRelation() {
+        private void setChannelRelation() {
             //Get amount of matches in same channel
+
 
             //Get total amount of matches with all users
 
             //Result is the quotient of these two values
         }
 
-        public void setGeoRelation() {
+        private void setGeoRelation() {
             //Get user's location
 
             //Get other user's location

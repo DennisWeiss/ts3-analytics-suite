@@ -65,6 +65,7 @@ public class DbUserInfoWriter implements Runnable {
 
          while (resultSet.next()) {
             int clientID = resultSet.getInt(1);
+            System.out.printf("result of %d\n", clientID);
             String uniqueID = resultSet.getString(2);
             String nickName = resultSet.getString(3);
             int totalUpload = resultSet.getInt(4);
