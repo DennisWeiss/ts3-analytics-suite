@@ -170,7 +170,9 @@ public class User {
         private void setGeoRelation() {
             //Gets the distance between user's location and other user's location
             //Uses a linear function with result >= 0 to calculate the geo relation
-            geoRelation = Math.max(0, -1 / 500 * location.distanceTo(otherUser.getLocation()) + 1);
+            double distance = location.distanceTo(otherUser.getLocation());
+            double temp = -1f / 500 * distance + 1;
+            geoRelation = Math.max(0, temp);
         }
 
         private void setIpMatch() {

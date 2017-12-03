@@ -30,9 +30,11 @@ public class Location {
 
     public double distanceTo(Location otherLocation) {
         //TODO improve precision
-        return Math.sqrt(Math.pow((latitude - otherLocation.getLatitude()) * 0.5 * Math.PI * earthPolarRadius / 90, 2) + Math.pow(
+        double distance = Math.sqrt(Math.pow((latitude - otherLocation.getLatitude()) * 0.5 * Math.PI * earthPolarRadius / 90, 2) + Math.pow(
                 (longitude - otherLocation.longitude) * 2 * Math.PI * earthEquatorialRadius / 360 *
                         Math.cos(degreeToRadian((longitude + otherLocation.longitude) / 2)), 2));
+
+        return distance;
     }
 
     private static double degreeToRadian(double degree) {
