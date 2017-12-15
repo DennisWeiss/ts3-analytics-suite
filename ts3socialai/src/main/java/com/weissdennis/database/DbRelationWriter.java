@@ -17,8 +17,8 @@ public class DbRelationWriter {
             this.connection = DriverManager.getConnection(internDbUrl, Configuration.mariaDBusername, Configuration.mariaDBpassword);
             this.statement = connection.createStatement();
             statement.execute("USE ts3_social_ai");
-            statement.execute("CREATE TABLE relations(client1 VARCHAR(200) NOT NULL, client2 VARCHAR(200) NOT NULL, geo_relation DECIMAL(20,15), " +
-                    "channel_relation DECIMAL(20,15), ip_relation DECIMAL(4,2), total_relation DECIMAL(20,15), CONSTRAINT " +
+            statement.execute("CREATE TABLE relations(client1 VARCHAR(200) NOT NULL, client2 VARCHAR(200) NOT NULL, geo_relation DECIMAL(25,20), " +
+                    "channel_relation DECIMAL(25,20), ip_relation DECIMAL(25,20), total_relation DECIMAL(25,20), CONSTRAINT " +
                     "PK_Relations PRIMARY KEY(client1, client2));");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,8 +32,21 @@ public class DbRelationWriter {
         try {
             statement.execute(query);
         } catch (SQLException e) {
-            System.out.println("entry exists already");
-            //TODO: proper implementation
+            //System.out.println("entry exists already");
+
+        } finally {
+            String updateQuery =
+                    "UPDATE relations SET geo_relation=" + userRelation.getGeoRelation() + ", channel_relation=" + userRelation.getChannelRelation() +
+                            ", ip_relation=" + userRelation.getIpMatch().getValue() + ", total_relation=" + userRelation.getTotalRelation() +
+                            " WHERE client1='" + userRelation.getUniqueIdOfUser() + "' AND client2='" + userRelation.getOtherUser().getUniqueID() +
+                            "';";
+
+            System.out.println(updateQuery);
+            try {
+                statement.execute(updateQuery);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 @SpringBootApplication
 public class Ts3socialaiApplication {
     static String configLocation = "config.cfg";
-    static String queryName = "TS3SocialAI-Test2";
+    static String queryName = "TS3SocialAI-Test";
 
     public static void main(String[] args) {
         SpringApplication.run(Ts3socialaiApplication.class, args);
