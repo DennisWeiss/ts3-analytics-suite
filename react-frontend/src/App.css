@@ -1,0 +1,12 @@
+.content {
+  background: #fcfcfc;
+  height: 100vh;
+}
+
+.graph {
+  background: #ffffff;
+  margin: 20px;
+  height: 600px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+}
