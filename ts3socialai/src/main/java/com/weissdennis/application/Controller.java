@@ -2,6 +2,7 @@ package com.weissdennis.application;
 
 import com.weissdennis.ai.User;
 import com.weissdennis.database.DbLoader;
+import com.weissdennis.database.RelationWrapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -27,5 +28,11 @@ public class Controller {
    public User userById(@RequestParam(value = "id") String uniqueId) throws SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
       return dbLoader.loadUserById(uniqueId);
+   }
+
+   @RequestMapping(value = "/relations", method = RequestMethod.GET)
+   public List<RelationWrapper> relations() throws  SQLException {
+      DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
+      return dbLoader.loadRelations();
    }
 }

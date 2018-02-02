@@ -37,6 +37,31 @@ public class DbLoader {
       return processSingleResultSet(resultSet);
    }
 
+   public List<RelationWrapper> loadRelations() throws SQLException {
+      ResultSet resultSet = statement.executeQuery("SELECT relations.client1, relations.client2, relations.geo_relation, " +
+              "(relations.channel_relation+relations2.channel_relation)/2 AS channel_relation, relations.ip_relation," +
+              "(relations.total_relation+relations2.total_relation)/2 AS total_relation\n" +
+              "FROM relations \n" +
+              "JOIN relations AS relations2 ON relations.client2 = relations2.client1 AND relations.client1 = relations2.client2\n" +
+              "WHERE relations.channel_relation > 0.01 AND relations2.channel_relation > 0.01\n" +
+              "ORDER BY total_relation DESC;");
+      return processRelations(resultSet);
+   }
+
+   private List<RelationWrapper> processRelations(ResultSet resultSet) throws SQLException {
+      List<RelationWrapper> relations = new ArrayList<>();
+      while (resultSet.next()) {
+         String user = resultSet.getString(1);
+         String otherUser = resultSet.getString(2);
+         double geoRelation = resultSet.getDouble(3);
+         double channelRelation = resultSet.getDouble(4);
+         double ipRelation = resultSet.getDouble(5);
+         double totalRelation = resultSet.getDouble(6);
+         relations.add(new RelationWrapper(user, otherUser, geoRelation, channelRelation, ipRelation, totalRelation));
+      }
+      return relations;
+   }
+
    private User processSingleResultSet(ResultSet resultSet) throws SQLException {
       int clientID = resultSet.getInt(1);
       String uniqueID = resultSet.getString(2);
