@@ -15,13 +15,35 @@ var options = {
     layout: {
         hierarchical: false
     },
+    nodes: {
+        shape: 'box',
+        font: {
+            size: 20,
+            face: 'helvetica'
+        }
+    },
     edges: {
-        color: "#000000"
+        arrows: {
+            to: {
+                enabled: false
+            },
+            middle: {
+                enabled: false
+            },
+            from: {
+                enabled: false
+            }
+        },
+        color: "#000000",
+        scaling: {
+            min: 0.01,
+            max: 20,
+        }
     },
     physics: {
         barnesHut: {
-            gravitationalConstant: -100000,
-            centralGravity: 1
+            gravitationalConstant: -200000,
+            centralGravity: 8
         }
     }
 };
@@ -78,9 +100,7 @@ export default class SocialGraph extends React.Component {
         axios.get('/relations.json').then(res => {
             let edges = this.state.graph.edges.slice();
             for (let i = 0; i < res.data.length; i++) {
-                if (res.data[i].channelRelation >= 0.1) {
-                    edges.push({from: res.data[i].user, to: res.data[i].otherUser});
-                }
+                edges.push({from: res.data[i].user, to: res.data[i].otherUser, value: res.data[i].totalRelation});
             }
             this.setState({
                 graph: {
@@ -88,6 +108,7 @@ export default class SocialGraph extends React.Component {
                     edges: edges
                 }
             });
+            console.log(this.state.graph);
         });
 
     }

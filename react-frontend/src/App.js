@@ -21,7 +21,7 @@ export default class App extends React.Component {
                     </Col>
                     <Col span={20}>
                         <div className='graph'>
-                            <SocialGraph/>
+                            <SocialGraph />
                         </div>
                     </Col>
                 </Row>
