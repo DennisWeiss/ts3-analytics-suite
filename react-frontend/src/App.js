@@ -8,21 +8,35 @@ import axios from 'axios';
 
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            current: 'graph'
+        }
+    }
 
-
+    handleMenuClick(e) {
+        console.log(e);
+        this.setState({
+            current: e.key
+        });
+    }
 
 
     render() {
+        let content = '';
+        if (this.state.current === 'graph') {
+            content = <div className='graph'><SocialGraph /></div>;
+        }
+
         return(
             <div>
                 <Row className='content'>
                     <Col span={4}>
-                        <MainMenu />
+                        <MainMenu handleChange={this.handleMenuClick.bind(this)}/>
                     </Col>
                     <Col span={20}>
-                        <div className='graph'>
-                            <SocialGraph />
-                        </div>
+                        {content}
                     </Col>
                 </Row>
             </div>

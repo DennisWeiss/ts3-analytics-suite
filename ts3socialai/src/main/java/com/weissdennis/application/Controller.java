@@ -12,24 +12,28 @@ import java.util.List;
 @RequestMapping("/ts3")
 public class Controller {
 
+   @CrossOrigin
    @RequestMapping(value = "/users", method = RequestMethod.GET)
    public List<User> users() throws SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
       return dbLoader.load();
    }
 
+   @CrossOrigin
    @RequestMapping(value = "/user/{nickname}", method = RequestMethod.GET)
    public List<User> user(@PathVariable(value = "nickname") String nickname) throws SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
       return dbLoader.loadUser(nickname);
    }
 
+   @CrossOrigin
    @RequestMapping(value = "/user", method = RequestMethod.GET)
    public User userById(@RequestParam(value = "id") String uniqueId) throws SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
       return dbLoader.loadUserById(uniqueId);
    }
 
+   @CrossOrigin
    @RequestMapping(value = "/relations", method = RequestMethod.GET)
    public List<RelationWrapper> relations() throws  SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);

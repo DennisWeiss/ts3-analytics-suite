@@ -83,7 +83,7 @@ export default class SocialGraph extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('/users.json').then(res => {
+        axios.get('http://localhost:8080/ts3/users').then(res => {
             let graphnodes = this.state.graph.nodes.slice();
             for (let i = 0; i < res.data.length; i++) {
                 graphnodes.push({id: res.data[i].uniqueID, label: res.data[i].nickname});
@@ -97,10 +97,12 @@ export default class SocialGraph extends React.Component {
             console.log(this.state.graph);
         });
 
-        axios.get('/relations.json').then(res => {
+        axios.get('http://localhost:8080/ts3/relations').then(res => {
             let edges = this.state.graph.edges.slice();
             for (let i = 0; i < res.data.length; i++) {
-                edges.push({from: res.data[i].user, to: res.data[i].otherUser, value: res.data[i].totalRelation});
+                if (res.data[i].channelRelation >= 0.03) {
+                    edges.push({from: res.data[i].user, to: res.data[i].otherUser, value: res.data[i].totalRelation});
+                }
             }
             this.setState({
                 graph: {
