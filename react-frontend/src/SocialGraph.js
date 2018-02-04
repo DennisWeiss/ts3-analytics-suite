@@ -42,7 +42,7 @@ var options = {
     },
     physics: {
         barnesHut: {
-            gravitationalConstant: -200000,
+            gravitationalConstant: -300000,
             centralGravity: 8
         }
     }
@@ -100,7 +100,7 @@ export default class SocialGraph extends React.Component {
         axios.get('http://localhost:8080/ts3/relations').then(res => {
             let edges = this.state.graph.edges.slice();
             for (let i = 0; i < res.data.length; i++) {
-                if (res.data[i].channelRelation >= 0.03) {
+                if (res.data[i].channelRelation >= 0.02) {
                     edges.push({from: res.data[i].user, to: res.data[i].otherUser, value: res.data[i].totalRelation});
                 }
             }
