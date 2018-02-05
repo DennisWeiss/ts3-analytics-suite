@@ -15,14 +15,16 @@ public class Ts3socialaiApplication {
     static String configLocation = "config.cfg";
     static String queryName = "TS3SocialAI-Test";
 
+    public static ServerQuery serverQuery;
+
     public static void main(String[] args) {
-        SpringApplication.run(Ts3socialaiApplication.class, args);
         Configuration.loadConfig(configLocation);
-        writeUserInfoIntoDB();
-        updateRelations();
-        ServerQuery serverQuery = new ServerQuery(queryName);
+        serverQuery = new ServerQuery(queryName);
         serverQuery.login();
         serverQuery.getUserData();
+        writeUserInfoIntoDB();
+        updateRelations();
+        SpringApplication.run(Ts3socialaiApplication.class, args);
     }
 
     private static void writeUserInfoIntoDB() {

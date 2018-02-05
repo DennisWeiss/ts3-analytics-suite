@@ -3,8 +3,11 @@ package com.weissdennis.application;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
+import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.weissdennis.database.DbUsersInChannel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -36,5 +39,18 @@ public class ServerQuery {
       ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
       ScheduledFuture scheduledFuture =
             scheduler.scheduleAtFixedRate(new DbUsersInChannel(ts3Api), 3, 10, TimeUnit.SECONDS);
+   }
+
+   public List<CurrentUser> getCurrentUsers() {
+      List<Client> clients = ts3Api.getClients();
+      return fromClients(clients);
+   }
+
+   private List<CurrentUser> fromClients(List<Client> clients) {
+      List<CurrentUser> currentUsers = new ArrayList<>();
+      for (Client client : clients) {
+         currentUsers.add(new CurrentUser(client.getUniqueIdentifier(), client.getChannelId()));
+      }
+      return currentUsers;
    }
 }

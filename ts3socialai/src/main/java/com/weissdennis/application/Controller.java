@@ -39,4 +39,10 @@ public class Controller {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
       return dbLoader.loadRelations();
    }
+
+   @CrossOrigin
+   @RequestMapping(value = "/currentusers", method = RequestMethod.GET)
+   public List<CurrentUser> currentUsers() {
+      return Ts3socialaiApplication.serverQuery.getCurrentUsers();
+   }
 }
