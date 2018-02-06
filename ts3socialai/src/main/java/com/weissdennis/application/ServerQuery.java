@@ -3,6 +3,7 @@ package com.weissdennis.application;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
+import com.github.theholywaffle.teamspeak3.api.wrapper.Ban;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.weissdennis.database.DbUsersInChannel;
 
@@ -52,5 +53,14 @@ public class ServerQuery {
          currentUsers.add(new CurrentUser(client.getUniqueIdentifier(), client.getChannelId()));
       }
       return currentUsers;
+   }
+
+   public List<String> getBans() {
+      List<Ban> bans = ts3Api.getBans();
+      List<String> bannedUsers = new ArrayList<>();
+      for (Ban ban : bans) {
+         bannedUsers.add(ban.getBannedUId());
+      }
+      return bannedUsers;
    }
 }

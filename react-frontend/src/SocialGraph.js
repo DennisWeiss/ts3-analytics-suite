@@ -6,11 +6,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from "axios/index";
 
-
-
-
-
-
 var options = {
     layout: {
         hierarchical: false
@@ -70,16 +65,10 @@ export default class SocialGraph extends React.Component {
         this.state = {
             users: [],
             graph: {
-                nodes: [
-
-                ],
-                edges: [
-
-                ]
+                nodes: [],
+                edges: []
             }
         };
-
-
     }
 
     componentWillMount() {
@@ -112,7 +101,6 @@ export default class SocialGraph extends React.Component {
             });
             console.log(this.state.graph);
         });
-
     }
 
     render() {

@@ -45,4 +45,10 @@ public class Controller {
    public List<CurrentUser> currentUsers() {
       return Ts3socialaiApplication.serverQuery.getCurrentUsers();
    }
+
+   @CrossOrigin
+   @RequestMapping(value = "/bans", method = RequestMethod.GET)
+   public List<String> bans() {
+      return Ts3socialaiApplication.serverQuery.getBans();
+   }
 }
