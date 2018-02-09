@@ -1,0 +1,17 @@
+.selector {
+    margin: 20px;
+}
+
+.overview {
+    margin: 20px;
+    min-height: 30vh;
+    min-width: 380px;
+    background: #ffffff;
+    border: solid darkgray 1px;
+    border-radius: 5px;
+}
+
+.dataoverview {
+    padding: 20px;
+    font-size: 11pt;
+}

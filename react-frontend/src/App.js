@@ -5,13 +5,14 @@ import 'antd/dist/antd.css';
 import './App.css';
 import SocialGraph from "./SocialGraph";
 import axios from 'axios';
+import UserData from "./UserData";
 
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 'graph'
+            current: 'relations'
         }
     }
 
@@ -25,8 +26,10 @@ export default class App extends React.Component {
 
     render() {
         let content = '';
-        if (this.state.current === 'graph') {
+        if (this.state.current == 'relations') {
             content = <div className='graph'><SocialGraph /></div>;
+        } else if (this.state.current == 'data') {
+            content = <UserData/>;
         }
 
         return(

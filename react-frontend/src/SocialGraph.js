@@ -2,6 +2,8 @@ import React from 'react';
 import './index.css';
 import Graph from 'react-graph-vis';
 import axios from "axios/index";
+import {Spin} from 'antd';
+import './SocialGraph.css';
 
 
 const bannedColor = '#ff4444';
@@ -11,6 +13,7 @@ var channelIndex = 0;
 
 
 var options = {
+    autoResize: true,
     layout: {
         hierarchical: false
     },
@@ -151,9 +154,24 @@ export default class SocialGraph extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+    }
+
+    setNetworkInstance = network => {
+        this.network = network;
+        console.log(this.network.getScale());
+    };
+
     render() {
+        let content = '';
+        if (this.state.graph.nodes.length === 0) {
+            content = <div className='loader'/>;
+        } else {
+            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />;
+        }
         return(
-            <Graph graph={this.state.graph} options={options} events={events} />
+            content
         );
     }
 }
