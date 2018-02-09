@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+::-webkit-scrollbar:hover {
+  background-color: rgba(210, 210, 210, 0.6);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(230, 230, 230, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(160, 160, 160, 0.8);
+  outline: 1px solid slategrey;
+  border-radius: 4px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Layout, Menu, Row} from 'antd';
+import {Col, Layout} from 'antd';
 import MainMenu from './MainMenu'
 import 'antd/dist/antd.css';
 import './App.css';
@@ -33,16 +33,14 @@ export default class App extends React.Component {
         }
 
         return(
-            <div>
-                <Row className='content'>
-                    <Col span={4}>
-                        <MainMenu handleChange={this.handleMenuClick.bind(this)}/>
-                    </Col>
-                    <Col span={20}>
-                        {content}
-                    </Col>
-                </Row>
-            </div>
+            <Layout>
+                <Layout.Sider width={250} style={{background: '#ffffff', 'border-right': 'solid darkgray 1px'}}>
+                    <MainMenu handleChange={this.handleMenuClick.bind(this)}/>
+                </Layout.Sider>
+                <Layout.Content style={{background: '#f9f9f9'}}>
+                    {content}
+                </Layout.Content>
+            </Layout>
         );
     }
 }
