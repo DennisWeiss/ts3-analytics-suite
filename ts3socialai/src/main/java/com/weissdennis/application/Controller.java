@@ -41,6 +41,13 @@ public class Controller {
    }
 
    @CrossOrigin
+   @RequestMapping(value = "/relation/{nickname}", method = RequestMethod.GET)
+   public List<RelationWrapper> relationsOfUser(@PathVariable(value = "nickname") String nickname) throws SQLException {
+      DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
+      return dbLoader.loadRelationOfUser(nickname);
+   }
+
+   @CrossOrigin
    @RequestMapping(value = "/currentusers", method = RequestMethod.GET)
    public List<CurrentUser> currentUsers() {
       return Ts3socialaiApplication.serverQuery.getCurrentUsers();

@@ -48,6 +48,12 @@ public class DbLoader {
       return processRelations(resultSet);
    }
 
+   public List<RelationWrapper> loadRelationOfUser(String user) throws SQLException {
+      ResultSet resultSet = statement.executeQuery("SELECT * FROM relations WHERE client1='" + user + "' " +
+              "AND channel_relation > 0.01 ORDER BY total_relation DESC;");
+      return processRelations(resultSet);
+   }
+
    private List<RelationWrapper> processRelations(ResultSet resultSet) throws SQLException {
       List<RelationWrapper> relations = new ArrayList<>();
       while (resultSet.next()) {
