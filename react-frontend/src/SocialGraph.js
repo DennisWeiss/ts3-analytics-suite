@@ -2,6 +2,8 @@ import React from 'react';
 import './index.css';
 import Graph from 'react-graph-vis';
 import axios from "axios/index";
+import {Spin} from 'antd';
+import './SocialGraph.css';
 
 
 const bannedColor = '#ff4444';
@@ -11,6 +13,7 @@ var channelIndex = 0;
 
 
 var options = {
+    autoResize: true,
     layout: {
         hierarchical: false
     },
@@ -85,11 +88,11 @@ export default class SocialGraph extends React.Component {
                                         channelIndex = 0;
                                     }
                                 }
-                                console.log(channelToColor);
+                                //console.log(channelToColor);
                                 //node.color = '#009933';
                             }
                         }
-                        console.log(res3.data);
+                        //console.log(res3.data);
                         for (let j = 0; j < res3.data.length; j++) {
                             //console.log(res3.data[j]);
                             if (node.id == res3.data[j]) {
@@ -97,12 +100,12 @@ export default class SocialGraph extends React.Component {
                                     console.log(res3.data[j]);
                                 }
                                 node.color = bannedColor;
-                                console.log(res.data[i].unqiueID);
+                                console.log(res.data[i].uniqueID);
                             }
                         }
                         graphnodes.push(node);
                     }
-                    console.log(this.state.graph);
+                    //console.log(this.state.graph);
 
                     axios.get('http://gr-esports.de:8080/ts3/relations').then(res4 => {
                         let edges = this.state.graph.edges.slice();
@@ -129,7 +132,7 @@ export default class SocialGraph extends React.Component {
                                     if (res4.data[i].otherUser == graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
                                             if (graphnodes[j].color == color1 && color1 != bannedColor) {
-                                                console.log(i);
+                                                //console.log(i);
                                                 edge.color.color = color1;
                                             }
                                         }
@@ -151,9 +154,24 @@ export default class SocialGraph extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+    }
+
+    setNetworkInstance = network => {
+        this.network = network;
+        console.log(this.network.getScale());
+    };
+
     render() {
+        let content = '';
+        if (this.state.graph.nodes.length === 0) {
+            content = <div className='loader'/>;
+        } else {
+            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />;
+        }
         return(
-            <Graph graph={this.state.graph} options={options} events={events} />
+            content
         );
     }
 }
