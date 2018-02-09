@@ -11,16 +11,45 @@ export default class UserData extends React.Component {
         super(props);
         this.state = {
             users: [],
-            user: ''
+            user: {},
+            relatedUsers: []
         }
     }
 
     componentDidMount() {
         axios.get('http://gr-esports.de:8080/ts3/users').then(res => {
+            let user = res.data[Math.floor(res.data.length * Math.random())];
             this.setState({
                 users: res.data,
-                user: res.data[Math.floor(res.data.length * Math.random())]
+                user: user
             });
+            this.setRelations(user);
+        });
+    }
+
+    setRelations(user) {
+        axios.get('http://gr-esports.de:8080/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
+            axios.get('http://gr-esports.de:8080/ts3/users').then(res2 => {
+                let relatedUsers = this.state.relatedUsers.splice();
+                let username = '';
+                for (let i = 0; i < res.data.length; i++) {
+                    for (let j = 0; j < res2.data.length; j++) {
+                        if (res.data[i].otherUser == res2.data[j].uniqueID) {
+                            username = res2.data[j].nickname;
+                        }
+                    }
+                    relatedUsers.push({
+                        key: res.data[i].otherUser,
+                        username: username,
+                        id: res.data[i].otherUser,
+                        relation: res.data[i].totalRelation
+                    });
+                }
+                console.log(relatedUsers);
+                this.setState({
+                    relatedUsers: relatedUsers
+                });
+            })
         });
     }
 
@@ -31,8 +60,11 @@ export default class UserData extends React.Component {
                 user = this.state.users[i];
             }
         }
+
+        this.setRelations(user);
+
         this.setState({
-            user: user
+            user: user,
         });
     }
 
@@ -60,7 +92,7 @@ export default class UserData extends React.Component {
                 <Row>
                     <Col span={12}>
                         <UserDataOverview user={this.state.user}/>
-                        <RelationsOverview/>
+                        <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
                     </Col>
                     <Col span={12}>
 
