@@ -34,7 +34,7 @@ export default class App extends React.Component {
 
         return(
             <Layout>
-                <Layout.Sider width={250} style={{background: '#ffffff', 'border-right': 'solid darkgray 1px'}}>
+                <Layout.Sider breakpoint='md' width={210} style={{background: '#ffffff', padding: 0}}>
                     <MainMenu handleChange={this.handleMenuClick.bind(this)}/>
                 </Layout.Sider>
                 <Layout.Content style={{background: '#f9f9f9'}}>
