@@ -41,10 +41,10 @@ public class Controller {
    }
 
    @CrossOrigin
-   @RequestMapping(value = "/relation/{nickname}", method = RequestMethod.GET)
-   public List<RelationWrapper> relationsOfUser(@PathVariable(value = "nickname") String nickname) throws SQLException {
+   @RequestMapping(value = "/relation", method = RequestMethod.GET)
+   public List<RelationWrapper> relationsOfUser(@RequestParam(value = "user") String user) throws SQLException {
       DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
-      return dbLoader.loadRelationOfUser(nickname);
+      return dbLoader.loadRelationOfUser(user);
    }
 
    @CrossOrigin
