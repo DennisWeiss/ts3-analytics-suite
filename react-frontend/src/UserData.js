@@ -70,6 +70,15 @@ export default class UserData extends React.Component {
     }
 
     render() {
+        console.log(this.state.user);
+
+        let location = {};
+        if (this.state.user.location == null) {
+            location = {lat: 0, lng: 0}
+        } else {
+            location = {lat: this.state.user.location.latitude, lng: this.state.user.location.longitude}
+        }
+
         return(
             <div>
                 <div className='selector'>
@@ -96,7 +105,7 @@ export default class UserData extends React.Component {
                         <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
                     </Col>
                     <Col span={12}>
-
+                        <Location lat={location.lat} lng={location.lng}/>
                     </Col>
                 </Row>
             </div>

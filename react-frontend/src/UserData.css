@@ -3,22 +3,84 @@
 }
 
 .overview {
-    margin: 20px;
-    min-height: 30vh;
-    min-width: 400px;
     background: #ffffff;
-    border: solid darkgray 1px;
-    border-radius: 5px;
+    border: solid #c0c0c0 1px;
+    border-radius: 4px;
 }
 
-.dataoverview {
-    padding: 20px;
-    font-size: 11pt;
+@media (max-width: 768px) {
+    .heading {
+        padding: 5px 10px;
+        font-size: 14pt;
+    }
+
+    .overview {
+        margin: 10px;
+        width: 70vw;
+        min-height: 25vh;
+    }
+
+    .dataoverview {
+        padding: 5px;
+        font-size: 8pt;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+    .heading {
+        padding: 5px 10px;
+        font-size: 14pt;
+    }
+
+    .overview {
+        margin: 20px;
+        min-width: 280px;
+        min-height: 25vh;
+    }
+
+    .dataoverview {
+        padding: 5px;
+        font-size: 8pt;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+    .heading {
+        padding: 8px 20px;
+        font-size: 17pt;
+    }
+
+    .overview {
+        margin: 20px;
+        min-width: 350px;
+        min-height: 30vh;
+    }
+
+    .dataoverview {
+        padding: 12px;
+        font-size: 10pt;
+    }
+}
+
+@media (min-width: 1101px) {
+    .heading {
+        padding: 10px 20px;
+        font-size: 18pt;
+    }
+
+    .overview {
+        margin: 20px;
+        min-width: 400px;
+        min-height: 30vh;
+    }
+
+    .dataoverview {
+        padding: 20px;
+        font-size: 11pt;
+    }
 }
 
 .heading {
-    border-bottom: solid darkgray 1px;
-    padding: 10px 20px;
-    font-size: 18pt;
+    border-bottom: solid #c0c0c0 1px;
     color: #0099ff;
 }

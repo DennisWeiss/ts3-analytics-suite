@@ -9,8 +9,8 @@ body {
 }
 
 ::-webkit-scrollbar:hover {
-  background-color: rgba(210, 210, 210, 0.6);
-}
+   background-color: rgba(210, 210, 210, 0.6);
+ }
 
 ::-webkit-scrollbar {
   width: 8px;
