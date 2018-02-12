@@ -2,6 +2,8 @@ import React from 'react';
 import './UserDataOverview.css';
 import './UserData.css';
 import {Row, Col} from 'antd';
+import isoCountries from './countries';
+import Flag from 'react-world-flags';
 
 
 export default class UserDataOverview extends React.Component {
@@ -16,19 +18,19 @@ export default class UserDataOverview extends React.Component {
 
         return(
             <div className='overview'>
-                <div className='username'>
+                <div className='heading'>
                     {nickname}
                 </div>
                 <div className='dataoverview'>
                     <Row>
                         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
-                            ID:
+                            Global ID:
                         </Col>
                         <Col xs={24-xs} sm={24-sm} md={24-md} lg={24-lg} xl={24-xl}>
                             {this.props.user.uniqueID}<br />
                         </Col>
                         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
-                            Ip:
+                            IP:
                         </Col>
                         <Col xs={24-xs} sm={24-sm} md={24-md} lg={24-lg} xl={24-xl}>
                             {this.props.user.ip}<br />
@@ -49,7 +51,7 @@ export default class UserDataOverview extends React.Component {
                             Country:
                         </Col>
                         <Col xs={24-xs} sm={24-sm} md={24-md} lg={24-lg} xl={24-xl}>
-                            {this.props.user.country}<br />
+                            <Flag code={this.props.user.country} height={12}/> {isoCountries[this.props.user.country]}<br />
                         </Col>
                         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                             Postal code:

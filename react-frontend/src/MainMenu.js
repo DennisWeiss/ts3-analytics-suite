@@ -1,7 +1,9 @@
 import React from 'react';
-import {Menu} from 'antd';
+import {Icon, Menu} from 'antd';
 import 'antd/dist/antd.css';
 import './MainMenu.css';
+import 'font-awesome/css/font-awesome.min.css';
+
 
 
 export default class MainMenu extends React.Component {
@@ -18,13 +20,13 @@ export default class MainMenu extends React.Component {
                 onClick={this.props.handleChange}
                 defaultSelectedKeys={['relations']}
                 defaultOpenKeys={['users', 'server']}>
-                <Menu.SubMenu key='users' title='Users'>
-                    <Menu.Item key='relations'>Relations</Menu.Item>
-                    <Menu.Item key='data'>Data</Menu.Item>
-                    <Menu.Item key='heatmap'>Location Heatmap</Menu.Item>
+                <Menu.SubMenu key='users' title={<span><Icon type='user' /><span>Users</span></span>}>
+                    <Menu.Item key='relations'><i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Relations</Menu.Item>
+                    <Menu.Item key='data'><Icon type='table'/>Data</Menu.Item>
+                    <Menu.Item key='heatmap'><i className='fa fa-map' style={{'margin-right': '10px'}}/>Location Heatmap</Menu.Item>
                 </Menu.SubMenu>
-                <Menu.SubMenu key='server' title='Server Usage'>
-                    <Menu.Item key='usage-statistics'>Statistics</Menu.Item>
+                <Menu.SubMenu key='server' title={<span><Icon type='cloud-upload-o'/><span>Server Usage</span></span>}>
+                    <Menu.Item key='usage-statistics'><Icon type='line-chart'/>Statistics</Menu.Item>
                 </Menu.SubMenu>
             </Menu>
         );
