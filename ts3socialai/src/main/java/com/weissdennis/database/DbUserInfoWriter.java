@@ -133,8 +133,8 @@ public class DbUserInfoWriter implements Runnable {
                 statement.execute("UPDATE Users SET ClientID = " + client.getId() + ", UniqueID = '" + client.getUniqueID() + "', nick_name = '" +
                         client.getNickname() + "', total_upload = " + client.getTotalUpload() + ", total_download = " + client.getTotalDownload() +
                         ", ip = '" + client.getIp() + "', hostname = '" + client.getHostName() + "', city = '" + client.getCity() + "', region = '" +
-                        client.getRegion() + "', country = '" + client.getCountry() + "', longitude = " + location.getLongitude() + ", latitude = " +
-                        location.getLatitude() + ", postal = '" + client.getPostalCode() + "', org = '" + client.getAssociatedOrg() +
+                        client.getRegion() + "', country = '" + client.getCountry() + "', longitude = " + location.getLatitude() + ", latitude = " +
+                        location.getLongitude() + ", postal = '" + client.getPostalCode() + "', org = '" + client.getAssociatedOrg() +
                         "' WHERE UniqueID = '" + client.getUniqueID() + "';");
             } catch (SQLException e1) {
                 e1.printStackTrace();

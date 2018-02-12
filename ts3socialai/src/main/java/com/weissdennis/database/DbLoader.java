@@ -79,12 +79,12 @@ public class DbLoader {
       String city = resultSet.getString(8);
       String region = resultSet.getString(9);
       String country = resultSet.getString(10);
-      double longitude = resultSet.getDouble(11);
-      double latitude = resultSet.getDouble(12);
+      double latitude = resultSet.getDouble(11);
+      double longitude = resultSet.getDouble(12);
       String postal = resultSet.getString(13);
       String org = resultSet.getString(14);
       return new User(clientID, uniqueID, nickName, totalUpload, totalDownload, ip, hostname, city, region, country,
-            new Location(longitude, latitude), postal, org);
+            new Location(latitude, longitude), postal, org);
    }
 
    private List<User> processResultSet(ResultSet resultSet) throws SQLException {
