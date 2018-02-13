@@ -12,8 +12,8 @@ export default class UserDataOverview extends React.Component {
 
         let xs = 8;
         let sm = 8;
-        let md = 9;
-        let lg = 9;
+        let md = 8;
+        let lg = 8;
         let xl = 8;
 
         return(
