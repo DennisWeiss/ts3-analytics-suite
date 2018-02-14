@@ -5,6 +5,7 @@ import axios from 'axios';
 import UserDataOverview from './UserDataOverview';
 import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
+import UserSocialGraph from "./UserSocialGraph";
 
 
 export default class UserData extends React.Component {
@@ -55,6 +56,7 @@ export default class UserData extends React.Component {
     }
 
     handleSelect(value) {
+        this.socialGraph.select(value);
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
             if (this.state.users[i].uniqueID == value) {
@@ -103,6 +105,7 @@ export default class UserData extends React.Component {
                     <UserDataOverview user={this.state.user}/>
                     <Location lat={location.lat} lng={location.lng}/>
                     <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
+                    <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref}/>
                 </div>
             </div>
         );

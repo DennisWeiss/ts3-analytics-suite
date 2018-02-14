@@ -12,6 +12,10 @@
     float: left;
 }
 
+.dataoverview {
+    line-height: 1.8;
+}
+
 .heading {
     border-bottom: solid #c0c0c0 1px;
     color: #0099ff;
@@ -20,7 +24,7 @@
 @media (min-width: 1170px) {
     .overview {
         width: 48%;
-        min-height: 350px;
+        min-height: 380px;
     }
 
     .dataoverview {
@@ -37,7 +41,7 @@
 @media (min-width: 770px) and (max-width: 1169px) {
     .overview {
         width: 450px;
-        min-height: 300px;
+        min-height: 320px;
     }
 
     .dataoverview {

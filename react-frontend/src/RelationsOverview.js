@@ -43,7 +43,6 @@ export default class RelationsOverview extends React.Component {
 
     render() {
         let size = 'default';
-        console.log(this.state.windowWidth);
 
         if (this.state.windowWidth <= 900) {
             size = 'middle';

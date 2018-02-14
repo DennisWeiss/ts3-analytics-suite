@@ -22,7 +22,7 @@ export default class Location extends React.Component {
                 <MapComponent
                     googleMapURL={'https://maps.googleapis.com/maps/api/js?key=' + key + '&v=3.exp&libraries=geometry,drawing,places'}
                     loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `350px` }} />}
+                    containerElement={<div style={{ height: `380px` }} />}
                     mapElement={<div style={{ height: `100%` }} />} />
             </div>
         );
