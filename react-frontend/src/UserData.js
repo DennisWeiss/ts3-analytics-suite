@@ -71,6 +71,21 @@ export default class UserData extends React.Component {
         });
     }
 
+    handleGraphSelect(value) {
+        let user = {};
+        for (let i = 0; i < this.state.users.length; i++) {
+            if (this.state.users[i].uniqueID == value) {
+                user = this.state.users[i];
+            }
+        }
+
+        this.setRelations(user);
+
+        this.setState({
+            user: user,
+        });
+    }
+
     render() {
         console.log(this.state.user);
 
@@ -105,7 +120,7 @@ export default class UserData extends React.Component {
                     <UserDataOverview user={this.state.user}/>
                     <Location lat={location.lat} lng={location.lng}/>
                     <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
-                    <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref}/>
+                    <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref} onSelect={this.handleGraphSelect.bind(this)}/>
                 </div>
             </div>
         );

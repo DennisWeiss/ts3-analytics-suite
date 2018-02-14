@@ -167,6 +167,7 @@ export default class UserSocialGraph extends React.Component {
 
     setNetworkInstance = network => {
         this.network = network;
+        this.network.on('selectNode', (click) => this.props.onSelect(click.nodes[0]));
     };
 
     select(id) {
