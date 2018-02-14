@@ -99,15 +99,11 @@ export default class UserData extends React.Component {
                         })}
                     </Select>
                 </div>
-                <Row>
-                    <Col span={12}>
-                        <UserDataOverview user={this.state.user}/>
-                        <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
-                    </Col>
-                    <Col span={12}>
-                        <Location lat={location.lat} lng={location.lng}/>
-                    </Col>
-                </Row>
+                <div className='content-parent'>
+                    <UserDataOverview user={this.state.user}/>
+                    <Location lat={location.lat} lng={location.lng}/>
+                    <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
+                </div>
             </div>
         );
     }
