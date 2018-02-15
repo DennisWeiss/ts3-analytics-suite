@@ -72,6 +72,9 @@ export default class UserData extends React.Component {
     }
 
     handleGraphSelect(value) {
+        if (this.socialGraph != null) {
+            this.socialGraph.select(value);
+        }
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
             if (this.state.users[i].uniqueID == value) {
