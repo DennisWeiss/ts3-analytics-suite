@@ -170,8 +170,6 @@ export default class SocialGraph extends React.Component {
         } else {
             content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />;
         }
-        return(
-            content
-        );
+        return content
     }
 }

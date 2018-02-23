@@ -1,7 +1,8 @@
 import React from 'react';
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps'
 import './LocationHeatmap.css';
-import HeatmapLayer from "react-google-maps/lib/components/visualization/HeatmapLayer";
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import HeatmapLayer from '../src/HeatmapLayer';
+import { addressPoints } from './realworld.10000.js';
 
 /* global google */
 
@@ -14,25 +15,23 @@ export default class LocationHeatmap extends React.Component {
     }
 
     render() {
-        console.log('prop-points', this.props.points);
-
-        const MapComponent = withScriptjs(withGoogleMap((props) =>
-            <GoogleMap defaultZoom={3} defaultCenter={{lat: 30, lng: 10}}>
-                <HeatmapLayer
-                    data={this.props.points}
-                    options={{
-                        data: this.props.points,
-                        radius: 50
-                    }}
-                />
-            </GoogleMap>));
 
         return(
-            <MapComponent
-                googleMapURL={'https://maps.googleapis.com/maps/api/js?key=' + key + '&v=3.exp&libraries=geometry,drawing,places'}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />} />
+            <div>
+                <Map center={[0,0]} zoom={13}>
+                    <HeatmapLayer
+                        fitBoundsOnLoad
+                        fitBoundsOnUpdate
+                        points={addressPoints}
+                        longitudeExtractor={m => m[1]}
+                        latitudeExtractor={m => m[0]}
+                        intensityExtractor={m => parseFloat(m[2])} />
+                    <TileLayer
+                        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                </Map>
+            </div>
         );
     }
 }
