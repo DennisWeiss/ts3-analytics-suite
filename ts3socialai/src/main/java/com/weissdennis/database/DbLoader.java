@@ -17,7 +17,6 @@ public class DbLoader {
    }
 
    public List<User> load() throws SQLException {
-
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users;");
       return processResultSet(resultSet);
    }
