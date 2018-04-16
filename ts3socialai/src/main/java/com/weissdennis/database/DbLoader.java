@@ -23,7 +23,6 @@ public class DbLoader {
    }
 
    public List<User> loadUser(String nickname) throws SQLException {
-
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE nick_name = '" + nickname + "';");
       System.out.println(resultSet.getFetchSize());
       return processResultSet(resultSet);
