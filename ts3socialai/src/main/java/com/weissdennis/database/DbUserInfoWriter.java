@@ -99,6 +99,7 @@ public class DbUserInfoWriter implements Runnable {
                     if (clientIpInfo.getOrg() == null) {
                         clientIpInfo.setOrg("");
                     }
+
                     Client client = new Client(clientID, uniqueID, nickName, totalUpload, totalDownload, ip, clientIpInfo.getHostname(),
                             clientIpInfo.getCity(), clientIpInfo.getRegion(), clientIpInfo.getCountry(), clientIpInfo.getLoc(),
                             clientIpInfo.getPostal(), clientIpInfo.getOrg());
