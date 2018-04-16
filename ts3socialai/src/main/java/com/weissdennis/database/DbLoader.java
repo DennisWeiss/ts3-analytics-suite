@@ -30,8 +30,6 @@ public class DbLoader {
    }
 
    public User loadUserById(String uniqueId) throws SQLException {
-      System.out.println("Searching for " + encoded(uniqueId));
-
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE UniqueID = '" + encoded(uniqueId) + "';");
       resultSet.next();
       return processSingleResultSet(resultSet);
