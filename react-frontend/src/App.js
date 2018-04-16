@@ -1,12 +1,13 @@
-import React from 'react';
-import {Col, Layout} from 'antd';
+import React from 'react'
+import {Col, Layout} from 'antd'
 import MainMenu from './MainMenu'
-import 'antd/dist/antd.css';
-import './App.css';
-import SocialGraph from "./SocialGraph";
+import 'antd/dist/antd.css'
+import './App.css'
+import SocialGraph from "./SocialGraph"
 import axios from 'axios';
-import UserData from "./UserData";
-import LocationHeatmap from './LocationHeatmap';
+import UserData from './UserData'
+import LocationHeatmap from './LocationHeatmap'
+
 
 /* global google */
 

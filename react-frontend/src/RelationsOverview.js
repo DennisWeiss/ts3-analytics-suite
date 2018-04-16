@@ -15,11 +15,12 @@ export default class RelationsOverview extends React.Component {
                 title: 'User',
                 dataIndex: 'username',
                 key: 'username',
+                render: (text, record) => <a onClick={() => this.props.handleSelect(record.id)} >{text}</a>
             }, {
                 title: 'ID',
                 dataIndex: 'id',
                 key: 'id',
-                render: text => <a href='#' onClick={() => this.props.handleSelect(text)} >{text}</a>
+                render: text => <a onClick={() => this.props.handleSelect(text)} >{text}</a>
             }, {
                 title: 'Relation',
                 dataIndex: 'relation',
