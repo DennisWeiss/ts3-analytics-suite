@@ -79,6 +79,7 @@ public class DbLoader {
       double longitude = resultSet.getDouble(12);
       String postal = resultSet.getString(13);
       String org = resultSet.getString(14);
+
       return new User(clientID, uniqueID, nickName, totalUpload, totalDownload, ip, hostname, city, region, country,
             new Location(latitude, longitude), postal, org);
    }
