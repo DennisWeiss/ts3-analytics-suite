@@ -17,13 +17,13 @@ public class DbLoader {
    }
 
    public List<User> load() throws SQLException {
-      //statement.execute("USE DATABASE ts3_social_ai;");
+
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users;");
       return processResultSet(resultSet);
    }
 
    public List<User> loadUser(String nickname) throws SQLException {
-      //statement.execute("USE DATABASE ts3_social_ai;");
+
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE nick_name = '" + nickname + "';");
       System.out.println(resultSet.getFetchSize());
       return processResultSet(resultSet);
@@ -31,7 +31,7 @@ public class DbLoader {
 
    public User loadUserById(String uniqueId) throws SQLException {
       System.out.println("Searching for " + encoded(uniqueId));
-      //statement.execute("USE DATABASE ts3_social_ai;");
+
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Users WHERE UniqueID = '" + encoded(uniqueId) + "';");
       resultSet.next();
       return processSingleResultSet(resultSet);
