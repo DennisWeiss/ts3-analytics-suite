@@ -7,6 +7,7 @@ import SocialGraph from "./SocialGraph"
 import axios from 'axios';
 import UserData from './UserData'
 import LocationHeatmap from './LocationHeatmap'
+import {Route} from "react-router";
 
 
 /* global google */
@@ -26,18 +27,14 @@ export default class App extends React.Component {
              let points = [];
              for (let i = 0; i < res.data.length; i++) {
                  points.push({
-                     location: new google.maps.LatLng(
-                         res.data[i].location.latitude, res.data[i].location.longitude),
-                     weight: 5
-                 })
-                 /*points.push({
+                     lng: res.data[i].location.longitude,
                      lat: res.data[i].location.latitude,
-                     lng: res.data[i].location.longitude
-                 });*/
+                     weight: 800
+                 })
              }
              this.setState({
                  points: points
-             }, () => console.log(this.state.points));
+             }, () => console.log('points', this.state.points));
         });
     }
 
@@ -66,7 +63,9 @@ export default class App extends React.Component {
                     <MainMenu handleChange={this.handleMenuClick.bind(this)} />
                 </Layout.Sider>
                 <Layout.Content className='content' >
-                    {content}
+                    <Route path='/' exact component={() => <div className='graph'><SocialGraph /></div>}/>
+                    <Route path='/user-data' exact component={UserData}/>
+                    <Route path='/heatmap' exact component={() => <div className='graph'><LocationHeatmap points={this.state.points}/></div>}/>
                 </Layout.Content>
             </Layout>
         );
