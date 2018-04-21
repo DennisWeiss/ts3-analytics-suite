@@ -1,0 +1,29 @@
+.location-map {
+    margin: 10px;
+    background: #ffffff;
+    border: solid #c0c0c0 1px;
+    border-radius: 4px;
+    display: inline-block;
+    float: left;
+}
+
+@media (min-width: 1170px) {
+    .location-map {
+        width: 48%;
+        height: 380px;
+    }
+}
+
+@media (min-width: 770px) and (max-width: 1169px) {
+    .location-map {
+        width: 450px;
+        height: 320px;
+    }
+}
+
+@media (max-width: 769px) {
+    .location-map {
+        width: 96%;
+        height: 250px;
+    }
+}

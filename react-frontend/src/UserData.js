@@ -119,9 +119,9 @@ export default class UserData extends React.Component {
                         })}
                     </Select>
                 </div>
-                <div className='content-parent'>
+                <div>
                     <UserDataOverview user={this.state.user}/>
-                    <Location lat={location.lat} lng={location.lng}/>
+                    <Location lat={location.lat} lng={location.lng} username={this.state.user.uername}/>
                     <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
                     <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref} onSelect={this.handleGraphSelect.bind(this)}/>
                 </div>
