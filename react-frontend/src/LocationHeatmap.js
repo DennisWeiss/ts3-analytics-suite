@@ -1,35 +1,53 @@
-import React from 'react';
-import './LocationHeatmap.css';
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet';
-import HeatmapLayer from 'react-leaflet-heatmap-layer';
-import {addressPoints} from './realworld.10000.js';
-
-/* global google */
+import React from 'react'
+import './LocationHeatmap.css'
+import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import HeatmapLayer from 'react-leaflet-heatmap-layer'
 
 
-const key = 'AIzaSyDOC-TY0tIePGLZ2IlTgzaIIo3UBjV3dCM'
+// source: https://wiki.openstreetmap.org/wiki/Zoom_levels
+const zoomLevelScaleAt0 = 156412
 
-const position = [0, 0]
 
-export default class LocationHeatmap extends React.Component {
+class LocationHeatmap extends React.Component {
     constructor(props) {
         super(props);
+        console.log('radiusInM', this.props.radiusInM)
+        this.state = {
+            viewport: {
+                center: [0, 0],
+                zoom: 2,
+            }
+        }
+    }
+
+    onViewportChange = viewport => {
+        this.setState({
+            viewport: {
+                center: viewport.center,
+                zoom: Math.min(11, viewport.zoom)
+            }
+        }, () => console.log('zoom', this.state.viewport.zoom))
     }
 
     render() {
+        console.log('state', this.state)
+
         return (
             <div className='location-heatmap'>
-                <Map center={position} zoom={13}>
+                <Map
+                    viewport={this.state.viewport}
+                    onViewportChange={this.onViewportChange}>
                     <HeatmapLayer
-                        fitBoundsOnLoad
-                        fitBoundsOnUpdate
+                        fitBoundsOnLoad={false}
+                        fitBoundsOnUpdate={false}
                         points={this.props.points}
-                        radius={40}
+                        radius={25}
                         blur={30}
-                        maxZoom={5}
+                        maxZoom={2}
+                        max={8}
                         longitudeExtractor={data => data.lng}
                         latitudeExtractor={data => data.lat}
-                        intensityExtractor={data => data.weight} />
+                        intensityExtractor={data => data.weight}/>
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -39,3 +57,5 @@ export default class LocationHeatmap extends React.Component {
         )
     }
 }
+
+export default LocationHeatmap
