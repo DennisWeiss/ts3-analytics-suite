@@ -87,9 +87,9 @@ public class DbLoader {
 
    private List<User> processResultSet(ResultSet resultSet) throws SQLException {
       List<User> users = new ArrayList<>();
+      List<String> bannedUsers = Ts3socialaiApplication.serverQuery.getBans();
       while (resultSet.next()) {
          User user = processSingleResultSet(resultSet);
-         List<String> bannedUsers = Ts3socialaiApplication.serverQuery.getBans();
          if (!bannedUsers.contains(user.getUniqueID())) {
             users.add(user);
          }
