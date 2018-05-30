@@ -15,6 +15,7 @@ public class RelationUpdater implements Runnable {
         try {
             DbLoader dbLoader = new DbLoader(Configuration.mariaDBLocation);
             List<User> users = dbLoader.load();
+
             for (int i = 0; i < users.size(); i++) {
                 for (int j = 0; j < users.size(); j++) {
                     if (i != j) {
