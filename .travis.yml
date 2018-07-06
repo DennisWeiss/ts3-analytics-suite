@@ -8,6 +8,7 @@ script:
     - cd react-frontend
     - npm run build
     - cd ..
+    - mkdir -p ts3socialai/src/main/resources/public
     - mv -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
     - cd ts3socialai
     - mvn clean install
