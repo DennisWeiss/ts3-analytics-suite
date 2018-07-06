@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Layout} from 'antd'
+import {Layout} from 'antd'
 import MainMenu from './MainMenu'
 import 'antd/dist/antd.css'
 import './App.css'
@@ -10,7 +10,6 @@ import LocationHeatmap from './LocationHeatmap'
 import {Route} from "react-router";
 
 
-/* global google */
 
 let existingPoints = {}
 
@@ -75,7 +74,7 @@ export default class App extends React.Component {
 
     spread = points => {
         let spreadPoints = []
-        points.map(point => {
+        points.forEach(point => {
             spreadPoints.push({
                 lat: point.lat + Math.pow(10, -2) * (Math.random() - 0.5),
                 lng: point.lng + Math.pow(10, -2) * (Math.random() - 0.5),

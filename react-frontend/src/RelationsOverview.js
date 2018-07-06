@@ -1,7 +1,6 @@
 import React from 'react';
 import './RelationsOverview.css';
 import './UserData.css';
-import axios from 'axios';
 import {Table} from 'antd';
 
 
