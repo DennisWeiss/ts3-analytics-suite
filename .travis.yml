@@ -1,5 +1,12 @@
 language: java
 sudo: false
+install:
+    - cd react-frontend
+    - npm install
 script:
+    - cd react-frontend
+    - npm run build
+    - cd ..
+    - mv -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
     - cd ts3socialai
     - mvn clean install
