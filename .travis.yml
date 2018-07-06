@@ -3,6 +3,7 @@ sudo: false
 install:
     - cd react-frontend
     - npm install
+    - cd ..
 script:
     - cd react-frontend
     - npm run build
