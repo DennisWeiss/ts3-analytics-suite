@@ -10,3 +10,20 @@
   background: #f9f9f9;
   padding: 10px;
 }
+
+.ant-card {
+  border-radius: 5px;
+}
+
+.ant-card-head-title {
+  color: #0099ff;
+  font-size: 20px;
+}
+
+.ant-card-body {
+  padding: 0;
+}
+
+.ant-card-loading-content {
+  height: 315px;
+}

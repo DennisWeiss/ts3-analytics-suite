@@ -77,7 +77,7 @@ export default class SocialGraph extends React.Component {
                     for (let i = 0; i < res.data.length; i++) {
                         let node = {id: res.data[i].uniqueID, label: res.data[i].nickname};
                         for (let j = 0; j < res2.data.length; j++) {
-                            if (res.data[i].uniqueID == res2.data[j].id) {
+                            if (res.data[i].uniqueID === res2.data[j].id) {
                                 if (channelToColor[res2.data[j].channel] != null) {
                                     node.color = channelToColor[res2.data[j].channel];
                                 } else {
@@ -88,17 +88,10 @@ export default class SocialGraph extends React.Component {
                                         channelIndex = 0;
                                     }
                                 }
-                                //console.log(channelToColor);
-                                //node.color = '#009933';
                             }
                         }
-                        //console.log(res3.data);
                         for (let j = 0; j < res3.data.length; j++) {
-                            //console.log(res3.data[j]);
-                            if (node.id == res3.data[j]) {
-                                if (i == 45) {
-                                    console.log(res3.data[j]);
-                                }
+                            if (node.id === res3.data[j]) {
                                 node.color = bannedColor;
                                 console.log(res.data[i].uniqueID);
                             }
@@ -122,17 +115,16 @@ export default class SocialGraph extends React.Component {
                                         highlight: '#b200cc'
                                     }};
                                 for (let j = 0; j < graphnodes.length; j++) {
-                                    if (res4.data[i].user == graphnodes[j].id) {
+                                    if (res4.data[i].user === graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
                                             color1 = graphnodes[j].color;
                                         }
                                     }
                                 }
                                 for (let j = 0; j < graphnodes.length; j++) {
-                                    if (res4.data[i].otherUser == graphnodes[j].id) {
+                                    if (res4.data[i].otherUser === graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
-                                            if (graphnodes[j].color == color1 && color1 != bannedColor) {
-                                                //console.log(i);
+                                            if (graphnodes[j].color === color1 && color1 !== bannedColor) {
                                                 edge.color.color = color1;
                                             }
                                         }

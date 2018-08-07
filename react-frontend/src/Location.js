@@ -3,6 +3,7 @@ import React from 'react';
 import './Location.css';
 import './UserData.css';
 import './index.css'
+import {Card} from 'antd'
 import {GoogleMap, Marker, withGoogleMap, withScriptjs} from "react-google-maps";
 
 
@@ -14,39 +15,27 @@ export default class Location extends React.Component {
     }
 
     render() {
+        if (this.props.loading) {
+            return <Card>
+                <div className='loader-wrapper'>
+                    <div className='loader'/>
+                </div>
+            </Card>
+        }
         const MapComponent = withScriptjs(withGoogleMap((props) =>
             <GoogleMap defaultZoom={6} defaultCenter={{lat: this.props.lat, lng: this.props.lng}}>
                 <Marker position={{lat: this.props.lat, lng: this.props.lng}}/>
             </GoogleMap>));
 
-        return(
-            <div className='overview'>
+        return (
+            <Card loading={this.props.loading}>
                 <MapComponent
                     googleMapURL={'https://maps.googleapis.com/maps/api/js?key=' + key + '&v=3.exp&libraries=geometry,drawing,places'}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `380px` }} />}
-                    mapElement={<div style={{ height: `100%` }} />} />
-            </div>
+                    loadingElement={<div style={{height: `100%`}}/>}
+                    containerElement={<div style={{height: `380px`}}/>}
+                    mapElement={<div style={{height: `100%`}}/>}/>
+            </Card>
         );
 
-        // const position = [this.props.lat, this.props.lng]
-        //
-        // console.log('props', this.props)
-        //
-        // return (
-        //     <div className='location-map'>
-        //         <Map center={position} zoom={7}>
-        //             <TileLayer
-        //                 attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-        //                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        //             />
-        //             <Marker position={position}>
-        //                 <Popup>
-        //                     <span>Some text</span>
-        //                 </Popup>
-        //             </Marker>
-        //         </Map>
-        //     </div>
-        // )
     }
 }

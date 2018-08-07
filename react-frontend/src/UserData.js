@@ -8,13 +8,23 @@ import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
 
 
+const cardSizes = {
+    xxl: 12,
+    xl: 12,
+    lg: 12,
+    md: 24,
+    sm: 24,
+    xs: 24
+}
+
 export default class UserData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             users: [],
             user: {},
-            relatedUsers: []
+            relatedUsers: [],
+            loading: true,
         }
     }
 
@@ -30,6 +40,7 @@ export default class UserData extends React.Component {
     }
 
     setRelations(user) {
+        this.setState({loading: true})
         axios.get('http://gr-esports.de:8080/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
             axios.get('http://gr-esports.de:8080/ts3/users').then(res2 => {
                 let relatedUsers = this.state.relatedUsers.splice();
@@ -47,9 +58,9 @@ export default class UserData extends React.Component {
                         relation: res.data[i].totalRelation
                     });
                 }
-                console.log(relatedUsers);
                 this.setState({
-                    relatedUsers: relatedUsers
+                    relatedUsers: relatedUsers,
+                    loading: false
                 });
             })
         });
@@ -90,7 +101,6 @@ export default class UserData extends React.Component {
     }
 
     render() {
-        console.log(this.state.user);
 
         let location = {};
         if (this.state.user.location == null) {
@@ -99,8 +109,8 @@ export default class UserData extends React.Component {
             location = {lat: this.state.user.location.latitude, lng: this.state.user.location.longitude}
         }
 
-        return(
-            <div>
+        return (
+            <div className='user-data-content'>
                 <div className='selector'>
                     <Select
                         showSearch
@@ -112,19 +122,62 @@ export default class UserData extends React.Component {
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                        {this.state.users.map((item, index) => {
-                            return(
-                                <Select.Option value={item.uniqueID}>{item.nickname}</Select.Option>
+                        {this.state.users.map(item => {
+                            return (
+                                <Select.Option value={item.uniqueID} key={item.uniqueID}>{item.nickname}</Select.Option>
                             );
                         })}
                     </Select>
                 </div>
-                <div>
-                    <UserDataOverview user={this.state.user}/>
-                    <Location lat={location.lat} lng={location.lng} username={this.state.user.uername}/>
-                    <RelationsOverview relatedUsers={this.state.relatedUsers} handleSelect={this.handleSelect.bind(this)}/>
-                    <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref} onSelect={this.handleGraphSelect.bind(this)}/>
-                </div>
+                <Row gutter={16}>
+                    <Col xs={cardSizes.xs}
+                         sm={cardSizes.sm}
+                         md={cardSizes.md}
+                         lg={cardSizes.lg}
+                         xl={cardSizes.xl}
+                         xxl={cardSizes.xxl}>
+                        <div className='card-element'>
+                            <UserDataOverview user={this.state.user} loading={this.state.loading}/>
+                        </div>
+                    </Col>
+                    <Col xs={cardSizes.xs}
+                         sm={cardSizes.sm}
+                         md={cardSizes.md}
+                         lg={cardSizes.lg}
+                         xl={cardSizes.xl}
+                         xxl={cardSizes.xxl}>
+                        <div className='card-element'>
+                            <Location lat={location.lat}
+                                      lng={location.lng}
+                                      username={this.state.user.uername}
+                                      loading={this.state.loading}/>
+                        </div>
+                    </Col>
+                    <Col xs={cardSizes.xs}
+                         sm={cardSizes.sm}
+                         md={cardSizes.md}
+                         lg={cardSizes.lg}
+                         xl={cardSizes.xl}
+                         xxl={cardSizes.xxl}>
+                        <div className='card-element'>
+                            <RelationsOverview relatedUsers={this.state.relatedUsers}
+                                               handleSelect={this.handleSelect.bind(this)}
+                                               loading={this.state.loading}/>
+                        </div>
+                    </Col>
+                    <Col xs={cardSizes.xs}
+                         sm={cardSizes.sm}
+                         md={cardSizes.md}
+                         lg={cardSizes.lg}
+                         xl={cardSizes.xl}
+                         xxl={cardSizes.xxl}>
+                        <div className='card-element'>
+                            <UserSocialGraph user={this.state.user} onRef={ref => this.socialGraph = ref}
+                                             onSelect={this.handleGraphSelect.bind(this)}
+                                             loading={this.state.loading}/>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }

@@ -1,0 +1,27 @@
+.user-data-overview {
+    margin: 20px;
+}
+
+@media (min-width: 1170px) {
+    .user-data-overview {
+        font-size: 12pt;
+    }
+}
+
+@media (min-width: 770px) and (max-width: 1169px) {
+    .user-data-overview {
+        font-size: 11pt;
+    }
+}
+
+@media (min-width: 520px) and (max-width: 769px) {
+    .user-data-overview {
+        font-size: 10pt;
+    }
+}
+
+@media (max-width: 519px) {
+    .user-data-overview {
+        font-size: 9pt;
+    }
+}

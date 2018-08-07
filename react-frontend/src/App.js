@@ -39,7 +39,7 @@ export default class App extends React.Component {
 
              this.setState({
                  points: this.spread(points)
-             }, () => console.log('points', this.state.points));
+             });
         });
     }
 
@@ -100,11 +100,10 @@ export default class App extends React.Component {
                     <MainMenu handleChange={this.handleMenuClick.bind(this)} />
                 </Layout.Sider>
                 <Layout.Content className='content' >
-                    <Route path='/' exact component={() => <div className='graph'><SocialGraph /></div>}/>
-                    <Route path='/user-data' exact component={UserData}/>
-                    <Route path='/heatmap' exact component={() => <div className='graph'><LocationHeatmap
-                        points={this.state.points}
-                        radiusInM={10000}/></div>}/>
+                    <Route path='/' exact render={() => <div className='graph'><SocialGraph /></div>}/>
+                    <Route path='/user-data' exact render={() => <UserData />}/>
+                    <Route path='/heatmap' exact render={() => <div className='graph'><LocationHeatmap
+                        points={this.state.points}/></div>}/>
                 </Layout.Content>
             </Layout>
         );

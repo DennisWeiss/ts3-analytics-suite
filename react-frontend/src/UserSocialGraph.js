@@ -5,9 +5,10 @@ import './UserSocialGraph.css';
 import './SocialGraph.css';
 import axios from "axios/index";
 import './UserData.css';
+import {Card} from "antd";
 
 const bannedColor = '#ff4444';
-const colors = ['#00cc00', '#66ffff', '#009933', '#cc00ff','#ffff00', '#ff3399', '#ffffcc', '#ffffff'];
+const colors = ['#00cc00', '#66ffff', '#009933', '#cc00ff', '#ffff00', '#ff3399', '#ffffcc', '#ffffff'];
 var channelToColor = {};
 var channelIndex = 0;
 
@@ -51,14 +52,14 @@ var options = {
 };
 
 var events = {
-    select: function(event) {
-        var { nodes, edges } = event;
+    select: function (event) {
+        var {nodes, edges} = event;
     }
 };
 
 export default class UserSocialGraph extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             network: {},
             users: [],
@@ -66,7 +67,7 @@ export default class UserSocialGraph extends React.Component {
                 nodes: [],
                 edges: []
             }
-        };
+        }
     }
 
     componentWillMount() {
@@ -114,14 +115,16 @@ export default class UserSocialGraph extends React.Component {
                             if (res4.data[i].channelRelation >= 0.03 || res4.data[i].totalRelation >= 0.3) {
                                 let color1 = '#7da9ff';
                                 //let nodes = this.state.graph.nodes;
-                                let edge = {from: res4.data[i].user,
+                                let edge = {
+                                    from: res4.data[i].user,
                                     to: res4.data[i].otherUser,
                                     value: res4.data[i].totalRelation,
                                     color: {
                                         color: color1,
                                         inherit: false,
                                         highlight: '#b200cc'
-                                    }};
+                                    }
+                                };
                                 for (let j = 0; j < graphnodes.length; j++) {
                                     if (res4.data[i].user == graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
@@ -156,9 +159,7 @@ export default class UserSocialGraph extends React.Component {
     }
 
     componentDidMount() {
-        //this.network.selectNodes(this.props.user.uniqueID);
         this.props.onRef(this);
-        console.log(this.network.getSelectedNodes());
     }
 
     componentWillUnmount() {
@@ -167,7 +168,9 @@ export default class UserSocialGraph extends React.Component {
 
     setNetworkInstance = network => {
         this.network = network;
-        this.network.on('selectNode', (click) => this.props.onSelect(click.nodes[0]));
+        if (this.network != null) {
+            this.network.on('selectNode', (click) => this.props.onSelect(click.nodes[0]))
+        }
     };
 
     select(id) {
@@ -183,11 +186,18 @@ export default class UserSocialGraph extends React.Component {
     }
 
     render() {
-
-        return(
-            <div className='overview'>
-                <Graph style={{height: '380px'}} getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />
-            </div>
+        if (this.props.loading) {
+            return <Card>
+                <div className='loader-wrapper'>
+                    <div className='loader'/>
+                </div>
+            </Card>
+        }
+        return (
+            <Card>
+                <Graph style={{height: '380px'}} getNetwork={this.setNetworkInstance} graph={this.state.graph}
+                       options={options} events={events}/>
+            </Card>
         );
     }
 }

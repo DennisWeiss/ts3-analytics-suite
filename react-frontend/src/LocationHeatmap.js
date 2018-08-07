@@ -11,7 +11,6 @@ const zoomLevelScaleAt0 = 156412
 class LocationHeatmap extends React.Component {
     constructor(props) {
         super(props);
-        console.log('radiusInM', this.props.radiusInM)
         this.state = {
             viewport: {
                 center: [0, 0],
@@ -26,7 +25,7 @@ class LocationHeatmap extends React.Component {
                 center: viewport.center,
                 zoom: Math.min(11, viewport.zoom)
             }
-        }, () => console.log('zoom', this.state.viewport.zoom))
+        })
     }
 
     render() {

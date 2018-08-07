@@ -2,7 +2,7 @@ import React from 'react';
 import './RelationsOverview.css';
 import './UserData.css';
 import axios from 'axios';
-import {Table} from 'antd';
+import {Card, Table} from 'antd';
 
 
 export default class RelationsOverview extends React.Component {
@@ -50,9 +50,9 @@ export default class RelationsOverview extends React.Component {
         }
 
         return(
-            <div className='overview' >
-                <Table size={size} columns={this.state.columns} dataSource={this.props.relatedUsers} pagination={false} />
-            </div>
+            <Card >
+                <Table size={size} columns={this.state.columns} dataSource={this.props.relatedUsers} pagination={false} loading={this.props.loading} />
+            </Card>
         );
     }
 }
