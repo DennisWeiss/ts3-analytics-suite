@@ -8,17 +8,25 @@ import axios from 'axios';
 import UserData from './UserData'
 import LocationHeatmap from './LocationHeatmap'
 import {Route} from "react-router";
+import createHistory from 'history/createBrowserHistory'
 
 
+const history = createHistory()
 
 let existingPoints = {}
 
+const pathNameToMenuKey = {
+    '/': 'relations',
+    '/user-data': 'data',
+    '/heatmap': 'heatmap',
+    '/stats': 'usage-statistics'
+}
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 'relations',
+            current: pathNameToMenuKey[history.location.pathname],
             points: []
         }
     }
@@ -93,10 +101,11 @@ export default class App extends React.Component {
 
 
     render() {
+        console.log('current', this.state.current)
         return(
             <Layout>
                 <Layout.Sider breakpoint='md' width={210} style={{background: '#ffffff', padding: 0}}>
-                    <MainMenu handleChange={this.handleMenuClick.bind(this)} />
+                    <MainMenu handleChange={this.handleMenuClick.bind(this)} selected={this.state.current}/>
                 </Layout.Sider>
                 <Layout.Content className='content' >
                     <Route path='/' exact render={() => <div className='graph'><SocialGraph /></div>}/>

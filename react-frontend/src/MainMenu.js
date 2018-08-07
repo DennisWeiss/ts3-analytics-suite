@@ -14,8 +14,8 @@ export default class MainMenu extends React.Component {
             <Menu
                 className='main-menu'
                 mode='inline'
+                selectedKeys={[this.props.selected]}
                 onClick={this.props.handleChange}
-                defaultSelectedKeys={['relations']}
                 defaultOpenKeys={['users', 'server']}>
                 <Menu.SubMenu key='users' title={<span><Icon type='user' /><span>Users</span></span>}>
                     <Menu.Item key='relations'><Link to='/'><i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Relations</Link></Menu.Item>

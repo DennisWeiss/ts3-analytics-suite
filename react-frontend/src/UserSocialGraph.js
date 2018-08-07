@@ -186,13 +186,13 @@ export default class UserSocialGraph extends React.Component {
     }
 
     render() {
-        if (this.props.loading) {
-            return <Card>
-                <div className='loader-wrapper'>
-                    <div className='loader'/>
-                </div>
-            </Card>
-        }
+        // if (this.props.loading) {
+        //     return <Card>
+        //         <div className='loader-wrapper'>
+        //             <div className='loader'/>
+        //         </div>
+        //     </Card>
+        // }
         return (
             <Card>
                 <Graph style={{height: '380px'}} getNetwork={this.setNetworkInstance} graph={this.state.graph}

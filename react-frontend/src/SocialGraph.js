@@ -6,7 +6,7 @@ import './SocialGraph.css';
 
 
 const bannedColor = '#ff4444';
-const colors = ['#00cc00', '#66ffff', '#009933', '#cc00ff','#ffff00', '#ff3399', '#ffffcc', '#ffffff'];
+const colors = ['#00cc00', '#66ffff', '#009933', '#cc00ff', '#ffff00', '#ff3399', '#ffffcc', '#ffffff'];
 var channelToColor = {};
 var channelIndex = 0;
 
@@ -100,14 +100,16 @@ export default class SocialGraph extends React.Component {
                             if (res4.data[i].channelRelation >= 0.03 || res4.data[i].totalRelation >= 0.3) {
                                 let color1 = '#7da9ff';
                                 //let nodes = this.state.graph.nodes;
-                                let edge = {from: res4.data[i].user,
+                                let edge = {
+                                    from: res4.data[i].user,
                                     to: res4.data[i].otherUser,
                                     value: res4.data[i].totalRelation,
                                     color: {
                                         color: color1,
                                         inherit: false,
                                         highlight: '#b200cc'
-                                    }};
+                                    }
+                                };
                                 for (let j = 0; j < graphnodes.length; j++) {
                                     if (res4.data[i].user === graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
@@ -150,12 +152,7 @@ export default class SocialGraph extends React.Component {
     };
 
     render() {
-        let content = '';
-        if (this.state.graph.nodes.length === 0) {
-            content = <div className='loader'/>;
-        } else {
-            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options}  />;
-        }
-        return content
+
+        return <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options}/>
     }
 }

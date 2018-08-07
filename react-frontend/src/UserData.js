@@ -6,7 +6,10 @@ import UserDataOverview from './UserDataOverview';
 import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
+import createHistory from 'history/createBrowserHistory'
+import queryString from 'query-string'
 
+const history = createHistory()
 
 const cardSizes = {
     xxl: 12,
@@ -19,22 +22,31 @@ const cardSizes = {
 
 export default class UserData extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
+
+        const parsedSearch = queryString.parse(history.location.search)
+
         this.state = {
             users: [],
-            user: {},
+            user: parsedSearch.user,
             relatedUsers: [],
             loading: true,
         }
     }
 
+    setSearchPath = () => history.push({
+        pathname: '/user-data',
+        search: `?user=${encodeURIComponent(this.state.user != null ? this.state.user.uniqueID : '')}`
+    })
+
     componentDidMount() {
         axios.get('http://gr-esports.de:8080/ts3/users').then(res => {
-            let user = res.data[Math.floor(res.data.length * Math.random())];
+            let user = this.state.user != null ? res.data.find(user => user.uniqueID === this.state.user) : res.data[Math.floor(res.data.length * Math.random())];
             this.setState({
                 users: res.data,
                 user: user
-            });
+            }, this.setSearchPath);
+
             this.setRelations(user);
         });
     }
@@ -79,7 +91,7 @@ export default class UserData extends React.Component {
 
         this.setState({
             user: user,
-        });
+        }, this.setSearchPath);
     }
 
     handleGraphSelect(value) {
@@ -97,13 +109,13 @@ export default class UserData extends React.Component {
 
         this.setState({
             user: user,
-        });
+        }, this.setSearchPath);
     }
 
     render() {
 
-        let location = {};
-        if (this.state.user.location == null) {
+        let location = {}
+        if (this.state.user == null || this.state.user.location == null) {
             location = {lat: 0, lng: 0}
         } else {
             location = {lat: this.state.user.location.latitude, lng: this.state.user.location.longitude}
@@ -116,7 +128,7 @@ export default class UserData extends React.Component {
                         showSearch
                         style={{width: 200}}
                         placeholder='Search for a user'
-                        value={this.state.user.uniqueID}
+                        value={this.state.user != null ? this.state.user.uniqueID : null}
                         optionsFilterProp='children'
                         onChange={this.handleSelect.bind(this)}
                         onFocus={this.handleFocus}
@@ -137,7 +149,7 @@ export default class UserData extends React.Component {
                          xl={cardSizes.xl}
                          xxl={cardSizes.xxl}>
                         <div className='card-element'>
-                            <UserDataOverview user={this.state.user} loading={this.state.loading}/>
+                            <UserDataOverview user={this.state.user != null ? this.state.user : {}} loading={this.state.loading}/>
                         </div>
                     </Col>
                     <Col xs={cardSizes.xs}
@@ -149,7 +161,7 @@ export default class UserData extends React.Component {
                         <div className='card-element'>
                             <Location lat={location.lat}
                                       lng={location.lng}
-                                      username={this.state.user.uername}
+                                      username={this.state.user != null ? this.state.user.username : ''}
                                       loading={this.state.loading}/>
                         </div>
                     </Col>
