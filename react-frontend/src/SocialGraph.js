@@ -2,7 +2,6 @@ import React from 'react';
 import './index.css';
 import Graph from 'react-graph-vis';
 import axios from "axios/index";
-import {Spin} from 'antd';
 import './SocialGraph.css';
 
 
@@ -50,11 +49,6 @@ var options = {
     }
 };
 
-var events = {
-    select: function(event) {
-        var { nodes, edges } = event;
-    }
-};
 
 export default class SocialGraph extends React.Component {
     constructor(props) {
@@ -160,7 +154,7 @@ export default class SocialGraph extends React.Component {
         if (this.state.graph.nodes.length === 0) {
             content = <div className='loader'/>;
         } else {
-            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />;
+            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options}  />;
         }
         return content
     }

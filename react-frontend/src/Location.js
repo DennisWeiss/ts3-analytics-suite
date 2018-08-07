@@ -10,9 +10,6 @@ import {GoogleMap, Marker, withGoogleMap, withScriptjs} from "react-google-maps"
 const key = 'AIzaSyDOC-TY0tIePGLZ2IlTgzaIIo3UBjV3dCM'
 
 export default class Location extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         if (this.props.loading) {
