@@ -1,11 +1,11 @@
 import React from 'react'
 import './LocationHeatmap.css'
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {Map, TileLayer} from 'react-leaflet'
 import HeatmapLayer from 'react-leaflet-heatmap-layer'
 
 
 // source: https://wiki.openstreetmap.org/wiki/Zoom_levels
-const zoomLevelScaleAt0 = 156412
+// const zoomLevelScaleAt0 = 156412
 
 
 class LocationHeatmap extends React.Component {

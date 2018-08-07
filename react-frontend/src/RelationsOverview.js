@@ -1,8 +1,8 @@
-import React from 'react';
-import './RelationsOverview.css';
-import './UserData.css';
-import axios from 'axios';
-import {Card, Table} from 'antd';
+import React from 'react'
+import './RelationsOverview.css'
+import './UserData.css'
+import axios from 'axios'
+import {Card, Table} from 'antd'
 
 
 export default class RelationsOverview extends React.Component {

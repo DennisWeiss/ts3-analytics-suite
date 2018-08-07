@@ -1,0 +1,14 @@
+language: java
+sudo: false
+install:
+    - cd react-frontend
+    - npm install
+    - cd ..
+script:
+    - cd react-frontend
+    - npm run build
+    - cd ..
+    - mkdir -p ts3socialai/src/main/resources/public
+    - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
+    - cd ts3socialai
+    - mvn clean install

@@ -8,7 +8,7 @@ import Flag from 'react-world-flags';
 
 export default class UserDataOverview extends React.Component {
     render() {
-        let nickname = this.props.user.nickname == null || this.props.user.nickname == '' ? ' ' : this.props.user.nickname;
+        let nickname = this.props.user.nickname == null || this.props.user.nickname === '' ? ' ' : this.props.user.nickname;
 
         let xs = 8;
         let sm = 8;

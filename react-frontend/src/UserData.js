@@ -1,6 +1,6 @@
 import React from 'react';
 import './UserData.css';
-import {Select, Row, Col} from 'antd';
+import {Select} from 'antd';
 import axios from 'axios';
 import UserDataOverview from './UserDataOverview';
 import RelationsOverview from "./RelationsOverview";
@@ -47,7 +47,7 @@ export default class UserData extends React.Component {
                 let username = '';
                 for (let i = 0; i < res.data.length; i++) {
                     for (let j = 0; j < res2.data.length; j++) {
-                        if (res.data[i].otherUser == res2.data[j].uniqueID) {
+                        if (res.data[i].otherUser === res2.data[j].uniqueID) {
                             username = res2.data[j].nickname;
                         }
                     }
@@ -70,7 +70,7 @@ export default class UserData extends React.Component {
         this.socialGraph.select(value);
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
-            if (this.state.users[i].uniqueID == value) {
+            if (this.state.users[i].uniqueID === value) {
                 user = this.state.users[i];
             }
         }
@@ -88,7 +88,7 @@ export default class UserData extends React.Component {
         }
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
-            if (this.state.users[i].uniqueID == value) {
+            if (this.state.users[i].uniqueID === value) {
                 user = this.state.users[i];
             }
         }

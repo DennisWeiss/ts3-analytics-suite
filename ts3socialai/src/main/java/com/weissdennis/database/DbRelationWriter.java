@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DbRelationWriter {
-    Connection connection;
-    Statement statement;
+    private Connection connection;
+    private Statement statement;
 
     public DbRelationWriter(String internDbUrl) {
         try {

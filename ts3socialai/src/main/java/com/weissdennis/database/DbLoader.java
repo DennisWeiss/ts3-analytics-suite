@@ -2,6 +2,7 @@ package com.weissdennis.database;
 
 import com.weissdennis.application.Configuration;
 import com.weissdennis.ai.User;
+import com.weissdennis.application.Ts3socialaiApplication;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -86,8 +87,12 @@ public class DbLoader {
 
    private List<User> processResultSet(ResultSet resultSet) throws SQLException {
       List<User> users = new ArrayList<>();
+      List<String> bannedUsers = Ts3socialaiApplication.serverQuery.getBans();
       while (resultSet.next()) {
-         users.add(processSingleResultSet(resultSet));
+         User user = processSingleResultSet(resultSet);
+         if (!bannedUsers.contains(user.getUniqueID())) {
+            users.add(user);
+         }
       }
       return users;
    }
