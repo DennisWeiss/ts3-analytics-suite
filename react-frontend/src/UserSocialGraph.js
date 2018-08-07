@@ -196,7 +196,7 @@ export default class UserSocialGraph extends React.Component {
         return (
             <Card>
                 <Graph style={{height: '380px'}} getNetwork={this.setNetworkInstance} graph={this.state.graph}
-                       options={options} events={events}/>
+                       options={options}/>
             </Card>
         );
     }

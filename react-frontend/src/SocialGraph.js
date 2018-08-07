@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import Graph from 'react-graph-vis';
 import axios from "axios/index";
+import {Spin} from 'antd';
 import './SocialGraph.css';
 
 
@@ -49,11 +50,11 @@ var options = {
     }
 };
 
-// var events = {
-//     select: function(event) {
-//         var { nodes, edges } = event;
-//     }
-// };
+var events = {
+    select: function(event) {
+        var { nodes, edges } = event;
+    }
+};
 
 export default class SocialGraph extends React.Component {
     constructor(props) {
@@ -90,14 +91,14 @@ export default class SocialGraph extends React.Component {
                             }
                         }
                         for (let j = 0; j < res3.data.length; j++) {
-                            //console.log(res3.data[j]);
                             if (node.id === res3.data[j]) {
-                                if (i === 45) {
-                                    console.log(res3.data[j]);
-                                }
+                                node.color = bannedColor;
+                                console.log(res.data[i].uniqueID);
+                            }
                         }
                         graphnodes.push(node);
                     }
+                    //console.log(this.state.graph);
 
                     axios.get('http://gr-esports.de:8080/ts3/relations').then(res4 => {
                         let edges = this.state.graph.edges.slice();
@@ -124,7 +125,6 @@ export default class SocialGraph extends React.Component {
                                     if (res4.data[i].otherUser === graphnodes[j].id) {
                                         if (graphnodes[j].color != null) {
                                             if (graphnodes[j].color === color1 && color1 !== bannedColor) {
-                                                //console.log(i);
                                                 edge.color.color = color1;
                                             }
                                         }
@@ -160,7 +160,7 @@ export default class SocialGraph extends React.Component {
         if (this.state.graph.nodes.length === 0) {
             content = <div className='loader'/>;
         } else {
-            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} />;
+            content = <Graph getNetwork={this.setNetworkInstance} graph={this.state.graph} options={options} events={events} />;
         }
         return content
     }

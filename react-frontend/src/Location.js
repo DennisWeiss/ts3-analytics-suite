@@ -34,7 +34,7 @@ export default class Location extends React.Component {
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `380px` }} />}
                     mapElement={<div style={{ height: `100%` }} />} />
-            </div>
+            </Card>
         )
     }
 }
