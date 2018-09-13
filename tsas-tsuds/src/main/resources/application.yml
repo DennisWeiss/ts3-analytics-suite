@@ -1,0 +1,23 @@
+ts3api:
+  queryName: TS3 Analytics Suite
+  loginMessage: Test
+  serverIp: localhost
+  serverQueryAdminName: serveradmin
+  serverQueryAdminPassword: Meycrosoft1337
+  serverId: 3
+  afkChannels: 92,93
+  locationInfoUpdateInterval: 3
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/tsas_tsuds
+    username: root
+    password: Meycrosoft1337
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8090
