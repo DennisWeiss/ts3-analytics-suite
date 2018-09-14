@@ -17,23 +17,14 @@ public class TS3UserRetrievalTask implements Runnable {
 
     private static Map<String, Date> userUnqiueIdToLastUpdated = new HashMap<>();
 
-    private TS3Api ts3Api;
+    private final TS3Api ts3Api;
     private TS3UserRepository ts3UserRepository;
     private Ts3PropertiesConfig ts3PropertiesConfig;
 
-
-    public TS3UserRetrievalTask(TS3Api ts3Api) {
+    public TS3UserRetrievalTask(TS3Api ts3Api, TS3UserRepository ts3UserRepository, Ts3PropertiesConfig ts3PropertiesConfig) {
         this.ts3Api = ts3Api;
-    }
-
-    @Autowired
-    public void setTs3UserRepository(TS3UserRepository ts3UserRepository) {
         this.ts3UserRepository = ts3UserRepository;
-    }
-
-    @Autowired
-    public void setTs3ApiConfig() {
-
+        this.ts3PropertiesConfig = ts3PropertiesConfig;
     }
 
     private TS3User mapDatabaseClientToUser(DatabaseClient databaseClient) {

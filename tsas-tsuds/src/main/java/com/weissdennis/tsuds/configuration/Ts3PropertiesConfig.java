@@ -1,13 +1,8 @@
 package com.weissdennis.tsuds.configuration;
 
-import com.github.theholywaffle.teamspeak3.TS3Api;
-import com.github.theholywaffle.teamspeak3.TS3Config;
-import com.github.theholywaffle.teamspeak3.TS3Query;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,17 +82,16 @@ public class Ts3PropertiesConfig {
         this.afkChannels = afkChannels;
     }
 
-    public List<Long> getParsedAfkChannels() {
-        return Arrays.asList(afkChannels.split(".*,.*"))
-                .parallelStream()
-                .map(Long::parseLong)
+    public List<Integer> getParsedAfkChannels() {
+        return Arrays.stream(afkChannels.split(".*,.*"))
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public void setAfkChannelsFromList(List<Long> afkChannels) {
+    public void setAfkChannelsFromList(List<Integer> afkChannels) {
         this.afkChannels = afkChannels
-                .parallelStream()
-                .reduce("", (String accStr, Long channel) -> accStr.concat(String.valueOf(channel)), (a, b) -> a + b);
+                .stream()
+                .reduce("", (String accStr, Integer channel) -> accStr.concat(String.valueOf(channel)), (a, b) -> a + b);
 
 
     }

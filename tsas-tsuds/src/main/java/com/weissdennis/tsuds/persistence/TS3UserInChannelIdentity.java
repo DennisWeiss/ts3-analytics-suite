@@ -2,19 +2,20 @@ package com.weissdennis.tsuds.persistence;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Embeddable
 public class TS3UserInChannelIdentity implements Serializable {
 
     private String uniqueId;
-    private Integer channelId;
+    private Instant dateTime;
 
     public TS3UserInChannelIdentity() {
     }
 
-    public TS3UserInChannelIdentity(String uniqueId, Integer channelId) {
+    public TS3UserInChannelIdentity(String uniqueId, Instant dateTime) {
         this.uniqueId = uniqueId;
-        this.channelId = channelId;
+        this.dateTime = dateTime;
     }
 
     public String getUniqueId() {
@@ -25,11 +26,11 @@ public class TS3UserInChannelIdentity implements Serializable {
         this.uniqueId = uniqueId;
     }
 
-    public Integer getChannelId() {
-        return channelId;
+    public Instant getDateTime() {
+        return dateTime;
     }
 
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
+    public void setDateTime(Instant dateTime) {
+        this.dateTime = dateTime;
     }
 }

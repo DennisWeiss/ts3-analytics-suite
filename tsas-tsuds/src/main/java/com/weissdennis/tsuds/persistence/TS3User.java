@@ -61,12 +61,14 @@ public class TS3User {
     }
 
     public TS3User withExtendedUserInfo() {
-        try {
-            return withExtendedUserInfo(new GsonBuilder().create().fromJson(new BufferedReader(new InputStreamReader(
-                    new URL("http://ipinfo.io/" + ip + "/json").openConnection().getInputStream())),
-                    ClientIpInfo.class));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (ip != null && !ip.equals("")) {
+            try {
+                return withExtendedUserInfo(new GsonBuilder().create().fromJson(new BufferedReader(new InputStreamReader(
+                                new URL("http://ipinfo.io/" + ip + "/json").openConnection().getInputStream())),
+                        ClientIpInfo.class));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return this;
     }
