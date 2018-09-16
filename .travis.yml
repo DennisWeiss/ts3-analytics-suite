@@ -16,9 +16,9 @@ script:
 - mkdir -p ts3socialai/src/main/resources/public
 - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
 - cd ts3socialai
-- mvn clean install
+- mvn clean install -DskipTests
 - cd ../tsas-tsuds
-- mvn clean install
+- mvn clean install -DskipTests
 - cd ..
 after_success:
-- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/tsas-tsuds/
+- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/
