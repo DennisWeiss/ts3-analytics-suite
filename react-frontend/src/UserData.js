@@ -9,8 +9,6 @@ import UserSocialGraph from "./UserSocialGraph";
 import createHistory from 'history/createBrowserHistory'
 import queryString from 'query-string'
 
-const history = createHistory()
-
 const cardSizes = {
     xxl: 12,
     xl: 12,
@@ -20,15 +18,12 @@ const cardSizes = {
     xs: 24
 }
 
-export default class UserData extends React.Component {
+export default class UserData extends UrlStateComponent {
     constructor(props) {
         super(props)
 
-        const parsedSearch = queryString.parse(history.location.search)
-
         this.state = {
             users: [],
-            user: parsedSearch.user,
             relatedUsers: [],
             loading: true,
         }
@@ -44,8 +39,11 @@ export default class UserData extends React.Component {
             let user = this.state.user != null ? res.data.find(user => user.uniqueID === this.state.user) : res.data[Math.floor(res.data.length * Math.random())];
             this.setState({
                 users: res.data,
+            });
+
+            this.setUrlState({
                 user: user
-            }, this.setSearchPath);
+            })
 
             this.setRelations(user);
         });
@@ -89,9 +87,9 @@ export default class UserData extends React.Component {
 
         this.setRelations(user);
 
-        this.setState({
+        this.setUrlState({
             user: user,
-        }, this.setSearchPath);
+        });
     }
 
     handleGraphSelect(value) {
@@ -107,9 +105,9 @@ export default class UserData extends React.Component {
 
         this.setRelations(user);
 
-        this.setState({
+        this.setUrlState({
             user: user,
-        }, this.setSearchPath);
+        });
     }
 
     render() {
