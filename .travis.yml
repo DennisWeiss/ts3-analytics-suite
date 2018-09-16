@@ -1,7 +1,5 @@
 env:
   global:
-  - secure: B0MKCnNQyZOhR7+oPcLHELukGokW12xsT3KKWWYmIu6/BKcsmCc4dKu3hAvaqbBeQXcUcTrGbIR+8a0zrSIvJ5fdzdc+swZc+4XtHWuyDtTPnlX8V7+vb5pLne533kzD3rpTgEqSJ/kGuzHcW9kLwl7DwyhYFIG415//9tLm8h5modTZLy25VuPK//mSr1DyioF3nyu4nrukptJaf7us+/kFU3iVrk+buKntRcpgCpstHaJxCxYmWlMEd9gVy9bcoK6ZQg4fKlU9hzTB1LKUh++V1nYmh/KxewBVJM52D+slqNKz7OUeHXajw/ucfnhUcS14kaP7oCa6AjwNtE0knaf1K/eZYopWlkd6v1w6QeoyK+kLIb2c6K33FJEePJi8CFBVP2MVZ8CdrbSW+6YSRoU7ui93ExdJdREcdGpdXveBECgecpRdgin5+qkBIerLCcXoWKAkOcYLGBnSq2Usu8YfPrgGXKDNNdqE+J62IXFJ1/nGj/j+CYmas/KOditqZ8xbG0ZVaWdwXGFqcYRgko7ipByHiRv/ARmDLjHwvHTINF/94u9M7I7QJMXh4wQKncO7rT321uqg2/2N0w+OT+go4uBe7Wuk6fxQWyZxihZdyhjRFeFEhaXkBuIEtUYR8eSxdV3XmAq7l5IVhFAdmJkheihYyhtaHDrP6iNqHlw=
-  - secure: MkfRxaogs3lc8fGYePrt35tSHkHiVDjKGlI2P5Q6JUicu45Kamyexk3SW1etuPtMh1mD5usqXRNjjsknOQ05+DqUD3AhWt5F+4Tns1aIihopQgo/iUF2zyOzOOdwaNgz8ENvRKrBPUXUPtj+QCfBDONOf8gMh3woyS/ekv8VBwArmz/10f0zTI6F11TthPehnbW7Qb9Q0lwU78E58dlkJ6L3uByLAmeZpf68YVZhH44BdDUsJTGRp0HHK9DI2F+LkL0nDPnb2mxpJAiH2JnJG8UkhRu2hSogAPM8nf/ha5Lu4jQPHdwRo2B2BCE/2smQeGh3e3dkfSU5LMOihpm+VzjKh4JQ9hckImS4OBsZguo4fncjlNwFX/mBEuymviusoMETKEawjd0Ly7OT32iFxNc7zfXAoekv9feDNagwED8CPfE2ftxIeU+zazZeSaE9S1vAYp3duQf5SX5POcS7zr+/nACl1oNiUbo1vJrgndgmF5ltdqrGnAW0UL0/9xwGDDNWApLZkrksac6jWWulGFsfOoiTsr/H1vewQdN84vNm+d3NpyeDN9oTc6V+3NMuR3OLt7XjIsFoTpjeV/sBezC0WdbBWLiel+c9gWobQi8A5blnOAk72P3n3vkQnsropMsO1L8byshfVh7pdujOxB0ekyXapn9jZBmWkwexVK0=
 
 language: java
 sudo: false
@@ -21,4 +19,4 @@ script:
 - mvn clean install -DskipTests
 - cd ..
 after_success:
-- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/
+- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/
