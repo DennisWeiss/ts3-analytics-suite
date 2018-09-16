@@ -1,24 +1,24 @@
 env:
   global:
-    - secure: "T0Lr3xXk9xPOx5M0hKutDrq3LCzt1QhbzKfSZE+X+n5FrwRuBio/7ch11iX1zoj3702Xrut2qnMtVZf6XlW/IQ1QSSHsW9wMVV319xb0O69ruBKbORig14iwkbXMKqb0Ov0sc/WvfgdzH28JbWCsqbORLJvXpcto3wIl2gpi3U+Lr5Lc1mzkW/oM4I3+JEO7F1VOI/F2+JoGWLTTsxyQ/O3reULc/QLuhZVGmfZII6YvqvXpysmwr74X2kxbxW0DerhodpD9KH8m68e6PSChO+iVnjjq7b5FnWEs8MXi/bGne6I99S7l00zjy2wZCSXQOEo6mP3UGI5RH+chAwghy0Nm1sHfOXVxZEK3wsPW89rAEqIhTpTYJuUmV5q/TXKyfegxzbRLVL3JTx5fPMFJ0tOqeRzzRC+KHSAj852mJ4E+qgD84gx8Mqr9Cc6wW1hxqWWcmpF5y9b/VViDimhPQ1ogHfHu9u1b+vXxrn1sALJZBKGgFSWYmuBlCTA1y30GW2FTqDwQkzNFBlLLGY+urB15x+IIMP5CoEpHORnNRfvsMTrRbWQ/rSXo65FE3LvZ/M7xIs/jUAbpKJWq7QJNTyfvP+0epA/MY8/QLU7YAxvXSJSiF3tAzRvm3C/otpLqQC8CPL7laZKtPbQ8IRc6iLvipt5o2jA7PLIfl/4L27k="
-    - secure: "LvoFSvwEVH5WqCN//FAfypTB1F/S4y0D66v2XIB2G7J70WSsGxl/2Fv0MMfroC6Usrc3hjirrXfPaEMGrd+CtgG8WRbzOTNIeZOSSBcTJ4i28h/1tqjgIotyZlGb2Qo5ROw20A/Q7EXzgWL8UpZEI+VUMbxCTfgU5x2uC7YvG5qSfM1WFCkODj0QgCiycWqvj0sqiPMKib3rWiQSWnjIOB2GlBUI/Soyzc6+SFmOjVyTAXH8XeN858DLoB/P+21u9On7yDyKweRqEwiOnP9zIfiVJpVrXwWwMKFplIpP4dVq6hd1JhhuV6VuxL2AIaUB3i6Q3QmdSeqcn6/1+uUl847RTB/2QDHe6dotuHw8cfWHoRzpQUhPGjyiGbzIk2P+NQizg0asKBVa/wzZjc92/u/ZH7zudRP/Ix/mjiAYusAvM5PYmJ1H1kk253cisZ+c6Zv05ei5JfQ9dcltDYSFITys+XIVjTT00/eGvQivAdHTEvgo5XHh26/tL1nBigXbfM6yR0J9u9UO6VNRAJT26r5BjnxDuiPnolvoeAHBEK9oLieUAzZ7da4UBddFaCe/xFD114hAZZReTQaC9ZOMg6iWhug5YnWTY051V+IY20muDFHG4ilRExgl1ErQmpE9q1zkhYx7UWIXFNSMX0t6Kz1ORPaYel0PHqoNdByEvpg="
+  - secure: B0MKCnNQyZOhR7+oPcLHELukGokW12xsT3KKWWYmIu6/BKcsmCc4dKu3hAvaqbBeQXcUcTrGbIR+8a0zrSIvJ5fdzdc+swZc+4XtHWuyDtTPnlX8V7+vb5pLne533kzD3rpTgEqSJ/kGuzHcW9kLwl7DwyhYFIG415//9tLm8h5modTZLy25VuPK//mSr1DyioF3nyu4nrukptJaf7us+/kFU3iVrk+buKntRcpgCpstHaJxCxYmWlMEd9gVy9bcoK6ZQg4fKlU9hzTB1LKUh++V1nYmh/KxewBVJM52D+slqNKz7OUeHXajw/ucfnhUcS14kaP7oCa6AjwNtE0knaf1K/eZYopWlkd6v1w6QeoyK+kLIb2c6K33FJEePJi8CFBVP2MVZ8CdrbSW+6YSRoU7ui93ExdJdREcdGpdXveBECgecpRdgin5+qkBIerLCcXoWKAkOcYLGBnSq2Usu8YfPrgGXKDNNdqE+J62IXFJ1/nGj/j+CYmas/KOditqZ8xbG0ZVaWdwXGFqcYRgko7ipByHiRv/ARmDLjHwvHTINF/94u9M7I7QJMXh4wQKncO7rT321uqg2/2N0w+OT+go4uBe7Wuk6fxQWyZxihZdyhjRFeFEhaXkBuIEtUYR8eSxdV3XmAq7l5IVhFAdmJkheihYyhtaHDrP6iNqHlw=
+  - secure: MkfRxaogs3lc8fGYePrt35tSHkHiVDjKGlI2P5Q6JUicu45Kamyexk3SW1etuPtMh1mD5usqXRNjjsknOQ05+DqUD3AhWt5F+4Tns1aIihopQgo/iUF2zyOzOOdwaNgz8ENvRKrBPUXUPtj+QCfBDONOf8gMh3woyS/ekv8VBwArmz/10f0zTI6F11TthPehnbW7Qb9Q0lwU78E58dlkJ6L3uByLAmeZpf68YVZhH44BdDUsJTGRp0HHK9DI2F+LkL0nDPnb2mxpJAiH2JnJG8UkhRu2hSogAPM8nf/ha5Lu4jQPHdwRo2B2BCE/2smQeGh3e3dkfSU5LMOihpm+VzjKh4JQ9hckImS4OBsZguo4fncjlNwFX/mBEuymviusoMETKEawjd0Ly7OT32iFxNc7zfXAoekv9feDNagwED8CPfE2ftxIeU+zazZeSaE9S1vAYp3duQf5SX5POcS7zr+/nACl1oNiUbo1vJrgndgmF5ltdqrGnAW0UL0/9xwGDDNWApLZkrksac6jWWulGFsfOoiTsr/H1vewQdN84vNm+d3NpyeDN9oTc6V+3NMuR3OLt7XjIsFoTpjeV/sBezC0WdbBWLiel+c9gWobQi8A5blnOAk72P3n3vkQnsropMsO1L8byshfVh7pdujOxB0ekyXapn9jZBmWkwexVK0=
 
 language: java
 sudo: false
 install:
-    - cd react-frontend
-    - npm install
-    - cd ..
+- cd react-frontend
+- npm install
+- cd ..
 script:
-    - cd react-frontend
-    - npm run build
-    - cd ..
-    - mkdir -p ts3socialai/src/main/resources/public
-    - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
-    - cd ts3socialai
-    - mvn clean install
-    - cd ../tsas-tsuds
-    - mvn clean install
-    - cd ..
+- cd react-frontend
+- npm run build
+- cd ..
+- mkdir -p ts3socialai/src/main/resources/public
+- cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
+- cd ts3socialai
+- mvn clean install
+- cd ../tsas-tsuds
+- mvn clean install
+- cd ..
 after_success:
-    - curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/tsas-tsuds/
+- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/tsas-tsuds/
