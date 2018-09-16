@@ -6,8 +6,8 @@ import UserDataOverview from './UserDataOverview';
 import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
-import createHistory from 'history/createBrowserHistory'
-import queryString from 'query-string'
+import UrlStateComponent from './UrlStateComponent'
+
 
 const cardSizes = {
     xxl: 12,
@@ -18,6 +18,12 @@ const cardSizes = {
     xs: 24
 }
 
+
+const idMappers = {
+    user: user => user.id
+}
+
+
 export default class UserData extends UrlStateComponent {
     constructor(props) {
         super(props)
@@ -27,12 +33,12 @@ export default class UserData extends UrlStateComponent {
             relatedUsers: [],
             loading: true,
         }
+
+        this.valueMappers = {
+            user: str => ({})
+        }
     }
 
-    setSearchPath = () => history.push({
-        pathname: '/user-data',
-        search: `?user=${encodeURIComponent(this.state.user != null ? this.state.user.uniqueID : '')}`
-    })
 
     componentDidMount() {
         axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
@@ -43,7 +49,7 @@ export default class UserData extends UrlStateComponent {
 
             this.setUrlState({
                 user: user
-            })
+            }, idMappers)
 
             this.setRelations(user);
         });
@@ -89,7 +95,7 @@ export default class UserData extends UrlStateComponent {
 
         this.setUrlState({
             user: user,
-        });
+        }, idMappers);
     }
 
     handleGraphSelect(value) {
@@ -107,7 +113,7 @@ export default class UserData extends UrlStateComponent {
 
         this.setUrlState({
             user: user,
-        });
+        }, idMappers);
     }
 
     render() {
