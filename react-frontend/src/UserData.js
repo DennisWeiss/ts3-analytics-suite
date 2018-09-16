@@ -40,7 +40,7 @@ export default class UserData extends React.Component {
     })
 
     componentDidMount() {
-        axios.get('http://gr-esports.de:8080/ts3/users').then(res => {
+        axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
             let user = this.state.user != null ? res.data.find(user => user.uniqueID === this.state.user) : res.data[Math.floor(res.data.length * Math.random())];
             this.setState({
                 users: res.data,
@@ -53,8 +53,8 @@ export default class UserData extends React.Component {
 
     setRelations(user) {
         this.setState({loading: true})
-        axios.get('http://gr-esports.de:8080/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
-            axios.get('http://gr-esports.de:8080/ts3/users').then(res2 => {
+        axios.get('http://gr-esports.de:8081/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
+            axios.get('http://gr-esports.de:8081/ts3/users').then(res2 => {
                 let relatedUsers = this.state.relatedUsers.splice();
                 let username = '';
                 for (let i = 0; i < res.data.length; i++) {

@@ -32,7 +32,7 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('http://gr-esports.de:8080/ts3/users').then(res => {
+        axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
              let points = [];
              for (let i = 0; i < res.data.length; i++) {
                  points.push({
