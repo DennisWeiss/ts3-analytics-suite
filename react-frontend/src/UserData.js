@@ -20,7 +20,7 @@ const cardSizes = {
 
 
 const idMappers = {
-    user: user => user.id
+    user: user => user.uniqueID
 }
 
 

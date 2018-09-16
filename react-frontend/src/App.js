@@ -109,7 +109,7 @@ export default class App extends React.Component {
                 </Layout.Sider>
                 <Layout.Content className='content' >
                     <Route path='/' exact render={() => <div className='graph'><SocialGraph /></div>}/>
-                    <Route path='/user-data' exact render={() => <UserData />}/>
+                    <Route path='/user-data' exact render={() => <UserData pathname='/user-data' />}/>
                     <Route path='/heatmap' exact render={() => <div className='graph'><LocationHeatmap
                         points={this.state.points}/></div>}/>
                 </Layout.Content>

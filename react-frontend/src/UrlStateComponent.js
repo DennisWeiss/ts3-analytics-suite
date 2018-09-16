@@ -28,7 +28,6 @@ export default class UrlStateComponent extends React.Component {
     }
 
     setUrlState(urlState, idMappers, callback) {
-
         const getSearchString = state => {
             if (Object.keys(state).length === 0) {
                 return ''
@@ -56,9 +55,12 @@ export default class UrlStateComponent extends React.Component {
             pathname: pathname,
             search: getSearchString(state)
         })
+
         this.setState(urlState, () => {
             history.push(convertToHistory(urlState, this.props.pathname))
-            callback()
+            if (typeof callback === 'function') {
+                callback()
+            }
         })
 
     }
