@@ -1,3 +1,8 @@
+env:
+  global:
+    - secure: "T0Lr3xXk9xPOx5M0hKutDrq3LCzt1QhbzKfSZE+X+n5FrwRuBio/7ch11iX1zoj3702Xrut2qnMtVZf6XlW/IQ1QSSHsW9wMVV319xb0O69ruBKbORig14iwkbXMKqb0Ov0sc/WvfgdzH28JbWCsqbORLJvXpcto3wIl2gpi3U+Lr5Lc1mzkW/oM4I3+JEO7F1VOI/F2+JoGWLTTsxyQ/O3reULc/QLuhZVGmfZII6YvqvXpysmwr74X2kxbxW0DerhodpD9KH8m68e6PSChO+iVnjjq7b5FnWEs8MXi/bGne6I99S7l00zjy2wZCSXQOEo6mP3UGI5RH+chAwghy0Nm1sHfOXVxZEK3wsPW89rAEqIhTpTYJuUmV5q/TXKyfegxzbRLVL3JTx5fPMFJ0tOqeRzzRC+KHSAj852mJ4E+qgD84gx8Mqr9Cc6wW1hxqWWcmpF5y9b/VViDimhPQ1ogHfHu9u1b+vXxrn1sALJZBKGgFSWYmuBlCTA1y30GW2FTqDwQkzNFBlLLGY+urB15x+IIMP5CoEpHORnNRfvsMTrRbWQ/rSXo65FE3LvZ/M7xIs/jUAbpKJWq7QJNTyfvP+0epA/MY8/QLU7YAxvXSJSiF3tAzRvm3C/otpLqQC8CPL7laZKtPbQ8IRc6iLvipt5o2jA7PLIfl/4L27k="
+    - secure: "LvoFSvwEVH5WqCN//FAfypTB1F/S4y0D66v2XIB2G7J70WSsGxl/2Fv0MMfroC6Usrc3hjirrXfPaEMGrd+CtgG8WRbzOTNIeZOSSBcTJ4i28h/1tqjgIotyZlGb2Qo5ROw20A/Q7EXzgWL8UpZEI+VUMbxCTfgU5x2uC7YvG5qSfM1WFCkODj0QgCiycWqvj0sqiPMKib3rWiQSWnjIOB2GlBUI/Soyzc6+SFmOjVyTAXH8XeN858DLoB/P+21u9On7yDyKweRqEwiOnP9zIfiVJpVrXwWwMKFplIpP4dVq6hd1JhhuV6VuxL2AIaUB3i6Q3QmdSeqcn6/1+uUl847RTB/2QDHe6dotuHw8cfWHoRzpQUhPGjyiGbzIk2P+NQizg0asKBVa/wzZjc92/u/ZH7zudRP/Ix/mjiAYusAvM5PYmJ1H1kk253cisZ+c6Zv05ei5JfQ9dcltDYSFITys+XIVjTT00/eGvQivAdHTEvgo5XHh26/tL1nBigXbfM6yR0J9u9UO6VNRAJT26r5BjnxDuiPnolvoeAHBEK9oLieUAzZ7da4UBddFaCe/xFD114hAZZReTQaC9ZOMg6iWhug5YnWTY051V+IY20muDFHG4ilRExgl1ErQmpE9q1zkhYx7UWIXFNSMX0t6Kz1ORPaYel0PHqoNdByEvpg="
+
 language: java
 sudo: false
 install:
@@ -12,3 +17,8 @@ script:
     - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
     - cd ts3socialai
     - mvn clean install
+    - cd ../tsas-tsuds
+    - mvn clean install
+    - cd ..
+after_success:
+    - curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/tsas-tsuds/
