@@ -25,7 +25,6 @@ const idMappers = {
 
 const valueResolvers = {
     user: id => new Promise((resolve, reject) => {
-        console.log('API call')
         axios
             .get('http://gr-esports.de:8081/ts3/users')
             .then(res => {
@@ -149,17 +148,15 @@ export default class UserData extends ReactUrlStateComponent {
                         showSearch
                         style={{width: 200}}
                         placeholder='Search for a user'
-                        value={this.state.user != null ? this.state.user.uniqueID : null}
+                        value={this.state.user != null && this.state.users != null && this.state.users.length > 0 ? this.state.user.uniqueID : null}
                         optionsFilterProp='children'
                         onChange={this.handleSelect.bind(this)}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                        {this.state.users.map(item => {
-                            return (
+                        {this.state.users.map(item =>
                                 <Select.Option value={item.uniqueID} key={item.uniqueID}>{item.nickname}</Select.Option>
-                            );
-                        })}
+                        )}
                     </Select>
                 </div>
                 <Row gutter={16}>
