@@ -13,18 +13,45 @@ export default class UrlStateComponent extends React.Component {
         super()
         const parsedSearch = queryString.parse(history.location.search)
         this.urlState = {...parsedSearch}
-        this.valueMappers = {}
+        this.valueResolvers = {}
     }
 
     componentDidMount() {
+        const getIdResolverPromise = (state, urlState, resolvers, resolve) => {
+            if (resolve == null) {
+                return new Promise(resolve => getIdResolverPromise(state, urlState, resolvers, resolve))
+            }
+            const currentState = {...state}
+            const currentUrlState = {...urlState}
+            if (Object.keys(currentUrlState).length === 0) {
+                resolve(currentState)
+            } else {
+                const key = Object.keys(currentUrlState)[1]
+                if (resolvers[key] == null) {
+                    currentState[key] = currentUrlState[key]
+                    delete currentUrlState[key]
+                    getIdResolverPromise(currentState, currentUrlState, resolvers, resolve)
+                } else if (typeof resolvers[key] === 'function') {
+                    resolvers[key](currentUrlState[key])
+                        .then(value => {
+                            currentState[key] = value
+                            delete currentUrlState[key]
+                            getIdResolverPromise(currentState, currentUrlState, resolvers, resolve)
+                        })
+                } else {
+                    throw `resolver of ${key} has to be a function with a promise`
+                }
+            }
+        }
+
         const state = {}
         Object.keys(this.state).forEach(key => state[key] = this.state[key])
-        Object.keys(this.urlState).forEach(key => {
-            if (this.valueMappers != null && this.valueMappers[key] != null && typeof this.valueMappers[key] === 'function') {
-                state[key] = this.valueMappers[key](this.urlState[key])
-            }
-        })
-        this.setState(state)
+        getIdResolverPromise(state, this.urlState, this.valueResolvers)
+            .then(resolvedState => {
+                console.log('resolvedState', resolvedState)
+                this.setState(resolvedState)
+            })
+
     }
 
     setUrlState(urlState, idMappers, callback) {

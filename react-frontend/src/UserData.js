@@ -23,6 +23,14 @@ const idMappers = {
     user: user => user.uniqueID
 }
 
+const valueResolvers = {
+    user: id => new Promise((resolve, reject) => {
+        axios
+            .get(`http://gr-esports.de:8081/ts3/users`)
+            .then(res => resolve(res.data.find(user => user.uniqueID === id)))
+            .catch(error => reject(error))
+    })
+}
 
 export default class UserData extends UrlStateComponent {
     constructor(props) {
@@ -34,9 +42,7 @@ export default class UserData extends UrlStateComponent {
             loading: true,
         }
 
-        this.valueMappers = {
-            user: str => ({})
-        }
+        this.valueResolvers = valueResolvers
     }
 
 
