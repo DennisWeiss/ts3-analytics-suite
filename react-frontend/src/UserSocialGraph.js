@@ -174,15 +174,17 @@ export default class UserSocialGraph extends React.Component {
     };
 
     select(id) {
-        this.network.setSelection({
-            nodes: [id],
-            edges: []
-        });
-        this.network.focus(id, {
-            scale: 0.6,
-            locked: true,
-            animation: false
-        });
+        if (id != null) {
+            this.network.setSelection({
+                nodes: [id],
+                edges: []
+            });
+            this.network.focus(id, {
+                scale: 0.6,
+                locked: true,
+                animation: false
+            });
+        }
     }
 
     render() {

@@ -25,10 +25,14 @@ const idMappers = {
 
 const valueResolvers = {
     user: id => new Promise((resolve, reject) => {
+        console.log('API call')
         axios
-            .get(`http://gr-esports.de:8081/ts3/users`)
-            .then(res => resolve(res.data.find(user => user.uniqueID === id)))
-            .catch(error => reject(error))
+            .get('http://gr-esports.de:8081/ts3/users')
+            .then(res => {
+                const user = res.data.find(user => user.uniqueID === id)
+                resolve(user != null ? user : {})
+            })
+            .catch(reject)
     })
 }
 
@@ -38,54 +42,61 @@ export default class UserData extends ReactUrlStateComponent {
 
         this.state = {
             users: [],
+            user: {},
             relatedUsers: [],
             loading: true,
         }
+
+        this.idMappers = idMappers
 
         this.valueResolvers = valueResolvers
     }
 
 
     componentDidMount() {
+        super.componentDidMount()
         axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
-            let user = this.state.user != null ? res.data.find(user => user.uniqueID === this.state.user) : res.data[Math.floor(res.data.length * Math.random())];
             this.setState({
                 users: res.data,
+            }, () => {
+                if (this.state.user.uniqueID == null) {
+                    this.setUrlState({
+                        user: this.state.users.length > 0 ? this.state.users[Math.floor(this.state.users.length * Math.random())] : {}
+                    })
+                }
             });
 
-            this.setUrlState({
-                user: user
-            }, idMappers)
-
-            this.setRelations(user);
+            this.setRelations(this.state.user);
         });
     }
 
     setRelations(user) {
-        this.setState({loading: true})
-        axios.get('http://gr-esports.de:8081/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
-            axios.get('http://gr-esports.de:8081/ts3/users').then(res2 => {
-                let relatedUsers = this.state.relatedUsers.splice();
-                let username = '';
-                for (let i = 0; i < res.data.length; i++) {
-                    for (let j = 0; j < res2.data.length; j++) {
-                        if (res.data[i].otherUser === res2.data[j].uniqueID) {
-                            username = res2.data[j].nickname;
+        if (user != null && user.uniqueID != null) {
+            this.setState({loading: true})
+            axios.get('http://gr-esports.de:8081/ts3/relation', {params: {user: user.uniqueID}}).then(res => {
+                axios.get('http://gr-esports.de:8081/ts3/users').then(res2 => {
+                    let relatedUsers = this.state.relatedUsers.splice();
+                    let username = '';
+                    for (let i = 0; i < res.data.length; i++) {
+                        for (let j = 0; j < res2.data.length; j++) {
+                            if (res.data[i].otherUser === res2.data[j].uniqueID) {
+                                username = res2.data[j].nickname;
+                            }
                         }
+                        relatedUsers.push({
+                            key: res.data[i].otherUser,
+                            username: username,
+                            id: res.data[i].otherUser,
+                            relation: res.data[i].totalRelation
+                        });
                     }
-                    relatedUsers.push({
-                        key: res.data[i].otherUser,
-                        username: username,
-                        id: res.data[i].otherUser,
-                        relation: res.data[i].totalRelation
+                    this.setState({
+                        relatedUsers: relatedUsers,
+                        loading: false
                     });
-                }
-                this.setState({
-                    relatedUsers: relatedUsers,
-                    loading: false
-                });
-            })
-        });
+                })
+            });
+        }
     }
 
     handleSelect(value) {
@@ -101,7 +112,7 @@ export default class UserData extends ReactUrlStateComponent {
 
         this.setUrlState({
             user: user,
-        }, idMappers);
+        });
     }
 
     handleGraphSelect(value) {
@@ -119,7 +130,7 @@ export default class UserData extends ReactUrlStateComponent {
 
         this.setUrlState({
             user: user,
-        }, idMappers);
+        });
     }
 
     render() {
