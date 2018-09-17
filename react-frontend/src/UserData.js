@@ -6,7 +6,7 @@ import UserDataOverview from './UserDataOverview';
 import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
-import UrlStateComponent from './UrlStateComponent'
+import ReactUrlStateComponent from './UrlStateComponent'
 
 
 const cardSizes = {
@@ -32,7 +32,7 @@ const valueResolvers = {
     })
 }
 
-export default class UserData extends UrlStateComponent {
+export default class UserData extends ReactUrlStateComponent {
     constructor(props) {
         super(props)
 

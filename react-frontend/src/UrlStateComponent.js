@@ -7,12 +7,11 @@ const history = createHistory()
 
 const isPrimitiveType = a => typeof a === 'string' || typeof a === 'number' || typeof  b === 'boolean'
 
-export default class UrlStateComponent extends React.Component {
+export default class ReactUrlStateComponent extends React.Component {
 
     constructor() {
         super()
-        const parsedSearch = queryString.parse(history.location.search)
-        this.urlState = {...parsedSearch}
+        this.urlState = {...queryString.parse(history.location.search)}
         this.valueResolvers = {}
     }
 
