@@ -48,7 +48,6 @@ export default class UrlStateComponent extends React.Component {
         Object.keys(this.state).forEach(key => state[key] = this.state[key])
         getIdResolverPromise(state, this.urlState, this.valueResolvers)
             .then(resolvedState => {
-                console.log('resolvedState', resolvedState)
                 this.setState(resolvedState)
             })
 
@@ -65,8 +64,7 @@ export default class UrlStateComponent extends React.Component {
                         return `${key}=${encodeURIComponent(state[key] != null ? state[key] : '')}`
                     } else {
                         if (idMappers[key] == null) {
-                            throw `No id mapper provided for ${key}! 
-                            You always need to provide a mapper if the value is not a primitive data type`
+                            throw `No id mapper provided for ${key}! You always need to provide a mapper if the value is not a primitive data type`
                         } else if (typeof idMappers[key] !== 'function' && !isPrimitiveType(state[key])) {
                             throw `Id mapper of ${key} has to be a function!`
                         } else {
