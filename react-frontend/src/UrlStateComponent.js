@@ -63,7 +63,7 @@ export default class ReactUrlStateComponent extends React.Component {
                     } else {
                         if (this.idMappers[key] == null) {
                             throw `No id mapper provided for ${key}! You always need to provide a mapper if the value is not a primitive data type`
-                        } else if (typeof this.idMappers[key] !== 'function' && !isPrimitiveType(state[key])) {
+                        } else if (typeof this.idMappers[key] !== 'function') {
                             throw `Id mapper of ${key} has to be a function!`
                         } else {
                             const value = this.idMappers[key](state[key])
