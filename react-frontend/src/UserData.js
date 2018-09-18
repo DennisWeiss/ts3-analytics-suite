@@ -30,6 +30,8 @@ const valueResolvers = {
             .get('http://gr-esports.de:8081/ts3/users')
             .then(res => {
                 const user = res.data.find(user => user.uniqueID === id)
+                console.log("id", id)
+                console.log("user", user)
                 resolve(user != null ? user : {})
             })
             .catch(reject)
@@ -49,7 +51,7 @@ export default class UserData extends ReactUrlStateComponent {
 
 
     componentDidMount() {
-        this.reactUrlState = initializeReactUrlState(this, valueResolvers, idMappers, '/user-data')
+        this.reactUrlState = initializeReactUrlState(this, valueResolvers, idMappers, '/user-data', ['user'])
 
         axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
             this.setState({

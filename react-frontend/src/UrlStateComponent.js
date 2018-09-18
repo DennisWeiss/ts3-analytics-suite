@@ -5,7 +5,7 @@ import createHistory from 'history/createBrowserHistory'
 
 const history = createHistory()
 
-const isPrimitiveType = a => typeof a === 'string' || typeof a === 'number' || typeof  b === 'boolean'
+const isPrimitiveType = a => typeof a === 'string' || typeof a === 'number' || typeof b === 'boolean'
 
 export default class ReactUrlStateComponent extends React.Component {
     constructor(props) {
