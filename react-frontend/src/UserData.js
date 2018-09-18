@@ -7,6 +7,7 @@ import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
 import ReactUrlStateComponent from './UrlStateComponent'
+import {initializeReactUrlState} from './react-url-state'
 
 
 const cardSizes = {
@@ -38,28 +39,24 @@ const valueResolvers = {
 export default class UserData extends ReactUrlStateComponent {
     constructor(props) {
         super(props)
-
         this.state = {
             users: [],
             user: {},
             relatedUsers: [],
             loading: true,
         }
-
-        this.idMappers = idMappers
-
-        this.valueResolvers = valueResolvers
     }
 
 
     componentDidMount() {
-        super.componentDidMount()
+        this.reactUrlState = initializeReactUrlState(this, valueResolvers, idMappers, '/user-data')
+
         axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
             this.setState({
                 users: res.data,
             }, () => {
                 if (this.state.user.uniqueID == null) {
-                    this.setUrlState({
+                    this.reactUrlState.setUrlState({
                         user: this.state.users.length > 0 ? this.state.users[Math.floor(this.state.users.length * Math.random())] : {}
                     })
                 }
@@ -109,7 +106,7 @@ export default class UserData extends ReactUrlStateComponent {
 
         this.setRelations(user);
 
-        this.setUrlState({
+        this.reactUrlState.setUrlState({
             user: user,
         });
     }
@@ -127,7 +124,7 @@ export default class UserData extends ReactUrlStateComponent {
 
         this.setRelations(user);
 
-        this.setUrlState({
+        this.reactUrlState.setUrlState({
             user: user,
         });
     }
