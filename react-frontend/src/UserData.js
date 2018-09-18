@@ -7,8 +7,8 @@ import RelationsOverview from "./RelationsOverview";
 import Location from "./Location";
 import UserSocialGraph from "./UserSocialGraph";
 import ReactUrlStateComponent from './UrlStateComponent'
-import {initializeReactUrlState} from './react-url-state'
-
+// import {initializeReactUrlState} from './react-url-state'
+import {initializeReactUrlState} from 'react-url-state'
 
 const cardSizes = {
     xxl: 12,

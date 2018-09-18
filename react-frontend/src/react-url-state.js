@@ -9,7 +9,6 @@ var isPrimitiveType = function (a) {
 };
 
 var getIdResolverPromise = function (urlState, resolvers, allowedQueryStringParams, state, resolve) {
-    console.log(urlState, resolvers, state, resolve);
     if (state == null) {
         state = {};
     }
