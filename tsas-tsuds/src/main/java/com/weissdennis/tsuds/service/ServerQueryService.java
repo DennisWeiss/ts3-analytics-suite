@@ -2,9 +2,11 @@ package com.weissdennis.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.weissdennis.tsuds.configuration.Ts3PropertiesConfig;
-import com.weissdennis.tsuds.persistence.TS3UserInChannelRepository;
+import com.weissdennis.tsuds.persistence.TS3UserInChannel;
+import com.weissdennis.tsuds.persistence.TS3UserInChannelEntity;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Executors;
@@ -17,14 +19,14 @@ public class ServerQueryService implements InitializingBean {
 
     private final TS3Api ts3Api;
     private final Ts3PropertiesConfig ts3PropertiesConfig;
-    private final TS3UserInChannelRepository ts3UserInChannelRepository;
+    private final KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate;
 
     @Autowired
     public ServerQueryService(Ts3PropertiesConfig ts3PropertiesConfig, TS3Api ts3Api,
-                              TS3UserInChannelRepository ts3UserInChannelRepository) {
+                              KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate) {
         this.ts3PropertiesConfig = ts3PropertiesConfig;
         this.ts3Api = ts3Api;
-        this.ts3UserInChannelRepository = ts3UserInChannelRepository;
+        this.ts3UserInChannelKafkaTemplate = ts3UserInChannelKafkaTemplate;
     }
 
     @Override
@@ -43,7 +45,8 @@ public class ServerQueryService implements InitializingBean {
 
     private void retrieveUserData() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new TS3UserInChannelRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserInChannelRepository), 1, 10, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new TS3UserInChannelRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserInChannelKafkaTemplate),
+                1, 10, TimeUnit.SECONDS);
     }
 
 

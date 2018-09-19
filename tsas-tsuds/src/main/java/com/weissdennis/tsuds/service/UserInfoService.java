@@ -3,9 +3,11 @@ package com.weissdennis.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.weissdennis.tsuds.configuration.Ts3PropertiesConfig;
-import com.weissdennis.tsuds.persistence.TS3UserRepository;
+import com.weissdennis.tsuds.persistence.TS3User;
+import com.weissdennis.tsuds.persistence.TS3UserImppl;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Executors;
@@ -16,14 +18,15 @@ import java.util.concurrent.TimeUnit;
 public class UserInfoService implements InitializingBean {
 
     private final TS3Api ts3Api;
-    private final TS3UserRepository ts3UserRepository;
     private final Ts3PropertiesConfig ts3PropertiesConfig;
+    private final KafkaTemplate<String, TS3User> ts3UserKafkaTemplate;
 
     @Autowired
-    public UserInfoService(TS3Api ts3Api, TS3UserRepository ts3UserRepository, Ts3PropertiesConfig ts3PropertiesConfig) {
+    public UserInfoService(TS3Api ts3Api, Ts3PropertiesConfig ts3PropertiesConfig,
+                           KafkaTemplate<String, TS3User> ts3UserKafkaTemplate) {
         this.ts3Api = ts3Api;
-        this.ts3UserRepository = ts3UserRepository;
         this.ts3PropertiesConfig = ts3PropertiesConfig;
+        this.ts3UserKafkaTemplate = ts3UserKafkaTemplate;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class UserInfoService implements InitializingBean {
 
     private void retrieveUserInfo() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new TS3UserRetrievalTask(ts3Api, ts3UserRepository, ts3PropertiesConfig), 30, 300, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new TS3UserRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserKafkaTemplate),
+                30, 300, TimeUnit.SECONDS);
     }
 }

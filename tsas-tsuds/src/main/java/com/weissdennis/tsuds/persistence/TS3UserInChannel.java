@@ -1,31 +1,12 @@
 package com.weissdennis.tsuds.persistence;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import java.time.Instant;
 
-@Entity
-public class TS3UserInChannel {
+public interface TS3UserInChannel {
 
-    @EmbeddedId
-    private TS3UserInChannelIdentity TS3UserInChannelIdentity;
+    Integer getChannelId();
 
-    private Integer channelId;
+    String getUniqueId();
 
-
-    public Integer getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
-    }
-
-    public TS3UserInChannelIdentity getTS3UserInChannelIdentity() {
-        return TS3UserInChannelIdentity;
-    }
-
-    public void setTS3UserInChannelIdentity(TS3UserInChannelIdentity TS3UserInChannelIdentity) {
-        this.TS3UserInChannelIdentity = TS3UserInChannelIdentity;
-    }
-
+    Instant getDateTime();
 }
