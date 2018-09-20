@@ -1,6 +1,10 @@
-kafka:
+kafka-conf:
   bootstrapAddress: localhost:9092
   groupId: 1
+
+kafka:
+  consumer:
+    auto-offset-reset: earliest
 
 spring:
   datasource:
@@ -12,15 +16,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
-#  kafka:
-#    consumer:
-#      properties:
-#        spring:
-#          json:
-#            trusted:
-#              packages: com.weissdennis
-#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
 server:
   port: 8091

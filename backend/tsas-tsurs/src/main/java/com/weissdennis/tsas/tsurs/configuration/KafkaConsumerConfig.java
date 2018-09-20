@@ -21,7 +21,7 @@ import java.util.Map;
 @EnableKafka
 @Configuration
 @PropertySource("classpath:application.yml")
-@ConfigurationProperties(prefix = "kafka")
+@ConfigurationProperties(prefix = "kafka-conf")
 public class KafkaConsumerConfig {
 
     private String bootstrapAddress;

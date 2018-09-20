@@ -1,1 +1,11 @@
-C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\TestClass.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3UserInChannel.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3ServerUsers.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3User.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3UserImpl.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\serializers\TS3ServerUsersSerializer.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3UserInChannelImpl.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\serializers\TS3ServerUsersDeserializer.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\serializers\TS3UserInChannelDeserializer.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\serializers\TS3UserInChannelSerializer.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\TS3ServerUsersImpl.java
+C:\Users\weiss\IdeaProjects\ts3-analytics-suite2\backend\tsas-common\src\main\java\com\weissdennis\tsas\common\ts3users\ClientIpInfo.java

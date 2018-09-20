@@ -1,5 +1,5 @@
 ts3api:
-  queryName: TS3 Analytics Suite
+  queryName: TS3 Analytics Suite - Dev
   loginMessage: Test
   serverIp: gr-esports.de
   serverQueryAdminName: serveradmin
