@@ -28,7 +28,7 @@ public class TS3UserInChannelDeserializer extends StdDeserializer<TS3UserInChann
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         String userUniqueId = node.get("user").asText();
         Instant timestamp = Instant.parse(node.get("timestamp").asText());
-        Integer channelId = (Integer) node.get("channel").numberValue();
+        int channelId = node.get("channel").asInt();
 
         return new TS3UserInChannelImpl(userUniqueId, timestamp, channelId);
     }
