@@ -1,4 +1,4 @@
-package com.weissdennis.tsas.tsuds.persistence;
+package com.weissdennis.tsas.tsurs.persistence;
 
 import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 
