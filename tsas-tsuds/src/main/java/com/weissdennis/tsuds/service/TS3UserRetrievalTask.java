@@ -3,9 +3,8 @@ package com.weissdennis.tsuds.service;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.wrapper.DatabaseClient;
 import com.weissdennis.tsuds.configuration.Ts3PropertiesConfig;
-import com.weissdennis.tsuds.persistence.TS3User;
-import com.weissdennis.tsuds.persistence.TS3UserImpl;
-import com.weissdennis.tsuds.persistence.TS3UserImppl;
+import com.weissdennis.tsuds.model.TS3User;
+import com.weissdennis.tsuds.model.TS3UserImpl;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +48,10 @@ public class TS3UserRetrievalTask implements Runnable {
                 .parallelStream()
                 .filter(this::getDatabaseClientPredicate)
                 .map(this::mapDatabaseClientToUser)
-                .forEach(user -> ts3UserKafkaTemplate.send("ts3_user", user));
+                .forEach(user -> {
+                    System.out.println("ts3_user " + user);
+                    ts3UserKafkaTemplate.send("ts3_user", user);
+                });
     }
 
 

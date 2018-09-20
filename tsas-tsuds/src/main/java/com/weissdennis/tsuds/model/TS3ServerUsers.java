@@ -1,4 +1,4 @@
-package com.weissdennis.tsuds.persistence;
+package com.weissdennis.tsuds.model;
 
 import java.time.Instant;
 

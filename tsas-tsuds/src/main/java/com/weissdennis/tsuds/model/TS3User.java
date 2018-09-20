@@ -1,5 +1,8 @@
-package com.weissdennis.tsuds.persistence;
+package com.weissdennis.tsuds.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface TS3User {
 
     Integer getClientId();

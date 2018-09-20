@@ -2,8 +2,7 @@ package com.weissdennis.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.weissdennis.tsuds.configuration.Ts3PropertiesConfig;
-import com.weissdennis.tsuds.persistence.TS3UserInChannel;
-import com.weissdennis.tsuds.persistence.TS3UserInChannelEntity;
+import com.weissdennis.tsuds.model.TS3UserInChannel;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;

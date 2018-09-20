@@ -1,5 +1,8 @@
 package com.weissdennis.tsuds.persistence;
 
+import com.weissdennis.tsuds.model.TS3UserInChannel;
+import com.weissdennis.tsuds.model.TS3UserInChannelIdentity;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.time.Instant;

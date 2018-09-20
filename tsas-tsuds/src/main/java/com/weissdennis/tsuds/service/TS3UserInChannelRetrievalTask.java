@@ -3,10 +3,8 @@ package com.weissdennis.tsuds.service;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
 import com.weissdennis.tsuds.configuration.Ts3PropertiesConfig;
-import com.weissdennis.tsuds.persistence.TS3UserInChannel;
-import com.weissdennis.tsuds.persistence.TS3UserInChannelEntity;
-import com.weissdennis.tsuds.persistence.TS3UserInChannelIdentity;
-import com.weissdennis.tsuds.persistence.TS3UserInChannelImpl;
+import com.weissdennis.tsuds.model.TS3UserInChannel;
+import com.weissdennis.tsuds.model.TS3UserInChannelImpl;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -44,7 +42,11 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
                 .stream()
                 .filter(this::isValidClient)
                 .map(client -> mapFromClientAndTimestampToUserInChannel(client, dateTime))
-                .forEach(ts3UserInChannel -> ts3UserInChannelKafkaTemplate.send("ts3_user_in_channel", ts3UserInChannel));
+                .forEach(ts3UserInChannel ->
+                {
+                    System.out.println("ts3_user_in_channel " + ts3UserInChannel);
+                    ts3UserInChannelKafkaTemplate.send("ts3_user_in_channel", ts3UserInChannel);
+                });
     }
 
     private boolean isValidClient(Client client) {

@@ -1,7 +1,8 @@
 package com.weissdennis.tsuds.configuration;
 
-import com.google.gson.JsonSerializer;
-import com.weissdennis.tsuds.persistence.*;
+import com.weissdennis.tsuds.model.TS3ServerUsers;
+import com.weissdennis.tsuds.model.TS3User;
+import com.weissdennis.tsuds.model.TS3UserInChannel;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;

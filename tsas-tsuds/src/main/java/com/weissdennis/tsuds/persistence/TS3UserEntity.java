@@ -1,17 +1,12 @@
 package com.weissdennis.tsuds.persistence;
 
-import com.google.gson.GsonBuilder;
-import com.weissdennis.tsuds.model.ClientIpInfo;
+import com.weissdennis.tsuds.model.TS3User;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 @Entity
-public class TS3UserImppl implements TS3User {
+public class TS3UserEntity implements TS3User {
 
     @Id
     private String uniqueId;
@@ -38,7 +33,7 @@ public class TS3UserImppl implements TS3User {
 
     private String org;
 
-    public TS3UserImppl() {
+    public TS3UserEntity() {
     }
 
     @Override

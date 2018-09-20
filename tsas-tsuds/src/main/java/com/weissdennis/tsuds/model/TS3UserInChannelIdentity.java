@@ -1,26 +1,23 @@
-package com.weissdennis.tsuds.persistence;
+package com.weissdennis.tsuds.model;
 
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.time.Instant;
 
-public class TS3UserInChannelImpl implements TS3UserInChannel {
+@Embeddable
+public class TS3UserInChannelIdentity implements Serializable {
 
     private String uniqueId;
     private Instant dateTime;
-    private Integer channelId;
 
-    public TS3UserInChannelImpl() {
+    public TS3UserInChannelIdentity() {
     }
 
-    @Override
-    public Integer getChannelId() {
-        return channelId;
+    public TS3UserInChannelIdentity(String uniqueId, Instant dateTime) {
+        this.uniqueId = uniqueId;
+        this.dateTime = dateTime;
     }
 
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
-    }
-
-    @Override
     public String getUniqueId() {
         return uniqueId;
     }
@@ -29,7 +26,6 @@ public class TS3UserInChannelImpl implements TS3UserInChannel {
         this.uniqueId = uniqueId;
     }
 
-    @Override
     public Instant getDateTime() {
         return dateTime;
     }

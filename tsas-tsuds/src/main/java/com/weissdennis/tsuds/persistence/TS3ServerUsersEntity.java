@@ -1,5 +1,7 @@
 package com.weissdennis.tsuds.persistence;
 
+import com.weissdennis.tsuds.model.TS3ServerUsers;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.Instant;

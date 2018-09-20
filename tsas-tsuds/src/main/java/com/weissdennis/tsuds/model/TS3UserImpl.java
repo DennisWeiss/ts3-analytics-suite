@@ -1,7 +1,6 @@
-package com.weissdennis.tsuds.persistence;
+package com.weissdennis.tsuds.model;
 
 import com.google.gson.GsonBuilder;
-import com.weissdennis.tsuds.model.ClientIpInfo;
 
 import java.io.BufferedReader;
 import java.io.IOException;

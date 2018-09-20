@@ -2,9 +2,8 @@ package com.weissdennis.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
-import com.weissdennis.tsuds.persistence.TS3ServerUsers;
-import com.weissdennis.tsuds.persistence.TS3ServerUsersEntity;
-import com.weissdennis.tsuds.persistence.TS3ServerUsersImpl;
+import com.weissdennis.tsuds.model.TS3ServerUsers;
+import com.weissdennis.tsuds.model.TS3ServerUsersImpl;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import java.time.Instant;
@@ -26,6 +25,7 @@ public class TS3ServerUsersRetrievalTask implements Runnable {
                 .filter(TS3ServerUsersRetrievalTask::isValidClient)
                 .count();
 
+        System.out.println("ts3_server_users " + new TS3ServerUsersImpl(Instant.now(), users));
         ts3ServerUsersKafkaTemplate.send("ts3_server_users", new TS3ServerUsersImpl(Instant.now(), users));
     }
 
