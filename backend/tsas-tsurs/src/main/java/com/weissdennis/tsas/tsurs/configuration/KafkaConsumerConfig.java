@@ -4,13 +4,12 @@ import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -26,6 +25,7 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     private String bootstrapAddress;
+    private String groupId;
 
     public KafkaConsumerConfig() {
     }
@@ -33,8 +33,10 @@ public class KafkaConsumerConfig {
     private Map<String, Object> getDefaultConfigProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "com.weissdennis.tsas.common.ts3users");
         return props;
     }
 
@@ -85,5 +87,13 @@ public class KafkaConsumerConfig {
 
     public void setBootstrapAddress(String bootstrapAddress) {
         this.bootstrapAddress = bootstrapAddress;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

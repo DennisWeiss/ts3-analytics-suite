@@ -2,8 +2,9 @@ package com.weissdennis.tsas.tsurs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = KafkaAutoConfiguration.class)
 public class TsursApplication {
 
     public static void main(String[] args) {

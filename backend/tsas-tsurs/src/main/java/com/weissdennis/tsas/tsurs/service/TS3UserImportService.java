@@ -1,6 +1,7 @@
 package com.weissdennis.tsas.tsurs.service;
 
 import com.weissdennis.tsas.common.ts3users.TS3User;
+import com.weissdennis.tsas.tsurs.mapper.TS3UserMapper;
 import com.weissdennis.tsas.tsurs.persistence.TS3UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,8 +17,8 @@ public class TS3UserImportService {
         this.ts3UserRepository = ts3UserRepository;
     }
 
-    @KafkaListener(topics = "ts3_user")
+    @KafkaListener(topics = "ts3_user", containerFactory = "ts3UserConcurrentKafkaListenerContainerFactory")
     public void listen(TS3User ts3User) {
-        ts3UserRepository.save(ts3User);
+        ts3UserRepository.save(TS3UserMapper.INSTANCE.ts3UserToTS3UserEntity(ts3User));
     }
 }
