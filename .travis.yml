@@ -1,14 +1,22 @@
+env:
+  global:
+
 language: java
 sudo: false
 install:
-    - cd react-frontend
-    - npm install
-    - cd ..
+- cd react-frontend
+- npm install
+- cd ..
 script:
-    - cd react-frontend
-    - npm run build
-    - cd ..
-    - mkdir -p ts3socialai/src/main/resources/public
-    - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
-    - cd ts3socialai
-    - mvn clean install
+- cd react-frontend
+- npm run build
+- cd ..
+- mkdir -p ts3socialai/src/main/resources/public
+- cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
+- cd ts3socialai
+- mvn clean install -DskipTests
+- cd ../tsas-tsuds
+- mvn clean install -DskipTests
+- cd ..
+after_success:
+- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/

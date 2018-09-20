@@ -1,0 +1,26 @@
+ts3api:
+  queryName: TS3 Analytics Suite
+  loginMessage: Test
+  serverIp: gr-esports.de
+  serverQueryAdminName: serveradmin
+  serverQueryAdminPassword: Meycrosoft1337
+  serverId: 3
+  afkChannels: 92,93
+  locationInfoUpdateInterval: 3
+
+kafka:
+  bootstrapAddress: localhost:9092
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/tsas_tsuds
+    username: root
+    password: Meycrosoft10
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8090
