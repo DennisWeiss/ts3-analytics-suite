@@ -35,14 +35,16 @@ public class UserRelationService  {
             List<TS3UserEntity> ts3Users = ts3UserRepository.findAllByBannedAndLastOnlineIsAfter(false, threeMonthsAgo
                     .toInstant(ZoneId.systemDefault().getRules().getOffset(threeMonthsAgo)));
 
-            ts3Users.parallelStream()
-                    .forEach(user1 -> ts3Users.parallelStream()
-                            .forEach(user2 -> getAndSaveRelation(user1, user2)));
+            for (TS3User user1 : ts3Users) {
+                for (TS3User user2 : ts3Users) {
+                    getAndSaveRelation(user1, user2);
+                }
+            }
         }
     }
 
     private void getAndSaveRelation(TS3User user1, TS3User user2) {
-        if (user1.getUniqueId() != user2.getUniqueId()) {
+        if (!user1.getUniqueId().equals(user2.getUniqueId())) {
             double channelRelation = getChannelRelation(user1, user2);
             UserRelationEntity s = new UserRelationEntity(new UserRelationIdentity(
                     user1.getUniqueId(), user2.getUniqueId()), getGeoRelation(
@@ -59,10 +61,8 @@ public class UserRelationService  {
     }
 
     private double getChannelRelation(TS3User user1, TS3User user2) {
-        Long sameChannelWithThisUser = ts3UserInChannelRepository.countUsersInSameChannel(user1.getUniqueId(),
-                user2.getUniqueId());
-        Long sameChannelWithAnyUser = ts3UserInChannelRepository.countTotalUsersInSameChannel
-                (user1.getUniqueId());
+        Long sameChannelWithThisUser = ts3UserInChannelRepository.countUsersInSameChannel(user1.getUniqueId(), user2.getUniqueId());
+        Long sameChannelWithAnyUser = ts3UserInChannelRepository.countTotalUsersInSameChannel(user1.getUniqueId());
         return sameChannelWithAnyUser != 0 ? (double) sameChannelWithThisUser / sameChannelWithAnyUser : 0;
     }
 }
