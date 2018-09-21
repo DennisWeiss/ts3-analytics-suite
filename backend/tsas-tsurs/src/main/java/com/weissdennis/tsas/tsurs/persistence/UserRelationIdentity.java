@@ -2,6 +2,7 @@ package com.weissdennis.tsas.tsurs.persistence;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class UserRelationIdentity implements Serializable {
@@ -31,5 +32,23 @@ public class UserRelationIdentity implements Serializable {
 
     public void setClient2(String client2) {
         this.client2 = client2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserRelationIdentity that = (UserRelationIdentity) o;
+
+        if (client1 != null ? !client1.equals(that.client1) : that.client1 != null) return false;
+        return client2 != null ? client2.equals(that.client2) : that.client2 == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = client1 != null ? client1.hashCode() : 0;
+        result = 31 * result + (client2 != null ? client2.hashCode() : 0);
+        return result;
     }
 }

@@ -9,5 +9,7 @@ public class TsursApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TsursApplication.class, args);
+
     }
+
 }

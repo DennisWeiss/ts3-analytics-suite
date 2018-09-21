@@ -4,8 +4,10 @@ import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.tsurs.model.Location;
 import com.weissdennis.tsas.tsurs.persistence.*;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -14,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class UserRelationService implements InitializingBean {
+public class UserRelationService  {
 
     private final TS3UserInChannelRepository ts3UserInChannelRepository;
     private final UserRelationRepository userRelationRepository;
@@ -27,12 +29,7 @@ public class UserRelationService implements InitializingBean {
         this.ts3UserRepository = ts3UserRepository;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        updateRelations();
-    }
-
-    private void updateRelations() {
+    public void updateRelations() {
         while (true) {
             LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
             List<TS3UserEntity> ts3Users = ts3UserRepository.findAllByBannedAndLastOnlineIsAfter(false, threeMonthsAgo

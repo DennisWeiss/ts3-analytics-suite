@@ -4,7 +4,7 @@ kafka-conf:
 
 kafka:
   consumer:
-    auto-offset-reset: earliest
+#    auto-offset-reset: earliest
 
 spring:
   datasource:
