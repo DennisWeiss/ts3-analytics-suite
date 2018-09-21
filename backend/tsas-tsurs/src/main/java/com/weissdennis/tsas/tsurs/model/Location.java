@@ -5,31 +5,31 @@ public class Location {
     public static double EARTH_POLAR_RADIUS = 6356.8;
     public static double EARTH_EQUATORIAL_RADIUS = 6371.0;
 
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 
-    public Location(double latitude, double longitude) {
+    public Location(Double latitude, Double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public double distanceTo(Location otherLocation) {
+    public Double distanceTo(Location otherLocation) {
         //TODO: improve precision
         return Math.sqrt(Math.pow((latitude - otherLocation.getLatitude()) * 0.5 * Math.PI * EARTH_POLAR_RADIUS / 90, 2)
                 + Math.pow((longitude - otherLocation.longitude) * 2 * Math.PI * EARTH_EQUATORIAL_RADIUS /

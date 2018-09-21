@@ -19,22 +19,25 @@ public class UserRelationEntity implements UserRelation {
 
     private IpRelation ipRelation;
 
+    public UserRelationEntity() {
+    }
+
+    public UserRelationEntity(UserRelationIdentity userRelationIdentity, double geoRelation, double channelRelation,
+                              IpRelation ipRelation) {
+        this.userRelationIdentity = userRelationIdentity;
+        this.geoRelation = geoRelation;
+        this.channelRelation = channelRelation;
+        this.ipRelation = ipRelation;
+    }
+
     @Override
     public String getClient1() {
         return userRelationIdentity.getClient1();
     }
 
-    public void setClient1(String client) {
-        this.userRelationIdentity.setClient1(client);
-    }
-
     @Override
     public String getClient2() {
         return userRelationIdentity.getClient2();
-    }
-
-    public void setClient2(String client) {
-        this.userRelationIdentity.setClient2(client);
     }
 
     @Override
