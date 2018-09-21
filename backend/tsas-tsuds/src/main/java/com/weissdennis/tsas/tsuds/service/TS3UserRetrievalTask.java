@@ -1,6 +1,7 @@
 package com.weissdennis.tsas.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
+import com.github.theholywaffle.teamspeak3.api.wrapper.Ban;
 import com.github.theholywaffle.teamspeak3.api.wrapper.DatabaseClient;
 import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
 import com.weissdennis.tsas.common.ts3users.TS3User;
@@ -27,12 +28,13 @@ public class TS3UserRetrievalTask implements Runnable {
         this.ts3UserKafkaTemplate = ts3UserKafkaTemplate;
     }
 
-    private TS3User mapDatabaseClientToUser(DatabaseClient databaseClient) {
+    private TS3User mapDatabaseClientToUser(DatabaseClient databaseClient, List<Ban> bans) {
         TS3UserImpl ts3User = new TS3UserImpl();
         ts3User.setUniqueId(databaseClient.getUniqueIdentifier());
         ts3User.setClientId(databaseClient.getDatabaseId());
         ts3User.setNickName(databaseClient.getNickname());
         ts3User.setIp(databaseClient.getLastIp());
+        ts3User.setBanned(bans.stream().anyMatch(ban -> ban.getBannedUId().equals(databaseClient.getUniqueIdentifier())));
         return ts3User.withExtendedUserInfo();
     }
 
@@ -44,11 +46,15 @@ public class TS3UserRetrievalTask implements Runnable {
 
     @Override
     public void run() {
+        List<Ban> bans = ts3Api.getBans();
         ts3Api.getDatabaseClients()
                 .parallelStream()
                 .filter(this::getDatabaseClientPredicate)
-                .map(this::mapDatabaseClientToUser)
-                .forEach(user -> ts3UserKafkaTemplate.send("ts3_user", user));
+                .map(databaseClient -> mapDatabaseClientToUser(databaseClient, bans))
+                .forEach(user -> {
+                    ts3UserKafkaTemplate.send("ts3_user", user);
+                    userUnqiueIdToLastUpdated.put(user.getUniqueId(), new Date());
+                });
     }
 
 

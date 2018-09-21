@@ -4,9 +4,11 @@ import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
+@Table(name = "user_in_channel")
 public class TS3UserInChannelEntity implements TS3UserInChannel {
 
     @EmbeddedId

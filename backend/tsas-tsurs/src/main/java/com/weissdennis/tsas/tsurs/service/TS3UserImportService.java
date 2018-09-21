@@ -24,7 +24,6 @@ public class TS3UserImportService {
 
     @KafkaListener(topics = "ts3_user", containerFactory = "ts3UserConcurrentKafkaListenerContainerFactory")
     public void listen(TS3User ts3User) {
-        logger.debug("TS3User", ts3User);
         ts3UserRepository.save(TS3UserMapper.INSTANCE.ts3UserImplToTS3UserEntity((TS3UserImpl) ts3User));
     }
 }

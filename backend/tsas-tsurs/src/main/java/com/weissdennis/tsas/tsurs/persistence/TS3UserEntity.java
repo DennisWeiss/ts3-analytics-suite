@@ -4,8 +4,11 @@ import com.weissdennis.tsas.common.ts3users.TS3User;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.Instant;
 
 @Entity
+@Table(name = "user")
 public class TS3UserEntity implements TS3User {
 
     @Id
@@ -33,8 +36,10 @@ public class TS3UserEntity implements TS3User {
 
     private String org;
 
-    public TS3UserEntity() {
-    }
+    private Instant lastOnline;
+
+    private boolean banned;
+
 
     @Override
     public Integer getClientId() {
@@ -142,5 +147,23 @@ public class TS3UserEntity implements TS3User {
 
     public void setOrg(String org) {
         this.org = org;
+    }
+
+    @Override
+    public Instant getLastOnline() {
+        return lastOnline;
+    }
+
+    public void setLastOnline(Instant lastOnline) {
+        this.lastOnline = lastOnline;
+    }
+
+    @Override
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
     }
 }
