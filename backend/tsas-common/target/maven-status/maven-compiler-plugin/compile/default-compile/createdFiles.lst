@@ -6,6 +6,7 @@ com\weissdennis\tsas\common\ts3users\TS3UserInChannelImpl.class
 com\weissdennis\tsas\common\ts3users\TS3ServerUsersImpl.class
 com\weissdennis\tsas\common\ts3users\TS3UserImpl.class
 com\weissdennis\tsas\common\ts3users\TS3ServerUsers.class
+com\weissdennis\tsas\common\Ipv4Address.class
 com\weissdennis\tsas\common\ts3users\serializers\TS3ServerUsersDeserializer.class
 com\weissdennis\tsas\common\ts3users\UserRelationImpl.class
 com\weissdennis\tsas\common\ts3users\IpRelation.class
