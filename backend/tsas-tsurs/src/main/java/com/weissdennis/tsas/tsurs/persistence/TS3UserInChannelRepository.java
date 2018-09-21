@@ -9,11 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TS3UserInChannelRepository extends CrudRepository<TS3UserInChannelEntity, TS3UserInChannelIdentity> {
 
-    @Query("select count(uic1) from user_in_channel uic1, user_in_channel uic2 where uic1.date_time=uic2.date_time " +
-            "and uic1.unique_id=:user1 and uic2.unique_id=:user2 and uic1.channel_id=uic2.channel_id")
+    @Query(value = "select count(uic1) from user_in_channel uic1, user_in_channel uic2 where uic1.date_time=uic2.date_time " +
+            "and uic1.unique_id=:user1 and uic2.unique_id=:user2 and uic1.channel_id=uic2.channel_id", nativeQuery =
+            true)
     Long countUsersInSameChannel(@Param("user1") String user1, @Param("user2") String user2);
 
-    @Query("select count(uic1) from user_in_channel uic1, user_in_channel uic2 where uic1.date_time=uic2.date_time " +
-            "and uic1.unique_id=:user1 and uic1.channel_id=uic2.channel_id and not uic1.unique_id=uic2.unique_id")
+    @Query(value = "select count(uic1) from user_in_channel uic1, user_in_channel uic2 where uic1.date_time=uic2.date_time " +
+            "and uic1.unique_id=:user1 and uic1.channel_id=uic2.channel_id and not uic1.unique_id=uic2.unique_id",
+            nativeQuery = true)
     Long countTotalUsersInSameChannel(@Param("user") String user);
 }

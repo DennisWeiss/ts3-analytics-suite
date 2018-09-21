@@ -4,7 +4,10 @@ import com.weissdennis.tsas.common.ts3users.IpRelation;
 import com.weissdennis.tsas.common.ts3users.UserRelation;
 
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
+
+@Entity
 public class UserRelationEntity implements UserRelation {
 
     @EmbeddedId
