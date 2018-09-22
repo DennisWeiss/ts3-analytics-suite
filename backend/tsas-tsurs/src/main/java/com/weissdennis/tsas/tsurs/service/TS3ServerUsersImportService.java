@@ -2,7 +2,6 @@ package com.weissdennis.tsas.tsurs.service;
 
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsersImpl;
-import com.weissdennis.tsas.common.ts3users.TS3UserInChannelImpl;
 import com.weissdennis.tsas.tsurs.mapper.TS3ServerUsersMapper;
 import com.weissdennis.tsas.tsurs.persistence.TS3ServerUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

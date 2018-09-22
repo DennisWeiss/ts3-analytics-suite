@@ -1,4 +1,4 @@
-package com.weissdennis.tsas.tsurs.persistence;
+package com.weissdennis.tsups.persistence;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -3,10 +3,8 @@ package com.weissdennis.tsas.tsurs.service;
 import com.weissdennis.tsas.common.ts3users.IpRelation;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.tsurs.model.Location;
-import com.weissdennis.tsas.tsurs.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;

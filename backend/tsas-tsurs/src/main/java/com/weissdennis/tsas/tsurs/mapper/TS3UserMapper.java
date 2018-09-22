@@ -1,6 +1,5 @@
 package com.weissdennis.tsas.tsurs.mapper;
 
-import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.common.ts3users.TS3UserImpl;
 import com.weissdennis.tsas.tsurs.persistence.TS3UserEntity;
 import org.mapstruct.Mapper;
