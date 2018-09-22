@@ -5,9 +5,11 @@ import com.weissdennis.tsas.common.ts3users.UserRelation;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "user_relation")
 public class UserRelationEntity implements UserRelation {
 
     @EmbeddedId
