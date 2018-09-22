@@ -1,5 +1,6 @@
 package com.weissdennis.tsas.common.ts3users;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.weissdennis.tsas.common.Ipv4Address;
 
 public enum IpRelation {
@@ -14,6 +15,7 @@ public enum IpRelation {
         this.value = value;
     }
 
+    @JsonValue
     public double getValue() {
         return value;
     }
