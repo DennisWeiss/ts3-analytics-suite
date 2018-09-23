@@ -2,8 +2,8 @@ package com.weissdennis.tsas.tsuds.service;
 
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
-import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
 import com.weissdennis.tsas.common.ts3users.TS3User;
+import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;

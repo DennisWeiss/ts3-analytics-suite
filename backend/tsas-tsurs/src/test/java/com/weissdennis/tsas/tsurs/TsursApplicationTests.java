@@ -1,4 +1,4 @@
-package com.weissdennis.tsas.tsups;
+package com.weissdennis.tsas.tsurs;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TsasTsupsApplicationTests {
+public class TsursApplicationTests {
 
     @Test
     public void contextLoads() {

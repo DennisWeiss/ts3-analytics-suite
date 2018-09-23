@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>tsurs</name>
-    <description>TeamSpeak User Relations Service</description>
+    <description>TeamSpeak User Relation Service</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,7 +23,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
-        <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
     </properties>
 
     <dependencies>
@@ -76,126 +75,16 @@
             <version>8.0.12</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${org.mapstruct.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}</finalName>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>live</id>
-            <build>
-                <resources>
-                    <resource>
-                        <!-- define a folder 'etc' where the resource files a stored -->
-                        <targetPath>../appassembler/jsw/tsas-tsurs/etc</targetPath>
-                        <directory>${project.basedir}/src/main/resources/</directory>
-                        <includes>
-                            <include>**/*.*</include>
-                        </includes>
-                    </resource>
-                </resources>
-
-                <plugins>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>appassembler-maven-plugin</artifactId>
-                        <version>1.10</version>
-                        <configuration>
-                            <includeConfigurationDirectoryInClasspath>true
-                            </includeConfigurationDirectoryInClasspath>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>generate-daemons</goal>
-                                </goals>
-                                <configuration>
-                                    <repositoryLayout>flat</repositoryLayout>
-                                    <target>${project.build.directory}/appassembler</target>
-                                    <useDaemonIdAsWrapperConfName>true</useDaemonIdAsWrapperConfName>
-                                    <daemons>
-                                        <daemon>
-                                            <id>tsas-tsurs</id>
-                                            <mainClass>com.weissdennis.tsas.tsurs.TsursApplication</mainClass>
-                                            <platforms>
-                                                <platform>jsw</platform>
-                                            </platforms>
-                                            <generatorConfigurations>
-                                                <generatorConfiguration>
-                                                    <generator>jsw</generator>
-                                                    <includes>
-                                                        <include>windows-x86-64</include>
-                                                    </includes>
-                                                    <configuration>
-                                                        <property>
-                                                            <name>configuration.directory.in.classpath.first</name>
-                                                            <value>etc</value>
-                                                        </property>
-                                                        <property>
-                                                            <name>wrapper.java.additional.1</name>
-                                                            <value>-XX:+UseG1GC</value>
-                                                        </property>
-                                                        <property>
-                                                            <name>wrapper.console.loglevel</name>
-                                                            <value>ERROR</value>
-                                                        </property>
-                                                        <property>
-                                                            <name>wrapper.logfile.loglevel</name>
-                                                            <value>ERROR</value>
-                                                        </property>
-                                                    </configuration>
-                                                </generatorConfiguration>
-                                            </generatorConfigurations>
-                                        </daemon>
-                                    </daemons>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-
-        </profile>
-
-    </profiles>
 
 
 </project>

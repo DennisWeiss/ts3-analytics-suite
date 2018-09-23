@@ -3,13 +3,16 @@ package com.weissdennis.tsas.tsuds.service;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Ban;
 import com.github.theholywaffle.teamspeak3.api.wrapper.DatabaseClient;
-import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.common.ts3users.TS3UserImpl;
+import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Component
