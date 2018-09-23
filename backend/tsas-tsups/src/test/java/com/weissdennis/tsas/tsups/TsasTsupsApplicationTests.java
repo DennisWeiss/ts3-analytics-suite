@@ -1,4 +1,4 @@
-package com.weissdennis.tsups;
+package com.weissdennis.tsas.tsups;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

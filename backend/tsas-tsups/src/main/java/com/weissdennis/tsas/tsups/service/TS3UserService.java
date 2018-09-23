@@ -1,8 +1,7 @@
-package com.weissdennis.tsups.service;
+package com.weissdennis.tsas.tsups.service;
 
 import com.weissdennis.tsas.common.ts3users.TS3User;
-import com.weissdennis.tsups.persistence.TS3UserEntity;
-import com.weissdennis.tsups.persistence.TS3UserRepository;
+import com.weissdennis.tsas.tsups.persistence.TS3UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

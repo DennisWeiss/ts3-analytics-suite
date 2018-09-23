@@ -1,7 +1,7 @@
-package com.weissdennis.tsups.api;
+package com.weissdennis.tsas.tsups.api;
 
 import com.weissdennis.tsas.common.ts3users.UserRelation;
-import com.weissdennis.tsups.service.UserRelationService;
+import com.weissdennis.tsas.tsups.service.UserRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

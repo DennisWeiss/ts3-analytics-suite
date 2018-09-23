@@ -1,4 +1,4 @@
-package com.weissdennis.tsups.api;
+package com.weissdennis.tsas.tsups.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

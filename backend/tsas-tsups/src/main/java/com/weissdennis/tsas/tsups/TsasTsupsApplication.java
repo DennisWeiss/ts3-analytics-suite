@@ -1,4 +1,4 @@
-package com.weissdennis.tsups;
+package com.weissdennis.tsas.tsups;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

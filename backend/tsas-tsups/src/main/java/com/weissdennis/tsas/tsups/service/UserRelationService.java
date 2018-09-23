@@ -1,7 +1,7 @@
-package com.weissdennis.tsups.service;
+package com.weissdennis.tsas.tsups.service;
 
 import com.weissdennis.tsas.common.ts3users.UserRelation;
-import com.weissdennis.tsups.persistence.UserRelationRepository;
+import com.weissdennis.tsas.tsups.persistence.UserRelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

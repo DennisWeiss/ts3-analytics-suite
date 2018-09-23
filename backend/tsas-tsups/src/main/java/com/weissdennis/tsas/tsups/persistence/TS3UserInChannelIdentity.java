@@ -1,4 +1,4 @@
-package com.weissdennis.tsups.persistence;
+package com.weissdennis.tsas.tsups.persistence;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

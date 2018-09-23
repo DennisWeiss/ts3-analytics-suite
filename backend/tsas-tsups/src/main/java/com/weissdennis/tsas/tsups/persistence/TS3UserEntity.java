@@ -1,4 +1,4 @@
-package com.weissdennis.tsups.persistence;
+package com.weissdennis.tsas.tsups.persistence;
 
 import com.weissdennis.tsas.common.ts3users.TS3User;
 

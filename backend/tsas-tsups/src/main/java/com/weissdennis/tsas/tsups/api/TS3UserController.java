@@ -1,16 +1,12 @@
-package com.weissdennis.tsups.api;
+package com.weissdennis.tsas.tsups.api;
 
 import com.weissdennis.tsas.common.ts3users.TS3User;
-import com.weissdennis.tsas.common.ts3users.UserRelation;
-import com.weissdennis.tsups.persistence.TS3UserEntity;
-import com.weissdennis.tsups.service.TS3UserService;
+import com.weissdennis.tsas.tsups.service.TS3UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
 
 
 @RestController
