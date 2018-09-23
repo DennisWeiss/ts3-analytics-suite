@@ -25,7 +25,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.0",
     "react-url-query": "^1.4.0",
-    "react-url-state": "^0.2.6",
+    "react-url-state": "^0.2.7",
     "react-window-size": "^1.2.2",
     "react-world-flags": "0.0.3",
     "recompose": "^0.26.0",
