@@ -15,6 +15,8 @@ script:
 - cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
 - cd ts3socialai
 - mvn clean install -DskipTests
+- cd ../tsas-common
+- mvn clean install
 - cd ../tsas-tsuds
 - mvn clean install -DskipTests
 - cd ..
