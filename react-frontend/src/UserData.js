@@ -1,14 +1,13 @@
-import React from 'react';
-import './UserData.css';
-import {Select, Row, Col} from 'antd';
-import axios from 'axios';
-import UserDataOverview from './UserDataOverview';
-import RelationsOverview from './RelationsOverview';
-import Location from './Location';
-import UserSocialGraph from './UserSocialGraph';
-import ReactUrlStateComponent from './UrlStateComponent';
-import {initializeReactUrlState} from 'react-url-state';
-import 'whatwg-fetch';
+import React from 'react'
+import './UserData.css'
+import {Select, Row, Col} from 'antd'
+import UserDataOverview from './UserDataOverview'
+import RelationsOverview from './RelationsOverview'
+import Location from './Location'
+import UserSocialGraph from './UserSocialGraph'
+import ReactUrlStateComponent from './UrlStateComponent'
+import {initializeReactUrlState} from 'react-url-state'
+import 'whatwg-fetch'
 import {convertToQueryString} from './helper/helper-functions'
 
 
