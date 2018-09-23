@@ -40,7 +40,7 @@ const reactUrlStateOptions = {
     pathname: '/user-data'
 };
 
-export default class UserData extends ReactUrlStateComponent {
+export default class UserData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
