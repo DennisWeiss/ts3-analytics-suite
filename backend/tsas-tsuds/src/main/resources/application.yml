@@ -1,5 +1,5 @@
 ts3api:
-  queryName: TS3 Analytics Suite
+  queryName: TS3 Analytics Suite - Dev
   loginMessage: Test
   serverIp: gr-esports.de
   serverQueryAdminName: serveradmin
@@ -10,17 +10,6 @@ ts3api:
 
 kafka:
   bootstrapAddress: localhost:9092
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost/tsas_tsuds
-    username: root
-    password: Meycrosoft10
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
 
 server:
   port: 8090

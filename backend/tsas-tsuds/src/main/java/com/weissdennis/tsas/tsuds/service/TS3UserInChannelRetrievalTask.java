@@ -38,8 +38,7 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
         List<Client> clients = ts3Api.getClients();
         Instant dateTime = Instant.now();
 
-        clients
-                .stream()
+        clients.stream()
                 .filter(this::isValidClient)
                 .map(client -> mapFromClientAndTimestampToUserInChannel(client, dateTime))
                 .forEach(ts3UserInChannel -> ts3UserInChannelKafkaTemplate.send("ts3_user_in_channel", ts3UserInChannel));

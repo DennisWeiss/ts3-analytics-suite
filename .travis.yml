@@ -11,14 +11,14 @@ script:
 - cd react-frontend
 - npm run build
 - cd ..
-- mkdir -p ts3socialai/src/main/resources/public
-- cp -r ./react-frontend/build/* ./ts3socialai/src/main/resources/public
-- cd ts3socialai
+- mkdir -p backend/ts3socialai/src/main/resources/public
+- cp -r ./react-frontend/build/* ./backend/ts3socialai/src/main/resources/public
+- cd backend/ts3socialai
 - mvn clean install -DskipTests
 - cd ../tsas-common
 - mvn clean install
 - cd ../tsas-tsuds
 - mvn clean install -DskipTests
-- cd ..
+- cd ../..
 after_success:
-- curl -T tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/
+- curl -T backend/tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/

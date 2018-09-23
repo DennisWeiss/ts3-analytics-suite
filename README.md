@@ -1,4 +1,4 @@
-# TS3 Social AI
+# TS3 Analytics Suite
 
 [![Build Status](https://travis-ci.com/DennisWeiss/ts3-analytics-suite.svg?branch=master)](https://travis-ci.com/DennisWeiss/ts3-analytics-suite)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5897a483bb39421482d91e27747d1898)](https://www.codacy.com/app/DennisWeiss/ts3-analytics-suite?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DennisWeiss/ts3-analytics-suite&amp;utm_campaign=Badge_Grade)
