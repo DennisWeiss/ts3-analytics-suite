@@ -1,8 +1,5 @@
 language: java
 sudo: false
-before_install:
-- openssl aes-256-cbc -K $encrypted_55efd6f63817_key -iv $encrypted_55efd6f63817_iv
-  -in key.enc -out key -d
 install:
 - cd react-frontend
 - npm install
@@ -28,3 +25,6 @@ after_success:
 - curl -T backend/tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/deploy_temp
 - curl -T backend/tsas-tsurs/target/tsurs.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/deploy_temp
 - curl -T backend/tsas-tsups/target/tsups.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/deploy_temp
+before_install:
+- openssl aes-256-cbc -K $encrypted_55efd6f63817_key -iv $encrypted_55efd6f63817_iv
+  -in key.enc -out key -d
