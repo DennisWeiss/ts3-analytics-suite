@@ -1,8 +1,10 @@
 env:
-  global:
-
+  global: 
 language: java
 sudo: false
+before_install:
+- openssl aes-256-cbc -K $encrypted_55efd6f63817_key -iv $encrypted_55efd6f63817_iv
+  -in key.enc -out key -d
 install:
 - cd react-frontend
 - npm install
