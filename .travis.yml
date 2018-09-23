@@ -21,4 +21,4 @@ script:
 - mvn clean install -DskipTests
 - cd ../..
 after_success:
-- curl -T backend/tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/
+- curl -T backend/tsas-tsuds/target/tsuds.jar -u $FTP_USER:$FTP_PASSWORD ftp://gr-esports.de/Services/tsuds
