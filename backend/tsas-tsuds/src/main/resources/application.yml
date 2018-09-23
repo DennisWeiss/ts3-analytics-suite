@@ -1,7 +1,7 @@
 ts3api:
-  queryName: TS3 Analytics Suite - Dev
+  queryName: TS3 Analytics Suite
   loginMessage: Test
-  serverIp: gr-esports.de
+  serverIp: localhost
   serverQueryAdminName: serveradmin
   serverQueryAdminPassword: Meycrosoft1337
   serverId: 3
