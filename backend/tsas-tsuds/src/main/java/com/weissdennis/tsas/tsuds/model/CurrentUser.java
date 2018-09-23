@@ -4,6 +4,9 @@ public class CurrentUser {
     private String id;
     private int channel;
 
+    public CurrentUser() {
+    }
+
     public CurrentUser(String id, int channel) {
         this.id = id;
         this.channel = channel;
