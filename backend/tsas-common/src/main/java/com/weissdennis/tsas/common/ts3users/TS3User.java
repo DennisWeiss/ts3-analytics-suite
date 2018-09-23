@@ -2,6 +2,8 @@ package com.weissdennis.tsas.common.ts3users;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.time.Instant;
+
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public interface TS3User {
 
@@ -28,4 +30,8 @@ public interface TS3User {
     String getPostalCode();
 
     String getOrg();
+
+    Instant getLastOnline();
+
+    boolean isBanned();
 }
