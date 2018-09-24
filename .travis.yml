@@ -17,7 +17,7 @@ script:
 - cd ../tsas-tsuds
 - mvn clean install -DskipTests
 - cd ../tsas-tsurs
-- mvn clean install
+- mvn clean install -DskipTests
 - cd ../tsas-tsups
 - mvn clean install -DskipTests
 - cd ../..
