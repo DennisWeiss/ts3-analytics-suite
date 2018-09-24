@@ -46,7 +46,7 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
     }
 
     @Override
-    public Integer getInterval() {
+    public Integer getDataInterval() {
         return interval;
     }
 

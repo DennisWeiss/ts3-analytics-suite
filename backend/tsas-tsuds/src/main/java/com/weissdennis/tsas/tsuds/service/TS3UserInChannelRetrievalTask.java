@@ -30,7 +30,7 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
         ts3UserInChannel.setUniqueId(client.getUniqueIdentifier());
         ts3UserInChannel.setDateTime(timestamp);
         ts3UserInChannel.setChannelId(client.getChannelId());
-        ts3UserInChannel.setInterval(ts3PropertiesConfig.getUserInChannelInterval());
+        ts3UserInChannel.setDataInterval(ts3PropertiesConfig.getUserInChannelInterval());
         return ts3UserInChannel;
     }
 

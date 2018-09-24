@@ -19,6 +19,6 @@ public interface TS3UserInChannel {
 
     Instant getDateTime();
 
-    Integer getInterval();
+    Integer getDataInterval();
 
 }
