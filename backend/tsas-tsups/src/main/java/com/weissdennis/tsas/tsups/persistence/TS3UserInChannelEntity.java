@@ -16,6 +16,8 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
 
     private Integer channelId;
 
+    private Integer interval;
+
     @Override
     public Integer getChannelId() {
         return channelId;
@@ -43,4 +45,12 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
         this.ts3UserInChannelIdentity = ts3UserInChannelIdentity;
     }
 
+    @Override
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Integer interval) {
+        this.interval = interval;
+    }
 }
