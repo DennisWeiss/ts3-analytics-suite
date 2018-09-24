@@ -4,16 +4,18 @@ import com.weissdennis.tsas.common.ts3users.IpRelation;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.tsurs.model.Location;
 import com.weissdennis.tsas.tsurs.persistence.*;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
-@Component
-public class UserRelationService  {
+@Service
+public class UserRelationService {
 
     private final TS3UserInChannelRepository ts3UserInChannelRepository;
     private final UserRelationRepository userRelationRepository;
@@ -27,7 +29,6 @@ public class UserRelationService  {
         this.ts3UserRepository = ts3UserRepository;
     }
 
-    @PostConstruct
     public void updateRelations() {
         while (true) {
             LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
