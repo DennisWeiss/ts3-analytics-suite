@@ -25,11 +25,12 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
         this.ts3UserInChannelKafkaTemplate = ts3UserInChannelKafkaTemplate;
     }
 
-    private static TS3UserInChannel mapFromClientAndTimestampToUserInChannel(Client client, Instant timestamp) {
+    private TS3UserInChannel mapFromClientAndTimestampToUserInChannel(Client client, Instant timestamp) {
         TS3UserInChannelImpl ts3UserInChannel = new TS3UserInChannelImpl();
         ts3UserInChannel.setUniqueId(client.getUniqueIdentifier());
         ts3UserInChannel.setDateTime(timestamp);
         ts3UserInChannel.setChannelId(client.getChannelId());
+        ts3UserInChannel.setInterval(ts3PropertiesConfig.getUserInChannelInterval());
         return ts3UserInChannel;
     }
 

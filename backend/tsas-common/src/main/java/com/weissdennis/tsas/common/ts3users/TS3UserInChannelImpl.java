@@ -7,6 +7,7 @@ public class TS3UserInChannelImpl implements TS3UserInChannel {
     private String uniqueId;
     private Instant dateTime;
     private Integer channelId;
+    private Integer interval;
 
     public TS3UserInChannelImpl() {
     }
@@ -42,5 +43,14 @@ public class TS3UserInChannelImpl implements TS3UserInChannel {
 
     public void setDateTime(Instant dateTime) {
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Integer interval) {
+        this.interval = interval;
     }
 }

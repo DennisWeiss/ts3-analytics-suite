@@ -45,7 +45,7 @@ public class ServerQueryService implements InitializingBean {
     private void retrieveUserData() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new TS3UserInChannelRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserInChannelKafkaTemplate),
-                1, 10, TimeUnit.SECONDS);
+                1, ts3PropertiesConfig.getUserInChannelInterval(), TimeUnit.SECONDS);
     }
 
 

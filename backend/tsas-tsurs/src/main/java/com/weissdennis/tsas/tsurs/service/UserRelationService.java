@@ -4,12 +4,9 @@ import com.weissdennis.tsas.common.ts3users.IpRelation;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.tsurs.model.Location;
 import com.weissdennis.tsas.tsurs.persistence.*;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -61,8 +58,8 @@ public class UserRelationService {
     }
 
     private double getChannelRelation(TS3User user1, TS3User user2) {
-        Long sameChannelWithThisUser = ts3UserInChannelRepository.countUsersInSameChannel(user1.getUniqueId(), user2.getUniqueId());
-        Long sameChannelWithAnyUser = ts3UserInChannelRepository.countTotalUsersInSameChannel(user1.getUniqueId());
-        return sameChannelWithAnyUser != 0 ? (double) sameChannelWithThisUser / sameChannelWithAnyUser : 0;
+        Double sameChannelWithThisUser = ts3UserInChannelRepository.weightedCountUsersInSameChannel(user1.getUniqueId(), user2.getUniqueId());
+        Double sameChannelWithAnyUser = ts3UserInChannelRepository.weightedCountTotalUsersInSameChannel(user1.getUniqueId());
+        return sameChannelWithAnyUser != 0 ? sameChannelWithThisUser / sameChannelWithAnyUser : 0;
     }
 }

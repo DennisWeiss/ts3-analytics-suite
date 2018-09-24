@@ -21,9 +21,9 @@ public class Ts3PropertiesConfig {
     private Integer serverId;
     private String afkChannels;
     private Integer locationInfoUpdateInterval;
+    private Integer userInChannelInterval;
 
     public Ts3PropertiesConfig() {
-        System.out.println("Test");
     }
 
     public String getQueryName() {
@@ -102,5 +102,13 @@ public class Ts3PropertiesConfig {
 
     public void setLocationInfoUpdateInterval(Integer locationInfoUpdateInterval) {
         this.locationInfoUpdateInterval = locationInfoUpdateInterval;
+    }
+
+    public Integer getUserInChannelInterval() {
+        return userInChannelInterval;
+    }
+
+    public void setUserInChannelInterval(Integer userInChannelInterval) {
+        this.userInChannelInterval = userInChannelInterval;
     }
 }

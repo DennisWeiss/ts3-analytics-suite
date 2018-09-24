@@ -1,0 +1,16 @@
+ts3api:
+  queryName: TS3 Analytics Suite - Dev
+  loginMessage: Test
+  serverIp: gr-esports.de
+  serverQueryAdminName: serveradmin
+  serverQueryAdminPassword: Meycrosoft1337
+  serverId: 3
+  afkChannels: 92,93
+  locationInfoUpdateInterval: 3
+  userInChannelInterval: 60
+
+kafka:
+  bootstrapAddress: localhost:9092
+
+server:
+  port: 8090
