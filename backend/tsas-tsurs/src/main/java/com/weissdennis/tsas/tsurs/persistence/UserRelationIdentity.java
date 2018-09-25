@@ -1,12 +1,16 @@
 package com.weissdennis.tsas.tsurs.persistence;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
 public class UserRelationIdentity implements Serializable {
 
+    @Column(nullable = false)
     private String client1;
+
+    @Column(nullable = false)
     private String client2;
 
     public UserRelationIdentity() {

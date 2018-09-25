@@ -2,6 +2,7 @@ package com.weissdennis.tsas.tsurs.persistence;
 
 import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,8 +15,10 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
     @EmbeddedId
     private TS3UserInChannelIdentity ts3UserInChannelIdentity;
 
+    @Column(nullable = false)
     private Integer channelId;
 
+    @Column(nullable = false)
     private Integer dataInterval;
 
     @Override

@@ -1,5 +1,6 @@
 package com.weissdennis.tsas.tsups.persistence;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.Instant;
@@ -7,7 +8,10 @@ import java.time.Instant;
 @Embeddable
 public class TS3UserInChannelIdentity implements Serializable {
 
+    @Column(nullable = false)
     private String uniqueId;
+
+    @Column(nullable = false)
     private Instant dateTime;
 
     public TS3UserInChannelIdentity() {

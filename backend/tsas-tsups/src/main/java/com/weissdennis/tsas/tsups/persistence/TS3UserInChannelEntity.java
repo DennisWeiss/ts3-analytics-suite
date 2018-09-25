@@ -2,6 +2,7 @@ package com.weissdennis.tsas.tsups.persistence;
 
 import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,9 +15,11 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
     @EmbeddedId
     private TS3UserInChannelIdentity ts3UserInChannelIdentity;
 
+    @Column(nullable = false)
     private Integer channelId;
 
-    private Integer interval;
+    @Column(nullable = false)
+    private Integer dataInterval;
 
     @Override
     public Integer getChannelId() {
@@ -47,10 +50,10 @@ public class TS3UserInChannelEntity implements TS3UserInChannel {
 
     @Override
     public Integer getDataInterval() {
-        return interval;
+        return dataInterval;
     }
 
-    public void setInterval(Integer interval) {
-        this.interval = interval;
+    public void setDataInterval(Integer dataInterval) {
+        this.dataInterval = dataInterval;
     }
 }

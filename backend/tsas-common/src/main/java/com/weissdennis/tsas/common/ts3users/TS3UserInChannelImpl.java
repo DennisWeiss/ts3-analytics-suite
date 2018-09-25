@@ -12,10 +12,11 @@ public class TS3UserInChannelImpl implements TS3UserInChannel {
     public TS3UserInChannelImpl() {
     }
 
-    public TS3UserInChannelImpl(String uniqueId, Instant dateTime, Integer channelId) {
+    public TS3UserInChannelImpl(String uniqueId, Instant dateTime, Integer channelId, Integer dataInterval) {
         this.uniqueId = uniqueId;
         this.dateTime = dateTime;
         this.channelId = channelId;
+        this.dataInterval = dataInterval;
     }
 
     @Override

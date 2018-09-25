@@ -23,6 +23,7 @@ public class TS3UserInChannelSerializer extends StdSerializer<TS3UserInChannel> 
         jsonGenerator.writeStringField("user", ts3UserInChannel.getUniqueId());
         jsonGenerator.writeStringField("timestamp", ts3UserInChannel.getDateTime().toString());
         jsonGenerator.writeNumberField("channel", ts3UserInChannel.getChannelId());
+        jsonGenerator.writeNumberField("data_interval", ts3UserInChannel.getDataInterval());
         jsonGenerator.writeEndObject();
     }
 }
