@@ -7,10 +7,10 @@ import java.io.Serializable;
 @Embeddable
 public class UserRelationIdentity implements Serializable {
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String client1;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String client2;
 
     public UserRelationIdentity() {
