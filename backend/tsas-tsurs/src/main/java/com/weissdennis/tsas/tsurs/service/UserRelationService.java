@@ -60,6 +60,7 @@ public class UserRelationService {
     private double getChannelRelation(TS3User user1, TS3User user2) {
         Double sameChannelWithThisUser = ts3UserInChannelRepository.weightedCountUsersInSameChannel(user1.getUniqueId(), user2.getUniqueId());
         Double sameChannelWithAnyUser = ts3UserInChannelRepository.weightedCountTotalUsersInSameChannel(user1.getUniqueId());
-        return sameChannelWithAnyUser != 0 ? sameChannelWithThisUser / sameChannelWithAnyUser : 0;
+        return sameChannelWithThisUser != null && sameChannelWithAnyUser != null && sameChannelWithAnyUser != 0 ?
+                sameChannelWithThisUser / sameChannelWithAnyUser : 0;
     }
 }

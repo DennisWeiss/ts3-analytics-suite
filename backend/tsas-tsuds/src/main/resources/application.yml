@@ -3,7 +3,7 @@ ts3api:
   loginMessage: Test
   serverIp: gr-esports.de
   serverQueryAdminName: serveradmin
-  serverQueryAdminPassword: Meycrosoft1337
+  serverQueryAdminPassword: Meycrosoft10
   serverId: 3
   afkChannels: 92,93
   locationInfoUpdateInterval: 3
