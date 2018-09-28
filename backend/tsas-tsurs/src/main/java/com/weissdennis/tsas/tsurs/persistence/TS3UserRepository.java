@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface TS3UserRepository extends CrudRepository<TS3UserEntity, String> {
 
-    @Query(value = "select u from user u where u.banned=0 and (u.last_online is null or u.last_online > :lastOnline)")
+    @Query(value = "select u from user u where u.banned=0 and (u.last_online is null or u.last_online > :lastOnline)", nativeQuery = true)
     List<TS3UserEntity> findAllThatHaveBeenOnlineAfterOrUnknownAndIsNotBanned(@Param("lastOnline") Instant lastOnline);
 }
