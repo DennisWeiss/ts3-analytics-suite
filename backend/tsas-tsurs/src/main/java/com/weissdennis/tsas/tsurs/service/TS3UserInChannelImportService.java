@@ -28,6 +28,7 @@ public class TS3UserInChannelImportService {
 
     @KafkaListener(topics = "ts3_user_in_channel", containerFactory = "ts3UserInChannelConcurrentKafkaListenerContainerFactory")
     public void listen(TS3UserInChannel ts3UserInChannel) {
+
         ts3UserInChannelRepository.save(TS3UserInChannelMapper.INSTANCE.ts3UserInChannelImplToTS3UserInChannelEntity
                 ((TS3UserInChannelImpl) ts3UserInChannel));
 
