@@ -39,6 +39,6 @@ public class UserInfoService implements InitializingBean {
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new TS3UserRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserKafkaTemplate),
-                30, 300, TimeUnit.SECONDS);
+                15, 300, TimeUnit.SECONDS);
     }
 }

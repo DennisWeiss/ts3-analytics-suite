@@ -42,9 +42,10 @@ public class TS3UserRetrievalTask implements Runnable {
     }
 
     private boolean getDatabaseClientPredicate(DatabaseClient client) {
-        return !userUniqueIdToLastUpdated.containsKey(client.getUniqueIdentifier()) ||
-                new Date().getTime() - userUniqueIdToLastUpdated.get(client.getUniqueIdentifier()).getTime() <
-                        TimeUnit.MILLISECONDS.convert(ts3PropertiesConfig.getLocationInfoUpdateInterval(), TimeUnit.DAYS);
+        return (!userUniqueIdToLastUpdated.containsKey(client.getUniqueIdentifier()) ||
+                new Date().getTime() - userUniqueIdToLastUpdated.get(client.getUniqueIdentifier()).getTime() >
+                        TimeUnit.MILLISECONDS.convert(ts3PropertiesConfig.getLocationInfoUpdateInterval(), TimeUnit.DAYS))
+                && client.getLastIp() != null;
     }
 
     @Override

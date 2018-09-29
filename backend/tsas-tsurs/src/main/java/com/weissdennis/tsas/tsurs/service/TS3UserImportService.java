@@ -48,6 +48,6 @@ public class TS3UserImportService {
     public void listen(TS3User ts3User) {
         ts3UserRepository.findById(ts3User.getUniqueId())
                 .map(ts3UserEntity -> ts3UserRepository.save(mergeUserData(ts3UserEntity, ts3User)))
-                .orElseGet(() -> TS3UserMapper.INSTANCE.ts3UserImplToTS3UserEntity((TS3UserImpl) ts3User));
+                .orElseGet(() -> ts3UserRepository.save(TS3UserMapper.INSTANCE.ts3UserImplToTS3UserEntity((TS3UserImpl) ts3User)));
     }
 }

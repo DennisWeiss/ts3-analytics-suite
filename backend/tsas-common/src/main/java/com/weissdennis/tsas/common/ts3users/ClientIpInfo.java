@@ -23,6 +23,7 @@ public class ClientIpInfo {
     }
 
     public double getLatitude() {
+        System.out.println(loc);
         String[] latString = loc.split(".*,.*");
         return latString.length > 0 ? Double.parseDouble(latString[0]) : 0;
     }

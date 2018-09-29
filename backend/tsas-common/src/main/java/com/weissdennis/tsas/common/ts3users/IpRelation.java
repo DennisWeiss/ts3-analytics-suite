@@ -21,6 +21,9 @@ public enum IpRelation {
     }
 
     public static IpRelation getRelation(String a, String b) {
+        if (a == null || b == null) {
+            return IpRelation.NOT_MATCH;
+        }
         int[] ipA = Ipv4Address.getIpParts(a);
         int[] ipB = Ipv4Address.getIpParts(b);
 

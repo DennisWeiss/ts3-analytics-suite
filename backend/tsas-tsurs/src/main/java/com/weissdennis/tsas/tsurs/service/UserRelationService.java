@@ -28,9 +28,7 @@ public class UserRelationService {
 
     public void updateRelations() {
         while (true) {
-            LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
-            List<TS3UserEntity> ts3Users = ts3UserRepository.findAllThatHaveBeenOnlineAfterOrUnknownAndIsNotBanned(
-                    threeMonthsAgo.toInstant(ZoneId.systemDefault().getRules().getOffset(threeMonthsAgo)));
+            List<TS3UserEntity> ts3Users = ts3UserRepository.findAllByBanned(false);
 
             for (TS3User user1 : ts3Users) {
                 for (TS3User user2 : ts3Users) {
