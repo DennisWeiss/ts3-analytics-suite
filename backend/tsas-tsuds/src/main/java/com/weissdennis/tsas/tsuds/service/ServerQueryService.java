@@ -1,11 +1,11 @@
 package com.weissdennis.tsas.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
-import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
 import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserInChannelRepository;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Executors;
@@ -18,14 +18,16 @@ public class ServerQueryService implements InitializingBean {
 
     private final TS3Api ts3Api;
     private final Ts3PropertiesConfig ts3PropertiesConfig;
-    private final KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate;
+    private final TS3UserInChannelRepository ts3UserInChannelRepository;
+    private final TS3UserRepository ts3UserRepository;
 
     @Autowired
     public ServerQueryService(Ts3PropertiesConfig ts3PropertiesConfig, TS3Api ts3Api,
-                              KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate) {
+                              TS3UserInChannelRepository ts3UserInChannelRepository, TS3UserRepository ts3UserRepository) {
         this.ts3PropertiesConfig = ts3PropertiesConfig;
         this.ts3Api = ts3Api;
-        this.ts3UserInChannelKafkaTemplate = ts3UserInChannelKafkaTemplate;
+        this.ts3UserInChannelRepository = ts3UserInChannelRepository;
+        this.ts3UserRepository = ts3UserRepository;
     }
 
     @Override
@@ -44,7 +46,8 @@ public class ServerQueryService implements InitializingBean {
 
     private void retrieveUserData() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new TS3UserInChannelRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserInChannelKafkaTemplate),
+        scheduler.scheduleAtFixedRate(new TS3UserInChannelRetrievalTask(ts3Api, ts3PropertiesConfig,
+                        ts3UserInChannelRepository, ts3UserRepository),
                 1, ts3PropertiesConfig.getUserInChannelInterval(), TimeUnit.SECONDS);
     }
 

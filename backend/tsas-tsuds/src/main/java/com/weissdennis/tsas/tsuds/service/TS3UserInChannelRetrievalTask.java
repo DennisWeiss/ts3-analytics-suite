@@ -2,10 +2,11 @@ package com.weissdennis.tsas.tsuds.service;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.wrapper.Client;
-import com.weissdennis.tsas.common.ts3users.TS3UserInChannel;
-import com.weissdennis.tsas.common.ts3users.TS3UserInChannelImpl;
 import com.weissdennis.tsas.tsuds.configuration.Ts3PropertiesConfig;
-import org.springframework.kafka.core.KafkaTemplate;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserInChannelEntity;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserInChannelIdentity;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserInChannelRepository;
+import com.weissdennis.tsas.tsuds.persistence.TS3UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -16,19 +17,20 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
 
     private final TS3Api ts3Api;
     private final Ts3PropertiesConfig ts3PropertiesConfig;
-    private final KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate;
+    private final TS3UserInChannelRepository ts3UserInChannelRepository;
+    private final TS3UserRepository ts3UserRepository;
 
     public TS3UserInChannelRetrievalTask(TS3Api ts3Api, Ts3PropertiesConfig ts3PropertiesConfig,
-                                         KafkaTemplate<String, TS3UserInChannel> ts3UserInChannelKafkaTemplate) {
+                                         TS3UserInChannelRepository ts3UserInChannelRepository, TS3UserRepository ts3UserRepository) {
         this.ts3Api = ts3Api;
         this.ts3PropertiesConfig = ts3PropertiesConfig;
-        this.ts3UserInChannelKafkaTemplate = ts3UserInChannelKafkaTemplate;
+        this.ts3UserInChannelRepository = ts3UserInChannelRepository;
+        this.ts3UserRepository = ts3UserRepository;
     }
 
-    private TS3UserInChannel mapFromClientAndTimestampToUserInChannel(Client client, Instant timestamp) {
-        TS3UserInChannelImpl ts3UserInChannel = new TS3UserInChannelImpl();
-        ts3UserInChannel.setUniqueId(client.getUniqueIdentifier());
-        ts3UserInChannel.setDateTime(timestamp);
+    private TS3UserInChannelEntity mapFromClientAndTimestampToUserInChannelEntity (Client client, Instant timestamp) {
+        TS3UserInChannelEntity ts3UserInChannel = new TS3UserInChannelEntity();
+        ts3UserInChannel.setTs3UserInChannelIdentity(new TS3UserInChannelIdentity(client.getUniqueIdentifier(), timestamp));
         ts3UserInChannel.setChannelId(client.getChannelId());
         ts3UserInChannel.setDataInterval(ts3PropertiesConfig.getUserInChannelInterval());
         return ts3UserInChannel;
@@ -41,8 +43,16 @@ public class TS3UserInChannelRetrievalTask implements Runnable {
 
         clients.stream()
                 .filter(this::isValidClient)
-                .map(client -> mapFromClientAndTimestampToUserInChannel(client, dateTime))
-                .forEach(ts3UserInChannel -> ts3UserInChannelKafkaTemplate.send("ts3_user_in_channel", ts3UserInChannel));
+                .map(client -> mapFromClientAndTimestampToUserInChannelEntity(client, dateTime))
+                .forEach(ts3UserInChannelEntity -> {
+                    ts3UserInChannelRepository.save(ts3UserInChannelEntity);
+                    ts3UserRepository
+                            .findById(ts3UserInChannelEntity.getUniqueId())
+                            .ifPresent(ts3UserEntity -> {
+                                ts3UserEntity.setLastOnline(ts3UserInChannelEntity.getDateTime());
+                                ts3UserRepository.save(ts3UserEntity);
+                            });
+                });
     }
 
     private boolean isValidClient(Client client) {

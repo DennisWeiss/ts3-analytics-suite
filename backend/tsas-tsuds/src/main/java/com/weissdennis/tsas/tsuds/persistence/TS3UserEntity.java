@@ -1,62 +1,45 @@
-package com.weissdennis.tsas.common.ts3users;
+package com.weissdennis.tsas.tsuds.persistence;
 
-import com.google.gson.GsonBuilder;
+import com.weissdennis.tsas.common.ts3users.TS3User;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.Instant;
 
-public class TS3UserImpl implements TS3User {
+@Entity
+@Table(name = "user")
+public class TS3UserEntity implements TS3User {
 
+    @Id
     private String uniqueId;
+
     private Integer clientId;
+
     private String nickName;
+
     private String ip;
+
     private String hostName;
+
     private String city;
+
     private String region;
+
     private String country;
+
     private Double longitude;
+
     private Double latitude;
+
     private String postalCode;
+
     private String org;
+
     private Instant lastOnline;
-    private boolean banned = false;
 
-    public TS3UserImpl() {
-    }
+    private boolean banned;
 
-    private TS3UserImpl withExtendedUserInfo(ClientIpInfo clientIpInfo) {
-        TS3UserImpl ts3User = new TS3UserImpl();
-        ts3User.setUniqueId(uniqueId);
-        ts3User.setClientId(clientId);
-        ts3User.setNickName(nickName);
-        ts3User.setIp(ip);
-        ts3User.setHostName(clientIpInfo.getHostname());
-        ts3User.setCity(clientIpInfo.getCity());
-        ts3User.setRegion(clientIpInfo.getRegion());
-        ts3User.setCountry(clientIpInfo.getCountry());
-        ts3User.setLatitude(clientIpInfo.getLatitude());
-        ts3User.setLongitude(clientIpInfo.getLongitude());
-        ts3User.setPostalCode(clientIpInfo.getPostal());
-        ts3User.setOrg(clientIpInfo.getOrg());
-        return ts3User;
-    }
-
-    public TS3UserImpl withExtendedUserInfo() {
-        if (ip != null && !ip.equals("")) {
-            try {
-                return withExtendedUserInfo(new GsonBuilder().create().fromJson(new BufferedReader(new InputStreamReader(
-                                new URL("http://ipinfo.io/" + ip + "/json").openConnection().getInputStream())),
-                        ClientIpInfo.class));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return this;
-    }
 
     @Override
     public Integer getClientId() {
@@ -184,4 +167,3 @@ public class TS3UserImpl implements TS3User {
         this.banned = banned;
     }
 }
-
