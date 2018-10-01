@@ -18,7 +18,19 @@ public class Ipv4Address {
     }
 
     public static int[] getIpParts(String ipString) {
-        return Arrays.stream(ipString.split("\\.")).mapToInt(Integer::parseInt).toArray();
+        String[] ipStrArr = ipString.split("\\.");
+        int[] ipArr = new int[ipStrArr.length];
+
+        for (int i = 0; i < ipArr.length; i++) {
+            try {
+                ipArr[i] = Integer.parseInt(ipStrArr[i]);
+            } catch (NumberFormatException e) {
+                ipArr[i] = 0;
+            }
+
+        }
+
+        return ipArr;
     }
 
     private static String insertLeadingZeros(String numberString, int decimalPlaces) {

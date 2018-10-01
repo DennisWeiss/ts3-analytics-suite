@@ -28,7 +28,7 @@ public enum IpRelation {
         int[] ipB = Ipv4Address.getIpParts(b);
 
         if (ipA.length != 4 || ipB.length != 4) {
-            throw new RuntimeException("Malformed IP String");
+            return NOT_MATCH;
         }
 
         for (int i = 0; i < 3; i++) {

@@ -40,13 +40,23 @@ public class UserRelationService {
 
     private void getAndSaveRelation(TS3User user1, TS3User user2) {
         if (!user1.getUniqueId().equals(user2.getUniqueId())) {
+            UserRelationIdentity userRelationIdentity = new UserRelationIdentity(user1.getUniqueId(), user2.getUniqueId());
+
             double channelRelation = getChannelRelation(user1, user2);
-            UserRelationEntity s = new UserRelationEntity(new UserRelationIdentity(
-                    user1.getUniqueId(), user2.getUniqueId()), getGeoRelation(
-                    new Location(user1.getLatitude(), user1.getLongitude()),
-                    new Location(user2.getLatitude(), user2.getLongitude())), channelRelation,
-                    IpRelation.getRelation(user1.getIp(), user2.getIp()));
-            userRelationRepository.save(s);
+            double geoRelation = getGeoRelation(new Location(user1.getLatitude(), user1.getLongitude()),
+                    new Location(user2.getLatitude(), user2.getLongitude()));
+            IpRelation ipRelation = IpRelation.getRelation(user1.getIp(), user2.getIp());
+
+            userRelationRepository.findById(userRelationIdentity)
+                    .map(userRelationEntity -> {
+                        userRelationEntity.setChannelRelation(channelRelation);
+                        userRelationEntity.setGeoRelation(geoRelation);
+                        userRelationEntity.setIpRelation(ipRelation);
+                        return userRelationRepository.save(userRelationEntity);
+                    })
+                    .orElseGet(() -> userRelationRepository.save(
+                            new UserRelationEntity(userRelationIdentity, geoRelation, channelRelation, ipRelation))
+                    );
         }
     }
 
