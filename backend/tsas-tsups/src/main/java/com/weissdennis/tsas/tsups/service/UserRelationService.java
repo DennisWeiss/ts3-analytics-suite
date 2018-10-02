@@ -16,7 +16,7 @@ public class UserRelationService {
     }
 
     public Iterable<? extends UserRelation> getRelations(String userUniqueId) {
-        return userUniqueId == null || userUniqueId.equals("") ? userRelationRepository.findAll() :
+        return userUniqueId == null || userUniqueId.equals("") ? userRelationRepository.findAllRelations() :
                 userRelationRepository.findAllByClient1(userUniqueId);
     }
 }
