@@ -25,14 +25,14 @@ public class TS3UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    @ApiOperation(value = "Gets all users with the given nickname", response = Iterable.class)
+    @ApiOperation(value = "Gets all users with the given nickname", response = TS3User.class, responseContainer = "List")
     public HttpEntity<Iterable<? extends TS3User>> getAllUsersByNickname(@RequestParam(required = false) String nickname) {
         return new ResponseEntity<>(nickname == null || nickname.equals("") ? ts3UserService.getAllUsers() :
                 ts3UserService.getAllUsersByNickname(nickname), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/user/{uniqueId}", method = RequestMethod.GET)
-    @ApiOperation(value = "Gets a specific user by its unique id", response = TS3User.class)
+    @ApiOperation(value = "Gets a specific user by its unique id")
     public HttpEntity<? extends TS3User> getUserByUniqueId(@PathVariable String uniqueId) {
         return ts3UserService.getUserByUniqueId(uniqueId)
                 .map(ts3User -> new ResponseEntity<>(ts3User, HttpStatus.OK))

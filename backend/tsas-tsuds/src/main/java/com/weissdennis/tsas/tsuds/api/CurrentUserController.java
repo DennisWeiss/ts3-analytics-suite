@@ -29,13 +29,14 @@ public class CurrentUserController {
     }
 
     @RequestMapping(value = "/currentusers", method = RequestMethod.GET)
-    @ApiOperation(value = "Gets users currently connected to the TeamSpeak server", response = Iterable.class)
+    @ApiOperation(value = "Gets users currently connected to the TeamSpeak server", response = CurrentUser.class,
+            responseContainer = "List")
     public HttpEntity<Iterable<CurrentUser>> getCurrentUser() {
         return new ResponseEntity<>(currentUserService.getCurrentUsers(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/bans", method = RequestMethod.GET)
-    @ApiOperation(value = "Gets a list of all banned users", response = Iterable.class)
+    @ApiOperation(value = "Gets a list of all banned users", response = Ban.class, responseContainer = "List")
     public HttpEntity<Iterable<Ban>> getBans() {
         return new ResponseEntity<>(currentUserService.getBans(), HttpStatus.OK);
     }

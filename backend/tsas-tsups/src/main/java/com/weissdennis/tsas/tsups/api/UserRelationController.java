@@ -24,7 +24,7 @@ public class UserRelationController {
 
     @RequestMapping(value = "/relations", method = RequestMethod.GET)
     @ApiOperation(value = "Gets relation values of a specific user if a unique id is provided otherwise gets relation values of all users",
-            response = Iterable.class)
+            response = UserRelation.class, responseContainer = "List")
     public HttpEntity<Iterable<? extends UserRelation>> getRelations(@RequestParam(required = false) String user) {
         return new ResponseEntity<>(userRelationService.getRelations(user), HttpStatus.OK);
     }
