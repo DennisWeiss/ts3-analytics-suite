@@ -20,7 +20,7 @@ public class TS3ServerUsersService {
     }
 
     public Iterable<? extends TS3ServerUsers> getServerUsers(LocalDateTime from, LocalDateTime to) {
-        return ts3ServerUsersRepository.findAllByDateTimeBeforeAndDateTimeAfter(from.toInstant(ZoneOffset.systemDefault()
+        return ts3ServerUsersRepository.findAllByDateTimeAfterAndDateTimeBefore(from.toInstant(ZoneOffset.systemDefault()
                 .getRules().getOffset(from)), to.toInstant(ZoneOffset.systemDefault().getRules().getOffset(to)));
     }
 
