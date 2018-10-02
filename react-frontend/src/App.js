@@ -33,17 +33,15 @@ export default class App extends React.Component {
 
     componentWillMount() {
         axios.get('http://gr-esports.de:8092/api/ts3/users').then(res => {
-             let points = [];
-             for (let i = 0; i < res.data.length; i++) {
-                 points.push({
-                     lng: res.data[i].longitude,
-                     lat: res.data[i].latitude,
-                     weight: 1
-                 })
-             }
-
              this.setState({
-                 points: this.spread(points)
+                 points: this.spread(res.data
+                     .filter(user => user.latitude != null && user.longitude != null)
+                     .map(user => ({
+                         lat: user.latitude,
+                         lng: user.longitude,
+                         weight: 1
+                     }))
+                 )
              });
         });
     }
@@ -53,8 +51,6 @@ export default class App extends React.Component {
     addPoint = (points, point) => {
 
         if (this.exists(point)) {
-            console.log('points', point)
-            console.log('points', true)
             this.addPoint(points, {
                 lng: point.lng + Math.pow(10, -2),
                 lat: point.lat + Math.pow(10, -2),
@@ -78,17 +74,14 @@ export default class App extends React.Component {
         return evaluatedPoints
     }
 
-    spread = points => {
-        let spreadPoints = []
-        points.forEach(point => {
-            spreadPoints.push({
+    spread = points =>
+        points.map(point => ({
                 lat: point.lat + Math.pow(10, -2) * (Math.random() - 0.5),
                 lng: point.lng + Math.pow(10, -2) * (Math.random() - 0.5),
                 weight: point.weight
             })
-        })
-        return spreadPoints
-    }
+        )
+
 
     handleMenuClick(e) {
         console.log(e);

@@ -26,16 +26,14 @@ const reactUrlStateOptions = {
             fetch('http://gr-esports.de:8092/api/ts3/users')
                 .then(res => res.json())
                 .then(data => {
-                    const user = data.find(user => user.uniqueID === id);
-                    console.log('id', id);
-                    console.log('user', user);
+                    const user = data.find(user => user.uniqueId === id);
                     resolve(user != null ? user : {});
                 })
                 .catch(reject);
         })
     },
     toIdMappers: {
-        user: user => user.uniqueID
+        user: user => user.uniqueId
     },
     pathname: '/user-data'
 };
@@ -61,7 +59,7 @@ export default class UserData extends React.Component {
                 this.setState({
                     users: data,
                 }, () => {
-                    if (this.state.user.uniqueID == null) {
+                    if (this.state.user.uniqueId == null) {
                         this.reactUrlState.setUrlState({
                             user: this.state.users.length > 0 ? this.state.users[Math.floor(this.state.users.length * Math.random())] : {}
                         });
@@ -73,9 +71,12 @@ export default class UserData extends React.Component {
     }
 
     setRelations(user) {
-        if (user != null && user.uniqueID != null) {
+        if (user != null && user.uniqueId != null) {
             this.setState({loading: true});
-            fetch('http://gr-esports.de:8092/api/ts3/relations' + convertToQueryString({user: user.uniqueID}))
+            fetch('http://gr-esports.de:8092/api/ts3/relations' + convertToQueryString({
+                user: user.uniqueId,
+                minRelation: 0.01
+            }))
                 .then(res => res.json())
                 .then(data => {
                 fetch('http://gr-esports.de:8092/api/ts3/users')
@@ -85,14 +86,14 @@ export default class UserData extends React.Component {
                         let username = '';
                         for (let i = 0; i < data.length; i++) {
                             for (let j = 0; j < data2.length; j++) {
-                                if (data[i].otherUser === data2[j].uniqueID) {
-                                    username = data2[j].nickname;
+                                if (data[i].client2 === data2[j].uniqueId) {
+                                    username = data2[j].nickName;
                                 }
                             }
                             relatedUsers.push({
-                                key: data[i].otherUser,
+                                key: data[i].client2,
                                 username: username,
-                                id: data[i].otherUser,
+                                id: data[i].client2,
                                 relation: data[i].totalRelation
                             });
                         }
@@ -109,7 +110,7 @@ export default class UserData extends React.Component {
         this.socialGraph.select(value);
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
-            if (this.state.users[i].uniqueID === value) {
+            if (this.state.users[i].uniqueId === value) {
                 user = this.state.users[i];
             }
         }
@@ -127,7 +128,7 @@ export default class UserData extends React.Component {
         }
         let user = {};
         for (let i = 0; i < this.state.users.length; i++) {
-            if (this.state.users[i].uniqueID === value) {
+            if (this.state.users[i].uniqueId === value) {
                 user = this.state.users[i];
             }
         }
@@ -142,10 +143,10 @@ export default class UserData extends React.Component {
     render() {
 
         let location = {};
-        if (this.state.user == null || this.state.user.location == null) {
+        if (this.state.user == null) {
             location = {lat: 0, lng: 0};
         } else {
-            location = {lat: this.state.user.location.latitude, lng: this.state.user.location.longitude};
+            location = {lat: this.state.user.latitude, lng: this.state.user.longitude};
         }
 
         return (
@@ -156,14 +157,14 @@ export default class UserData extends React.Component {
                         showSearch
                         style={{width: 200}}
                         placeholder='Search for a user'
-                        value={this.state.user != null && this.state.users != null && this.state.users.length > 0 ? this.state.user.uniqueID : null}
+                        value={this.state.user != null && this.state.users != null && this.state.users.length > 0 ? this.state.user.uniqueId : null}
                         optionsFilterProp='children'
                         onChange={this.handleSelect.bind(this)}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
                         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                        {this.state.users.map(item =>
-                            <Select.Option value={item.uniqueID} key={item.uniqueID}>{item.nickname}</Select.Option>
+                        {this.state.users.map(user =>
+                            <Select.Option value={user.uniqueId} key={user.uniqueId}>{user.nickName}</Select.Option>
                         )}
                     </Select>
                 </div>

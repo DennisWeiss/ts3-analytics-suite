@@ -86,7 +86,6 @@ export default class SocialGraph extends React.Component {
                         for (let j = 0; j < res3.data.length; j++) {
                             if (node.id === res3.data[j]) {
                                 node.color = bannedColor;
-                                console.log(res.data[i].uniqueId);
                             }
                         }
                         graphnodes.push(node);

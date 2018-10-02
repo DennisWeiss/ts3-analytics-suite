@@ -50,7 +50,7 @@ export default class RelationsOverview extends React.Component {
 
         return(
             <Card >
-                <Table size={size} columns={this.state.columns} dataSource={this.props.relatedUsers} pagination={false} loading={this.props.loading} />
+                <Table size={size} columns={this.state.columns} dataSource={this.props.relatedUsers} loading={this.props.loading} />
             </Card>
         );
     }

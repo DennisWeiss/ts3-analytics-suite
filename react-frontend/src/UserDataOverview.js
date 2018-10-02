@@ -8,7 +8,7 @@ import Flag from 'react-world-flags';
 
 export default class UserDataOverview extends React.Component {
     render() {
-        let nickname = this.props.user.nickname == null || this.props.user.nickname === '' ? ' ' : this.props.user.nickname;
+        let nickname = this.props.user.nickName == null || this.props.user.nickName === '' ? ' ' : this.props.user.nickName;
 
         let xs = 8;
         let sm = 8;
@@ -24,7 +24,7 @@ export default class UserDataOverview extends React.Component {
                             Global ID:
                         </Col>
                         <Col xs={24 - xs} sm={24 - sm} md={24 - md} lg={24 - lg} xl={24 - xl}>
-                            {this.props.user.uniqueID}<br/>
+                            {this.props.user.uniqueId}<br/>
                         </Col>
                         <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl}>
                             IP:
@@ -67,7 +67,7 @@ export default class UserDataOverview extends React.Component {
                             Ass. Org/Provider:
                         </Col>
                         <Col xs={24 - xs} sm={24 - sm} md={24 - md} lg={24 - lg} xl={24 - xl}>
-                            {this.props.user.associatedOrg}<br/>
+                            {this.props.user.org}<br/>
                         </Col>
                     </Row>
                 </div>
