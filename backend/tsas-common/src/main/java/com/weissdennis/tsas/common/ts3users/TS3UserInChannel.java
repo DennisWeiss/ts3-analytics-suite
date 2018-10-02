@@ -18,4 +18,7 @@ public interface TS3UserInChannel {
     String getUniqueId();
 
     Instant getDateTime();
+
+    Integer getDataInterval();
+
 }

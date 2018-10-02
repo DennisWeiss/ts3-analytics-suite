@@ -2,16 +2,20 @@ package com.weissdennis.tsas.tsuds.persistence;
 
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
+@Table(name = "server_users")
 public class TS3ServerUsersEntity implements TS3ServerUsers {
 
     @Id
     private Instant dateTime;
 
+    @Column(nullable = false)
     private Long users;
 
     public TS3ServerUsersEntity() {

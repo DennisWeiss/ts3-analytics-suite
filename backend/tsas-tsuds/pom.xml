@@ -22,7 +22,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <installer.dir>${project.basedir}/target/installer</installer.dir>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
         <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
     </properties>
@@ -46,6 +45,7 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -85,19 +85,30 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.6.7</version>
+            <version>2.9.4</version>
         </dependency>
-		
-		<dependency>
+
+        <dependency>
             <groupId>com.weissdennis</groupId>
             <artifactId>tsas-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>com.weissdennis</groupId>
-            <artifactId>tsas-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
         </dependency>
     </dependencies>
 

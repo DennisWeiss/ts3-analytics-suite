@@ -1,6 +1,9 @@
 package com.weissdennis.tsas.common.ts3users;
 
 public class ClientIpInfo {
+
+    private static String COMMA_SEPARATION_PATTERN = "\\s*,\\s*";
+
     private String ip;
     private String hostname;
     private String city;
@@ -23,12 +26,12 @@ public class ClientIpInfo {
     }
 
     public double getLatitude() {
-        String[] latString = loc.split(".*,.*");
+        String[] latString = loc.split(COMMA_SEPARATION_PATTERN);
         return latString.length > 0 ? Double.parseDouble(latString[0]) : 0;
     }
 
     public double getLongitude() {
-        String[] lngString = loc.split(".*,.*");
+        String[] lngString = loc.split(COMMA_SEPARATION_PATTERN);
         return lngString.length > 1 ? Double.parseDouble(lngString[1]) : 0;
     }
 

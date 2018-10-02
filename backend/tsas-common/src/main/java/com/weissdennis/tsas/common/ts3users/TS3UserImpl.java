@@ -6,37 +6,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.time.Instant;
 
 public class TS3UserImpl implements TS3User {
 
     private String uniqueId;
-
     private Integer clientId;
-
     private String nickName;
-
     private String ip;
-
     private String hostName;
-
     private String city;
-
     private String region;
-
     private String country;
-
     private Double longitude;
-
     private Double latitude;
-
     private String postalCode;
-
     private String org;
+    private Instant lastOnline;
+    private boolean banned = false;
 
     public TS3UserImpl() {
     }
 
-    private TS3User withExtendedUserInfo(ClientIpInfo clientIpInfo) {
+    private TS3UserImpl withExtendedUserInfo(ClientIpInfo clientIpInfo) {
         TS3UserImpl ts3User = new TS3UserImpl();
         ts3User.setUniqueId(uniqueId);
         ts3User.setClientId(clientId);
@@ -53,7 +45,7 @@ public class TS3UserImpl implements TS3User {
         return ts3User;
     }
 
-    public TS3User withExtendedUserInfo() {
+    public TS3UserImpl withExtendedUserInfo() {
         if (ip != null && !ip.equals("")) {
             try {
                 return withExtendedUserInfo(new GsonBuilder().create().fromJson(new BufferedReader(new InputStreamReader(
@@ -172,6 +164,24 @@ public class TS3UserImpl implements TS3User {
 
     public void setOrg(String org) {
         this.org = org;
+    }
+
+    @Override
+    public Instant getLastOnline() {
+        return lastOnline;
+    }
+
+    public void setLastOnline(Instant lastOnline) {
+        this.lastOnline = lastOnline;
+    }
+
+    @Override
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
     }
 }
 
