@@ -2,6 +2,8 @@ package com.weissdennis.tsas.tsups.api;
 
 import com.weissdennis.tsas.common.ts3users.UserRelation;
 import com.weissdennis.tsas.tsups.service.UserRelationService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ public class UserRelationController {
     }
 
     @RequestMapping(value = "/relations", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets relation values of a specific user if a unique id is provided otherwise gets relation values of all users",
+            response = Iterable.class)
     public HttpEntity<Iterable<? extends UserRelation>> getRelations(@RequestParam(required = false) String user) {
         return new ResponseEntity<>(userRelationService.getRelations(user), HttpStatus.OK);
     }
