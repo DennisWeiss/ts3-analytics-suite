@@ -24,9 +24,9 @@ public class TS3ServerUsersDeserializer extends StdDeserializer<TS3ServerUsers> 
     @Override
     public TS3ServerUsers deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        Instant timestamp = Instant.parse(node.get("timestamp").asText());
+        Instant dateTime = Instant.ofEpochMilli(node.get("dateTime").asLong());
         long users = node.get("users").asInt();
 
-        return new TS3ServerUsersImpl(timestamp, users);
+        return new TS3ServerUsersImpl(dateTime, users);
     }
 }

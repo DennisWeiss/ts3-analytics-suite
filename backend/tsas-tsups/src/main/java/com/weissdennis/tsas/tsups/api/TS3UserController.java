@@ -39,6 +39,4 @@ public class TS3UserController {
                 .orElseThrow(UserNotFoundException::new);
     }
 
-
-
 }
