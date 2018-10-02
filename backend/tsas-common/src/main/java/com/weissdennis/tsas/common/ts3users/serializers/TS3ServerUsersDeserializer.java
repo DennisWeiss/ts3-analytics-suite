@@ -22,10 +22,10 @@ public class TS3ServerUsersDeserializer extends StdDeserializer<TS3ServerUsers> 
     }
 
     @Override
-    public TS3ServerUsers deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public TS3ServerUsers deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        Instant dateTime = Instant.ofEpochMilli(node.get("dateTime").asLong());
-        long users = node.get("users").asInt();
+        Instant dateTime = Instant.ofEpochMilli(node.get(0).asLong());
+        long users = node.get(1).asLong();
 
         return new TS3ServerUsersImpl(dateTime, users);
     }

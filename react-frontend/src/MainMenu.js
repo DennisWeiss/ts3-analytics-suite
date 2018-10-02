@@ -23,7 +23,7 @@ export default class MainMenu extends React.Component {
                     <Menu.Item key='heatmap'><Link to='/heatmap'><i className='fa fa-map' style={{'margin-right': '10px'}}/>Location Heatmap</Link></Menu.Item>
                 </Menu.SubMenu>
                 <Menu.SubMenu key='server' title={<span><Icon type='cloud-upload-o'/><span>Server Usage</span></span>}>
-                    <Menu.Item key='usage-statistics'><Icon type='line-chart'/>Statistics</Menu.Item>
+                    <Menu.Item key='usage-statistics'><Link to='/stats'><Icon type='line-chart'/>Statistics</Link></Menu.Item>
                 </Menu.SubMenu>
             </Menu>
         );

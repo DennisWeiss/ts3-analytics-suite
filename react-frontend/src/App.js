@@ -9,6 +9,7 @@ import UserData from './UserData'
 import LocationHeatmap from './LocationHeatmap'
 import {Route} from "react-router";
 import createHistory from 'history/createBrowserHistory'
+import Statistics from './Statistics'
 
 
 const history = createHistory()
@@ -103,6 +104,7 @@ export default class App extends React.Component {
                     <Route path='/user-data' exact render={() => <UserData pathname='/user-data' />}/>
                     <Route path='/heatmap' exact render={() => <div className='graph'><LocationHeatmap
                         points={this.state.points}/></div>}/>
+                    <Route path='/stats' exact render={() => <div><Statistics/></div>} />
                 </Layout.Content>
             </Layout>
         );

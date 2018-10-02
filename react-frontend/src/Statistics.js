@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card} from 'antd'
 import ReactHighcharts from 'react-highcharts'
-import Highcharts from 'highcharts'
+// import Highcharts from 'highcharts'
 import {convertToQueryString} from './helper/helper-functions'
 import moment from 'moment'
 
@@ -17,8 +17,8 @@ class Statistics extends React.Component {
 
     componentDidMount() {
         fetch('http://gr-esports.de:8092/api/ts3/server-users/series-data' + convertToQueryString({
-            from: '2017-12-01',
-            to: moment().format('YYYY-MM-DD')
+            from: '2017-12-01T00:00:00Z',
+            to: moment().format('YYYY-MM-DD') + 'T' + moment().format('HH:mm:ss') + 'Z'
         }))
             .then(res => res.json())
             .then(data => this.setState({usersSeriesData: data}))
@@ -53,10 +53,10 @@ class Statistics extends React.Component {
                             x2: 0,
                             y2: 1
                         },
-                        stops: [
-                            [0, Highcharts.getOptions().colors[0]],
-                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        ]
+                        // stops: [
+                        //     [0, Highcharts.getOptions().colors[0]],
+                        //     [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        // ]
                     },
                 },
                 marker: {
@@ -87,3 +87,5 @@ class Statistics extends React.Component {
 
     }
 }
+
+export default Statistics

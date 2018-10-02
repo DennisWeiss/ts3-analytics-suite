@@ -19,9 +19,9 @@ public class TS3ServerUsersSerializer extends StdSerializer<TS3ServerUsers> {
 
     @Override
     public void serialize(TS3ServerUsers ts3ServerUsers, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeStartObject();
-        jsonGenerator.writeNumberField("dateTime", ts3ServerUsers.getDateTime().toEpochMilli());
-        jsonGenerator.writeNumberField("users", ts3ServerUsers.getUsers());
-        jsonGenerator.writeEndObject();
+        jsonGenerator.writeStartArray();
+        jsonGenerator.writeNumber(ts3ServerUsers.getDateTime().toEpochMilli());
+        jsonGenerator.writeNumber(ts3ServerUsers.getUsers());
+        jsonGenerator.writeEndArray();
     }
 }
