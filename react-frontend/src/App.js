@@ -32,17 +32,15 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('http://gr-esports.de:8081/ts3/users').then(res => {
+        axios.get('http://gr-esports.de:8092/api/ts3/users').then(res => {
              let points = [];
              for (let i = 0; i < res.data.length; i++) {
                  points.push({
-                     lng: res.data[i].location.longitude,
-                     lat: res.data[i].location.latitude,
+                     lng: res.data[i].longitude,
+                     lat: res.data[i].latitude,
                      weight: 1
                  })
              }
-
-             console.log('points', points)
 
              this.setState({
                  points: this.spread(points)
