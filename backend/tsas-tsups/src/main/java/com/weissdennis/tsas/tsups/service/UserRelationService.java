@@ -28,7 +28,7 @@ public class UserRelationService {
         }
 
         return StreamSupport.stream(userRelationEntities.spliterator(), false)
-                        .filter(userRelationEntity -> userRelationEntity.getTotalRelation() >= minRelation)
+                        .filter(userRelationEntity -> userRelationEntity.getChannelRelation() >= minRelation)
                         .sorted((a, b) -> (int) Math.signum(b.getTotalRelation() - a.getTotalRelation()))
                         .collect(Collectors.toList());
     }
