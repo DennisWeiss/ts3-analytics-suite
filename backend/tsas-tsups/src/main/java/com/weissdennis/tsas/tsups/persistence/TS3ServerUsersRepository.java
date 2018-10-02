@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
 @Repository
 public interface TS3ServerUsersRepository extends CrudRepository<TS3ServerUsersEntity, Instant> {
 
-    Iterable<TS3ServerUsersEntity> findAllByDateTimeBeforeAndDateTimeAfter(LocalDateTime from, LocalDateTime to);
+    Iterable<TS3ServerUsersEntity> findAllByDateTimeBeforeAndDateTimeAfter(Instant from, Instant to);
 
 }

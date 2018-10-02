@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 @Service
 public class TS3ServerUsersService {
@@ -18,7 +20,8 @@ public class TS3ServerUsersService {
     }
 
     public Iterable<? extends TS3ServerUsers> getServerUsers(LocalDateTime from, LocalDateTime to) {
-        return ts3ServerUsersRepository.findAllByDateTimeBeforeAndDateTimeAfter(from, to);
+        return ts3ServerUsersRepository.findAllByDateTimeBeforeAndDateTimeAfter(from.toInstant(ZoneOffset.systemDefault()
+                .getRules().getOffset(from)), to.toInstant(ZoneOffset.systemDefault().getRules().getOffset(to)));
     }
 
 }
