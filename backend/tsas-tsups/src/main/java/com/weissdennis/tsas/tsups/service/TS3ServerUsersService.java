@@ -36,7 +36,7 @@ public class TS3ServerUsersService {
         for (TS3ServerUsers ts3ServerUsersData : ts3ServerUsers) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(Date.from(ts3ServerUsersData.getDateTime()));
-            calendar.set(Calendar.HOUR, 0);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
