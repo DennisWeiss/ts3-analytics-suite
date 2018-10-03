@@ -17,7 +17,7 @@ import {withHighcharts} from 'react-jsx-highcharts'
 import config from './configuration/config'
 
 
-const mapData = dataPoint => ([1000 * moment(dataPoint.date).unix() - new Date().getTimezoneOffset() * 60000, dataPoint.users])
+const mapData = dataPoint => ([1000 * moment(dataPoint.date).unix() - new Date(dataPoint.date).getTimezoneOffset() * 60000, dataPoint.users])
 
 const plotOptions = {
     tooltip: {
