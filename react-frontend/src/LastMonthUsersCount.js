@@ -29,6 +29,8 @@ class LastMonthUsersCount extends React.Component {
     }
 
     componentDidMount() {
+        // this.refs.chart.getChart().showLoading()
+
         fetch('http://gr-esports.de:8092/api/ts3/server-users/series-data' + convertToQueryString({
             from: moment().subtract(32, 'days').toISOString(),
             to: moment().toISOString()
@@ -38,10 +40,6 @@ class LastMonthUsersCount extends React.Component {
     }
 
     render() {
-
-        if (this.state.usersSeriesData == null || this.state.usersSeriesData.length === 0) {
-            return <div>Loading...</div>
-        }
 
         return (
             <HighchartsStockChart>

@@ -17,6 +17,14 @@ import {withHighcharts} from 'react-jsx-highcharts'
 import config from './configuration/config'
 
 
+const mapData = dataPoint => ([1000 * moment(dataPoint.date).unix() - new Date().getTimezoneOffset() * 60000, dataPoint.users])
+
+const plotOptions = {
+    tooltip: {
+        valueDecimals: 3
+    }
+}
+
 class AllTimeUsersCount extends React.Component {
 
     constructor(props) {
@@ -32,26 +40,25 @@ class AllTimeUsersCount extends React.Component {
             to: moment().format('YYYY-MM-DD')
         }))
             .then(res => res.json())
-            .then(data => this.setState({usersSeriesData: data}))
+            .then(data => this.setState({usersSeriesData: data.map(mapData)}))
     }
 
 
     render() {
         return (
-            <HighchartsStockChart>
+            <HighchartsStockChart plotOption={plotOptions}>
                 <Chart onClick={this.handleClick} zoomType="x"/>
 
                 <Title>Users online all time</Title>
 
                 <RangeSelector>
-                    <RangeSelector.Button count={1} type="day">1d</RangeSelector.Button>
                     <RangeSelector.Button count={7} type="day">7d</RangeSelector.Button>
                     <RangeSelector.Button count={1} type="month">1m</RangeSelector.Button>
                     <RangeSelector.Button count={6} type="month">6m</RangeSelector.Button>
                     <RangeSelector.Button count={1} type="year">1y</RangeSelector.Button>
                 </RangeSelector>
 
-                <Tooltip/>
+                <Tooltip />
 
                 <XAxis>
 
