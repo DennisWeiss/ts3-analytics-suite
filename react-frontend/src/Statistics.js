@@ -1,10 +1,26 @@
 import React from 'react'
 import {Card} from 'antd'
-import ReactHighcharts from 'react-highcharts'
-// import Highcharts from 'highcharts'
+import Highcharts from 'highcharts/highstock'
 import {convertToQueryString} from './helper/helper-functions'
 import moment from 'moment'
+import {
+    HighchartsStockChart,
+    Chart,
+    Title,
+    Legend,
+    RangeSelector,
+    Tooltip,
+    XAxis,
+    YAxis,
+    Navigator,
+    SplineSeries,
+    AreaSplineSeries
+} from 'react-jsx-highstock'
+import {withHighcharts} from 'react-jsx-highcharts'
 
+
+
+const addTimeZoneOffset = dataPoint => ([dataPoint[0] - new Date().getTimezoneOffset() * 60000, dataPoint[1]])
 
 class Statistics extends React.Component {
 
@@ -17,70 +33,54 @@ class Statistics extends React.Component {
 
     componentDidMount() {
         fetch('http://gr-esports.de:8092/api/ts3/server-users/series-data' + convertToQueryString({
-            from: '2017-12-01T00:00:00Z',
-            to: moment().format('YYYY-MM-DD') + 'T' + moment().format('HH:mm:ss') + 'Z'
+            from: moment().subtract(32, 'days').toISOString(),
+            to: moment().toISOString()
         }))
             .then(res => res.json())
-            .then(data => this.setState({usersSeriesData: data}))
+            .then(data => this.setState({usersSeriesData: data
+                    .sort((a, b) => a[0] - b[0])
+                    .map(addTimeZoneOffset)}))
     }
 
     render() {
 
-        const options = {
-            chart: {
-                zoomType: 'x'
-            },
-            title: {
-                text: 'Users connected count'
-            },
-            xAxis: {
-                type: 'datetime'
-            },
-            yAxis: {
-                title: {
-                    text: 'Users online'
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            plotOptions: {
-                area: {
-                    fillColor: {
-                        linearGradient: {
-                            x1: 0,
-                            y1: 0,
-                            x2: 0,
-                            y2: 1
-                        },
-                        // stops: [
-                        //     [0, Highcharts.getOptions().colors[0]],
-                        //     [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
-                        // ]
-                    },
-                },
-                marker: {
-                    radius: 2
-                },
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 1
-                    }
-                },
-                threshold: null
-            },
-            series: [{
-                type: 'area',
-                name: 'Users online',
-                data: this.state.usersSeriesData
-            }]
+        if (this.state.usersSeriesData == null || this.state.usersSeriesData.length === 0) {
+            return (
+                <div>
+                    <Card></Card>
+                </div>
+            )
         }
 
         return (
             <div>
                 <Card>
-                    <ReactHighcharts config={options}/>
+                    <HighchartsStockChart>
+                        <Chart onClick={this.handleClick} zoomType="x" />
+
+                        <Title>Users online last month</Title>
+
+                        <RangeSelector>
+                            <RangeSelector.Button count={1} type="day">1d</RangeSelector.Button>
+                            <RangeSelector.Button count={7} type="day">7d</RangeSelector.Button>
+                            <RangeSelector.Button count={1} type="month">1m</RangeSelector.Button>
+                        </RangeSelector>
+
+                        <Tooltip />
+
+                        <XAxis>
+
+                        </XAxis>
+
+                        <YAxis>
+                            <YAxis.Title>Users online</YAxis.Title>
+                            <AreaSplineSeries id="user-online" name="Users online" data={this.state.usersSeriesData} />
+                        </YAxis>
+
+                        <Navigator>
+                            <Navigator.Series seriesId="users-online" />
+                        </Navigator>
+                    </HighchartsStockChart>
                 </Card>
             </div>
         )
@@ -88,4 +88,4 @@ class Statistics extends React.Component {
     }
 }
 
-export default Statistics
+export default withHighcharts(Statistics, Highcharts)

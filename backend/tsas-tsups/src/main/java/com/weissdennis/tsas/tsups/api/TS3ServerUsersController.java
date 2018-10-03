@@ -8,10 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -27,10 +24,17 @@ public class TS3ServerUsersController {
         this.ts3ServerUsersService = ts3ServerUsersService;
     }
 
-    @RequestMapping("/series-data")
+    @RequestMapping(value = "/series-data", method = RequestMethod.GET)
     @ApiOperation(value = "Gets time series data of users count between given timestamps")
     public HttpEntity<Iterable<? extends TS3ServerUsers>> getServersUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
                                                                           @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         return new ResponseEntity<>(ts3ServerUsersService.getServerUsers(from, to), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/daily-data", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets max user count of all days between given dates")
+    public HttpEntity<Iterable<? extends TS3ServerUsers>> getDailyServerUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime from,
+                                                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime to) {
+        return new ResponseEntity<>(ts3ServerUsersService.getDailyServerUsers(from, to), HttpStatus.OK);
     }
 }
