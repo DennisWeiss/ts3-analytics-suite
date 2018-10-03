@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
@@ -33,8 +34,8 @@ public class TS3ServerUsersController {
 
     @RequestMapping(value = "/daily-data", method = RequestMethod.GET)
     @ApiOperation(value = "Gets max user count of all days between given dates")
-    public HttpEntity<Iterable<? extends TS3ServerUsers>> getDailyServerUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime from,
-                                                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime to) {
+    public HttpEntity<Iterable<? extends TS3ServerUsers>> getDailyServerUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                                                                              @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         return new ResponseEntity<>(ts3ServerUsersService.getDailyServerUsers(from, to), HttpStatus.OK);
     }
 }

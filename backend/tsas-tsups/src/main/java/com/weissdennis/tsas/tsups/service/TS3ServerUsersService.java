@@ -6,6 +6,7 @@ import com.weissdennis.tsas.tsups.persistence.TS3ServerUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
@@ -25,8 +26,8 @@ public class TS3ServerUsersService {
                 .getRules().getOffset(from)), to.toInstant(ZoneOffset.systemDefault().getRules().getOffset(to)));
     }
 
-    public Iterable<? extends TS3ServerUsers> getDailyServerUsers(LocalDateTime from, LocalDateTime to) {
-        return getDailyData(getServerUsers(from, to));
+    public Iterable<? extends TS3ServerUsers> getDailyServerUsers(LocalDate from, LocalDate to) {
+        return getDailyData(getServerUsers(from.atStartOfDay(), to.atStartOfDay()));
     }
 
     private Iterable<? extends TS3ServerUsers> getDailyData(Iterable<? extends TS3ServerUsers> ts3ServerUsers) {
