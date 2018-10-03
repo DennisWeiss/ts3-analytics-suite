@@ -2,6 +2,7 @@ package com.weissdennis.tsas.tsups.service;
 
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsersImpl;
+import com.weissdennis.tsas.tsups.model.DailyTS3ServerUsers;
 import com.weissdennis.tsas.tsups.persistence.TS3ServerUsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,11 @@ public class TS3ServerUsersService {
                 .getRules().getOffset(from)), to.toInstant(ZoneOffset.systemDefault().getRules().getOffset(to)));
     }
 
-    public Iterable<? extends TS3ServerUsers> getDailyServerUsers(LocalDate from, LocalDate to) {
+    public Iterable<DailyTS3ServerUsers> getDailyServerUsers(LocalDate from, LocalDate to) {
         return getDailyData(getServerUsers(from.atStartOfDay(), to.atStartOfDay()));
     }
 
-    private Iterable<? extends TS3ServerUsers> getDailyData(Iterable<? extends TS3ServerUsers> ts3ServerUsers) {
+    private Iterable<DailyTS3ServerUsers> getDailyData(Iterable<? extends TS3ServerUsers> ts3ServerUsers) {
         Map<Date, Long> dateToUserCount = new TreeMap<>();
 
         for (TS3ServerUsers ts3ServerUsersData : ts3ServerUsers) {
@@ -47,9 +48,9 @@ public class TS3ServerUsersService {
             }
         }
 
-        List<TS3ServerUsersImpl> dailyData = new ArrayList<>();
+        List<DailyTS3ServerUsers> dailyData = new ArrayList<>();
 
-        dateToUserCount.forEach((k, v) -> dailyData.add(new TS3ServerUsersImpl(k.toInstant(), v)));
+        dateToUserCount.forEach((k, v) -> dailyData.add(new DailyTS3ServerUsers(k, v)));
 
         return dailyData;
     }
