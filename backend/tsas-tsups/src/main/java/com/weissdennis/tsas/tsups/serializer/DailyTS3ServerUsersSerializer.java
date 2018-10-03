@@ -7,8 +7,12 @@ import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 import com.weissdennis.tsas.tsups.model.DailyTS3ServerUsers;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class DailyTS3ServerUsersSerializer extends StdSerializer<DailyTS3ServerUsers> {
+
+    private static String DATE_PATTERN = "YYYY-MM-DD";
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
 
     public DailyTS3ServerUsersSerializer() {
         this(null);
@@ -21,7 +25,7 @@ public class DailyTS3ServerUsersSerializer extends StdSerializer<DailyTS3ServerU
     @Override
     public void serialize(DailyTS3ServerUsers dailyTS3ServerUsers, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("date", dailyTS3ServerUsers.getDate().toString());
+        jsonGenerator.writeStringField("date", simpleDateFormat.format(dailyTS3ServerUsers.getDate()));
         jsonGenerator.writeNumberField("users", dailyTS3ServerUsers.getUsers());
         jsonGenerator.writeEndObject();
     }
