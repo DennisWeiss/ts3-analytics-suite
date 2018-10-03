@@ -7,13 +7,11 @@ import {
     HighchartsStockChart,
     Chart,
     Title,
-    Legend,
     RangeSelector,
     Tooltip,
     XAxis,
     YAxis,
     Navigator,
-    SplineSeries,
     AreaSplineSeries
 } from 'react-jsx-highstock'
 import {withHighcharts} from 'react-jsx-highcharts'
