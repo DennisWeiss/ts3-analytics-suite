@@ -3,7 +3,6 @@ package com.weissdennis.tsas.tsups.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
 import com.weissdennis.tsas.tsups.model.DailyTS3ServerUsers;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.text.SimpleDateFormat;
 
 public class DailyTS3ServerUsersSerializer extends StdSerializer<DailyTS3ServerUsers> {
 
-    private static String DATE_PATTERN = "YYYY-MM-DD";
+    private static String DATE_PATTERN = "yyyy-MM-dd";
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
 
     public DailyTS3ServerUsersSerializer() {
