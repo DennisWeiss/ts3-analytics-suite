@@ -28,8 +28,8 @@ public class TS3ServerUsersController {
 
     @RequestMapping(value = "/series-data", method = RequestMethod.GET)
     @ApiOperation(value = "Gets time series data of users count between given timestamps")
-    public HttpEntity<Iterable<? extends TS3ServerUsers>> getServersUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
-                                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+    public HttpEntity<Iterable<? extends TS3ServerUsers>> getServersUsers(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX") LocalDateTime from,
+                                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX") LocalDateTime to) {
         return new ResponseEntity<>(ts3ServerUsersService.getServerUsers(from, to), HttpStatus.OK);
     }
 
