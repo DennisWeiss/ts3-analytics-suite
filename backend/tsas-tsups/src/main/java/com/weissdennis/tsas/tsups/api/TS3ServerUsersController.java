@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @RestController
 @RequestMapping("/api/ts3/server-users")
@@ -28,9 +30,14 @@ public class TS3ServerUsersController {
 
     @RequestMapping(value = "/series-data", method = RequestMethod.GET)
     @ApiOperation(value = "Gets time series data of users count between given timestamps")
-    public HttpEntity<Iterable<? extends TS3ServerUsers>> getServersUsers(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX") LocalDateTime from,
-                                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX") LocalDateTime to) {
-        return new ResponseEntity<>(ts3ServerUsersService.getServerUsers(from, to), HttpStatus.OK);
+    public HttpEntity<Iterable<? extends TS3ServerUsers>> getServersUsers(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime from,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime to
+    ) {
+        return new ResponseEntity<>(ts3ServerUsersService.getServerUsers(
+                from.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime(),
+                to.withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime()
+        ), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/daily-data", method = RequestMethod.GET)
