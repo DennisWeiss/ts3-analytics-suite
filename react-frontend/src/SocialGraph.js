@@ -64,9 +64,9 @@ export default class SocialGraph extends React.Component {
 
     componentWillMount() {
         let graphnodes = this.state.graph.nodes.slice();
-        axios.get('http://gr-esports.de:8092/api/ts3/users').then(res => {
-            axios.get('http://gr-esports.de:8090/api/ts3/currentusers').then(res2 => {
-                axios.get('http://gr-esports.de:8090/api/ts3/bans').then(res3 => {
+        axios.get('http://193.31.26.152:8092/api/ts3/users').then(res => {
+            axios.get('http://193.31.26.152:8090/api/ts3/currentusers').then(res2 => {
+                axios.get('http://193.31.26.152:8090/api/ts3/bans').then(res3 => {
                     for (let i = 0; i < res.data.length; i++) {
                         let node = {id: res.data[i].uniqueId, label: res.data[i].nickName};
                         for (let j = 0; j < res2.data.length; j++) {
@@ -91,7 +91,7 @@ export default class SocialGraph extends React.Component {
                         graphnodes.push(node);
                     }
 
-                    axios.get('http://gr-esports.de:8092/api/ts3/relations').then(res4 => {
+                    axios.get('http://193.31.26.152:8092/api/ts3/relations').then(res4 => {
                         let edges = this.state.graph.edges.slice();
                         for (let i = 0; i < res4.data.length; i++) {
                             if (res4.data[i].channelRelation >= 0.03 || res4.data[i].totalRelation >= 0.3) {

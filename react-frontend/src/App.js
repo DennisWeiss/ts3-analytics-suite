@@ -33,7 +33,7 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('http://gr-esports.de:8092/api/ts3/users').then(res => {
+        axios.get('http://193.31.26.152:8092/api/ts3/users').then(res => {
              this.setState({
                  points: this.spread(res.data
                      .filter(user => user.latitude != null && user.longitude != null)

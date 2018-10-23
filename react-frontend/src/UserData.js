@@ -23,7 +23,7 @@ const cardSizes = {
 const reactUrlStateOptions = {
     fromIdResolvers: {
         user: id => new Promise((resolve, reject) => {
-            fetch('http://gr-esports.de:8092/api/ts3/users')
+            fetch('http://193.31.26.152:8092/api/ts3/users')
                 .then(res => res.json())
                 .then(data => {
                     const user = data.find(user => user.uniqueId === id);
@@ -53,7 +53,7 @@ export default class UserData extends React.Component {
     componentDidMount() {
         this.reactUrlState = initializeReactUrlState(this)(reactUrlStateOptions);
 
-        fetch('http://gr-esports.de:8092/api/ts3/users')
+        fetch('http://193.31.26.152:8092/api/ts3/users')
             .then(res => res.json())
             .then(data => {
                 this.setState({
@@ -73,13 +73,13 @@ export default class UserData extends React.Component {
     setRelations(user) {
         if (user != null && user.uniqueId != null) {
             this.setState({loading: true});
-            fetch('http://gr-esports.de:8092/api/ts3/relations' + convertToQueryString({
+            fetch('http://193.31.26.152:8092/api/ts3/relations' + convertToQueryString({
                 user: user.uniqueId,
                 minRelation: 0.01
             }))
                 .then(res => res.json())
                 .then(data => {
-                fetch('http://gr-esports.de:8092/api/ts3/users')
+                fetch('http://193.31.26.152:8092/api/ts3/users')
                     .then(res => res.json())
                     .then(data2 => {
                         let relatedUsers = this.state.relatedUsers.splice();
