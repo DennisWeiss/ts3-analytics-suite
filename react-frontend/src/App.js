@@ -100,11 +100,11 @@ export default class App extends React.Component {
                     <MainMenu handleChange={this.handleMenuClick.bind(this)} selected={this.state.current}/>
                 </Layout.Sider>
                 <Layout.Content className='content' >
-                    <Route path='/tsas' exact render={() => <div className='graph'><SocialGraph /></div>}/>
-                    <Route path='/tsas/user-data' exact render={() => <UserData pathname='/user-data' />}/>
-                    <Route path='/tsas/heatmap' exact render={() => <div className='graph'><LocationHeatmap
+                    <Route path='/' exact render={() => <div className='graph'><SocialGraph /></div>}/>
+                    <Route path='/user-data' exact render={() => <UserData pathname='/user-data' />}/>
+                    <Route path='/heatmap' exact render={() => <div className='graph'><LocationHeatmap
                         points={this.state.points}/></div>}/>
-                    <Route path='/tsas/stats' exact render={() => <div><Statistics/></div>} />
+                    <Route path='/stats' exact render={() => <div><Statistics/></div>} />
                 </Layout.Content>
             </Layout>
         );
