@@ -11,3 +11,9 @@ spring:
 
 server:
   port: 8092
+
+  ssl:
+    key-store-type: PKCS12
+    key-store: keystore.p12
+    key-store-password: Meycrosoft1337
+    key-alias: tomcat
