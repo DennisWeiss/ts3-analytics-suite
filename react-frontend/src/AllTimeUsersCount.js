@@ -35,7 +35,7 @@ class AllTimeUsersCount extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://gr-esports.de:8092/api/ts3/server-users/daily-data' + convertToQueryString({
+        fetch('https://gr-esports.de:8092/api/ts3/server-users/daily-data' + convertToQueryString({
             from: config.startDate,
             to: moment().format('YYYY-MM-DD')
         }))
