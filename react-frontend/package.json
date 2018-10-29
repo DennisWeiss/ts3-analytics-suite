@@ -2,6 +2,7 @@
   "name": "ts3_social_ai",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gr-esports.de/tsas",
   "dependencies": {
     "antd": "^3.9.3",
     "axios": "^0.17.1",
