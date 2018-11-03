@@ -93,7 +93,6 @@ export default class App extends React.Component {
 
 
     render() {
-        console.log('current', this.state.current)
         return(
             <Layout>
                 <Layout.Sider breakpoint='md' width={210} style={{background: '#ffffff', padding: 0}}>

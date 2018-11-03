@@ -18,12 +18,27 @@ export default class MainMenu extends React.Component {
                 onClick={this.props.handleChange}
                 defaultOpenKeys={['users', 'server']}>
                 <Menu.SubMenu key='users' title={<span><Icon type='user' /><span>Users</span></span>}>
-                    <Menu.Item key='relations'><Link to='/tsas/'><i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Relations</Link></Menu.Item>
-                    <Menu.Item key='data'><Link to='/tsas/user-data'><Icon type='table'/>Data</Link></Menu.Item>
-                    <Menu.Item key='heatmap'><Link to='/tsas/heatmap'><i className='fa fa-map' style={{'margin-right': '10px'}}/>Location Heatmap</Link></Menu.Item>
+                    <Menu.Item key='relations'>
+                        <Link to='/'>
+                            <i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Relations
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key='data'>
+                        <Link to='/user-data'>
+                            <Icon type='table'/>Data</Link>
+                    </Menu.Item>
+                    <Menu.Item key='heatmap'>
+                        <Link to='/heatmap'>
+                            <i className='fa fa-map' style={{'margin-right': '10px'}}/>Location Heatmap
+                        </Link>
+                    </Menu.Item>
                 </Menu.SubMenu>
                 <Menu.SubMenu key='server' title={<span><Icon type='cloud-upload-o'/><span>Server Usage</span></span>}>
-                    <Menu.Item key='usage-statistics'><Link to='/tsas/stats'><Icon type='line-chart'/>Statistics</Link></Menu.Item>
+                    <Menu.Item key='usage-statistics'>
+                        <Link to='/stats'>
+                            <Icon type='line-chart'/>Statistics
+                        </Link>
+                    </Menu.Item>
                 </Menu.SubMenu>
             </Menu>
         );

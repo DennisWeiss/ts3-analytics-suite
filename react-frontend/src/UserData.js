@@ -35,7 +35,7 @@ const reactUrlStateOptions = {
     toIdMappers: {
         user: user => user.uniqueId
     },
-    pathname: '/user-data'
+    pathname: '/tsas/user-data'
 };
 
 export default class UserData extends React.Component {

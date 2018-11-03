@@ -1,5 +1,5 @@
 ts3api:
-  queryName: TS3 Analytics Suite
+  queryName: TS3 Analytics Suite - New
   loginMessage: TS3 Analytics Suite connected
   serverIp: localhost
   serverQueryAdminName: serveradmin
