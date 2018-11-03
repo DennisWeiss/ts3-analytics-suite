@@ -4,7 +4,7 @@ ts3api:
   serverIp: localhost
   serverQueryAdminName: serveradmin
   serverQueryAdminPassword: Meycrosoft1337
-  serverId: 3
+  serverId: 2
   afkChannels: 92,93
   locationInfoUpdateInterval: 3
   userInChannelInterval: 60
