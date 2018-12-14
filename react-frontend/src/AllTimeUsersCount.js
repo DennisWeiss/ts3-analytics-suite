@@ -1,6 +1,5 @@
 import React from 'react'
 import Highcharts from 'highcharts/highstock'
-import {convertToQueryString} from './helper/helper-functions'
 import moment from 'moment'
 import {
     HighchartsStockChart,
