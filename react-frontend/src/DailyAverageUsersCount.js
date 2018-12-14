@@ -1,21 +1,16 @@
 import React from 'react'
 import ReactHighcharts from 'react-highcharts'
 import moment from "moment";
-import {convertToQueryString} from "./helper/helper-functions";
-import config from "./configuration/config";
 
 const getOptions = data => ({
     title: {
         text: 'Daily Average user count'
     },
-    chart: {
-        zoomType: 'x'
-    },
     xAxis: {
         labels: {
             formatter: function() {
-                const timestamp = moment(this.value);
-                return `${timestamp.format('MMM')} '${timestamp.format('YY')}`
+                const timestamp = moment.utc(60 * 1000 * this.value);
+                return `${timestamp.format('HH')}:${timestamp.format('mm')}`
             }
         }
     },
@@ -24,8 +19,15 @@ const getOptions = data => ({
             text: 'User count'
         }
     },
+    tooltip: {
+        formatter: function(tooltip) {
+            const timestamp = moment.utc(60 * 1000 * this.x);
+            return `<span style="font-size: 10px">${timestamp.format('HH')}:${timestamp.format('mm')}</span>
+                    <br/>${this.series.name}: <b>${this.y}</b>`
+        }
+    },
     series: [{
-        name: 'Daily average',
+        name: 'Daily average users',
         data: data.map(dataPoint => dataPoint.users)
     }]
 })
