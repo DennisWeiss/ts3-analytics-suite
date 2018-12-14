@@ -65,7 +65,7 @@ class LastMonthUsersCount extends React.Component {
                 </YAxis>
 
                 <Navigator>
-                    <Navigator.Series seriesId="users-online"/>
+                    <Navigator.Series seriesId="users-online" />
                 </Navigator>
             </HighchartsStockChart>
         )

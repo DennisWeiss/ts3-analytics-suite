@@ -14,10 +14,7 @@ import {
     AreaSplineSeries
 } from 'react-jsx-highstock'
 import {withHighcharts} from 'react-jsx-highcharts'
-import config from './configuration/config'
 
-
-const mapData = dataPoint => ([1000 * moment(dataPoint.date).unix() - new Date(dataPoint.date).getTimezoneOffset() * 60000, dataPoint.users])
 
 const plotOptions = {
     tooltip: {
@@ -25,24 +22,9 @@ const plotOptions = {
     }
 }
 
+const mapData = dataPoint => ([1000 * moment(dataPoint.date).unix() - new Date(dataPoint.date).getTimezoneOffset() * 60000, dataPoint.users])
+
 class AllTimeUsersCount extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            usersSeriesData: []
-        }
-    }
-
-    componentDidMount() {
-        fetch('https://gr-esports.de:8092/api/ts3/server-users/daily-data' + convertToQueryString({
-            from: config.startDate,
-            to: moment().format('YYYY-MM-DD')
-        }))
-            .then(res => res.json())
-            .then(data => this.setState({usersSeriesData: data.map(mapData)}))
-    }
-
 
     render() {
         return (
@@ -66,7 +48,7 @@ class AllTimeUsersCount extends React.Component {
 
                 <YAxis>
                     <YAxis.Title>Users online</YAxis.Title>
-                    <AreaSplineSeries id="user-online" name="Users online" data={this.state.usersSeriesData}/>
+                    <AreaSplineSeries id="user-online" name="Users online" data={this.props.data.map(mapData)}/>
                 </YAxis>
 
                 <Navigator>
