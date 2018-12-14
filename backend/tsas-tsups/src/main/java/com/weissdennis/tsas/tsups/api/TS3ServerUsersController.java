@@ -1,6 +1,7 @@
 package com.weissdennis.tsas.tsups.api;
 
 import com.weissdennis.tsas.common.ts3users.TS3ServerUsers;
+import com.weissdennis.tsas.tsups.model.DailyAverageUsers;
 import com.weissdennis.tsas.tsups.model.DailyTS3ServerUsers;
 import com.weissdennis.tsas.tsups.service.TS3ServerUsersService;
 import io.swagger.annotations.ApiOperation;
@@ -45,5 +46,11 @@ public class TS3ServerUsersController {
     public HttpEntity<Iterable<DailyTS3ServerUsers>> getDailyServerUsers(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
                                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
         return new ResponseEntity<>(ts3ServerUsersService.getDailyServerUsers(from, to), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/daily-average-data", method = RequestMethod.GET)
+    @ApiOperation(value = "Gets daily average user count per minute")
+    public HttpEntity<Iterable<DailyAverageUsers>> getDailyAverageUsers() {
+        return new ResponseEntity<>(ts3ServerUsersService.getDailyAverageUsers());
     }
 }
