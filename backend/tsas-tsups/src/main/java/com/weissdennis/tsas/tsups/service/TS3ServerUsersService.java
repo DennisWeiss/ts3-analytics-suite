@@ -62,8 +62,8 @@ public class TS3ServerUsersService {
     }
 
     private static int getMinutesOfDay(Instant timestamp) {
-        return (int) (timestamp.truncatedTo(ChronoUnit.MINUTES).getEpochSecond() -
-                timestamp.truncatedTo(ChronoUnit.DAYS).getEpochSecond());
+        return (int) ((timestamp.truncatedTo(ChronoUnit.MINUTES).getEpochSecond() -
+                timestamp.truncatedTo(ChronoUnit.DAYS).getEpochSecond()) / 60);
     }
 
     private static LinkedHashMap<Integer, DailyUsersCounter> initializedDailyUsersCounterMap() {
@@ -80,6 +80,7 @@ public class TS3ServerUsersService {
 
         for (TS3ServerUsers ts3ServerUsers : ts3ServerUsersRepository.findAll()) {
             int minutesOfDay = getMinutesOfDay(ts3ServerUsers.getDateTime());
+            System.out.println(String.valueOf(minutesOfDay));
             DailyUsersCounter dailyUsersCounter = dailyUsersCounterMap.get(minutesOfDay);
             dailyUsersCounter.addUsers(ts3ServerUsers.getUsers());
             dailyUsersCounterMap.put(minutesOfDay, dailyUsersCounter);

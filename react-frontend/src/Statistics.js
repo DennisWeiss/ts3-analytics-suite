@@ -12,18 +12,32 @@ import moment from "moment";
 class Statistics extends React.Component {
 
     state = {
-        loading: [...Array(3)].map(_ => false),
+        loading0: false,
+        loading1: false,
+        loading2: false,
         usersSeriesData: []
     }
 
-    setLoading = i => value => this.setState((prevState, props) => {
-        prevState.loading[i] = value
-        return prevState
-    })
+    setLoading0(value) {
+        this.setState((prevState, props) => ({
+            loading0: value
+        }))
+    }
+
+    setLoading1(value) {
+        this.setState((prevState, props) => ({
+            loading1: value
+        }))
+    }
+
+    setLoading2(value) {
+        this.setState((prevState, props) => ({
+            loading2: value
+        }))
+    }
 
     componentDidMount() {
-        this.setLoading(1)(true)
-        this.setLoading(2)(true)
+        this.setLoading1(true)
         fetch('https://gr-esports.de:8092/api/ts3/server-users/daily-data' + convertToQueryString({
             from: config.startDate,
             to: moment().format('YYYY-MM-DD')
@@ -31,22 +45,21 @@ class Statistics extends React.Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({usersSeriesData: data})
-                this.setLoading(1)(false)
-                this.setLoading(2)(false)
+                this.setLoading1(false)
             })
     }
 
     render() {
         return (
             <div className='stats'>
-                <Card className='stats-card' loading={this.state.loading[0]}>
-                    <LastMonthUsersCount setLoading={this.setLoading(0)}/>
+                <Card className='stats-card' >
+                    <LastMonthUsersCount setLoading={this.setLoading0.bind(this)}/>
                 </Card>
-                <Card className='stats-card' loading={this.state.loading[1]}>
+                <Card className='stats-card' loading={this.state.loading1}>
                     <AllTimeUsersCount data={this.state.usersSeriesData}/>
                 </Card>
-                <Card className='stats-card' loading={this.state.loading[2]}>
-                    <DailyAverageUsersCount data={this.state.usersSeriesData}/>
+                <Card className='stats-card' >
+                    <DailyAverageUsersCount setLoading={this.setLoading2.bind(this)}/>
                 </Card>
             </div>
         )

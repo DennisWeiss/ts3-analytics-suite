@@ -36,7 +36,9 @@ class LastMonthUsersCount extends React.Component {
             to: moment().toISOString()
         }))
             .then(res => res.json())
-            .then(data => this.setState({usersSeriesData: data.map(addTimeZoneOffset)}))
+            .then(data => {
+                this.setState({usersSeriesData: data.map(addTimeZoneOffset)})
+            })
     }
 
     render() {
