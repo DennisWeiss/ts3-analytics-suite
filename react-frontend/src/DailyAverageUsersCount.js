@@ -28,12 +28,12 @@ const getOptions = usersSeriesData => ({
     }]
 })
 
-const getDailyAverageData = usersSeriesData => {
-    const dailyAverage = {}
-    for (let i = 0; i < usersSeriesData.length; i++) {
-        if (dailyAverage[usersSeriesData[i].])
-    }
-}
+// const getDailyAverageData = usersSeriesData => {
+//     const dailyAverage = {}
+//     for (let i = 0; i < usersSeriesData.length; i++) {
+//         if (dailyAverage[usersSeriesData[i].])
+//     }
+// }
 
 class DailyAverageUsersCount extends React.Component {
 
