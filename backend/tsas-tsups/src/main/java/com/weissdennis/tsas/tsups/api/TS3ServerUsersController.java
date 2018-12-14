@@ -51,6 +51,6 @@ public class TS3ServerUsersController {
     @RequestMapping(value = "/daily-average-data", method = RequestMethod.GET)
     @ApiOperation(value = "Gets daily average user count per minute")
     public HttpEntity<Iterable<DailyAverageUsers>> getDailyAverageUsers() {
-        return new ResponseEntity<>(ts3ServerUsersService.getDailyAverageUsers());
+        return new ResponseEntity<>(ts3ServerUsersService.getDailyAverageUsers(), HttpStatus.OK);
     }
 }
