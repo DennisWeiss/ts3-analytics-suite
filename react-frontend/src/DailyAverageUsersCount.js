@@ -41,10 +41,7 @@ class DailyAverageUsersCount extends React.Component {
     componentDidMount() {
         fetch('https://gr-esports.de:8092/api/ts3/server-users/daily-average-data')
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                this.setState({data})
-            })
+            .then(data => this.setState({data}))
     }
 
     render() {

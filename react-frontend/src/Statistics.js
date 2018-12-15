@@ -7,6 +7,7 @@ import DailyAverageUsersCount from "./DailyAverageUsersCount";
 import {convertToQueryString} from "./helper/helper-functions";
 import config from "./configuration/config";
 import moment from "moment";
+import UserOriginMapChart from "./UserOriginMapChart";
 
 
 class Statistics extends React.Component {
@@ -15,6 +16,7 @@ class Statistics extends React.Component {
         loading0: false,
         loading1: false,
         loading2: false,
+        loading3: false,
         usersSeriesData: []
     }
 
@@ -33,6 +35,12 @@ class Statistics extends React.Component {
     setLoading2(value) {
         this.setState((prevState, props) => ({
             loading2: value
+        }))
+    }
+
+    setLoading3(value) {
+        this.setState((prevState, props) => ({
+            loading3: value
         }))
     }
 
@@ -60,6 +68,9 @@ class Statistics extends React.Component {
                 </Card>
                 <Card className='stats-card' >
                     <DailyAverageUsersCount setLoading={this.setLoading2.bind(this)}/>
+                </Card>
+                <Card className='stats-card' >
+                    <UserOriginMapChart setLoading={this.setLoading3.bind(this)}/>
                 </Card>
             </div>
         )
