@@ -7,11 +7,11 @@ import './SocialGraph.css';
 
 const bannedColor = '#ff4444';
 const colors = ['#00cc00', '#66ffff', '#009933', '#cc00ff', '#ffff00', '#ff3399', '#ffffcc', '#ffffff'];
-var channelToColor = {};
-var channelIndex = 0;
+const channelToColor = {};
+let channelIndex = 0;
 
 
-var options = {
+const options = {
     autoResize: true,
     layout: {
         hierarchical: false

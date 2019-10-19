@@ -23,6 +23,11 @@ export default class MainMenu extends React.Component {
                             <i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Relations
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key='spectral-clustering'>
+                        <Link to='/spectral-clustering'>
+                            <i className='fa fa-share-alt' style={{'margin-right': '10px'}}/>Spectral Clustering
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key='data'>
                         <Link to='/user-data'>
                             <Icon type='table'/>Data</Link>

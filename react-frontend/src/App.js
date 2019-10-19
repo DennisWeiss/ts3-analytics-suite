@@ -10,6 +10,7 @@ import LocationHeatmap from './LocationHeatmap'
 import {Route} from "react-router";
 import createHistory from 'history/createBrowserHistory'
 import Statistics from './Statistics'
+import SpectralClustering from './SpectralClustering'
 
 
 const history = createHistory()
@@ -100,6 +101,7 @@ export default class App extends React.Component {
                 </Layout.Sider>
                 <Layout.Content className='content' >
                     <Route path='/' exact render={() => <div className='graph'><SocialGraph /></div>}/>
+                    <Route path='/spectral-clustering' exact render={() => <div className='graph'><SpectralClustering/></div>}/>
                     <Route path='/user-data' exact render={() => <UserData pathname='/user-data' />}/>
                     <Route path='/heatmap' exact render={() => <div className='graph'><LocationHeatmap
                         points={this.state.points}/></div>}/>
