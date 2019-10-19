@@ -1,5 +1,7 @@
 language: java
 sudo: false
+cache:
+  npm: false
 install:
 - cd react-frontend
 - rm -rf node_modules
