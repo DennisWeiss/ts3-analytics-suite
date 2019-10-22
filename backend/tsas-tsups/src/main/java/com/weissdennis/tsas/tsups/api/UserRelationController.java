@@ -2,7 +2,6 @@ package com.weissdennis.tsas.tsups.api;
 
 import com.weissdennis.tsas.common.ts3users.UserRelation;
 import com.weissdennis.tsas.tsups.service.UserRelationService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
