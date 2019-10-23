@@ -29,7 +29,7 @@ public class SpectralClusteringService {
         this.userRelationService = userRelationService;
     }
 
-    public TS3UserGraphLaplacianEigenDecomposition spectralClustering(Double minRelation) {
+    public TS3UserGraphLaplacianEigenDecomposition getEigenDecomposition(Double minRelation) {
         Pair<SimpleMatrix, List<String>> graphLaplacianResult = getGraphLaplacian(minRelation);
         SimpleMatrix graphLaplacian = graphLaplacianResult.getFirst();
 
@@ -54,7 +54,28 @@ public class SpectralClusteringService {
         return laplacianEigenDecomposition;
     }
 
-    public Pair<SimpleMatrix, List<String>> getGraphLaplacian(Double minRelation) {
+    public List<Complex64F> getEigenValues(Double minRelation) {
+        Pair<SimpleMatrix, List<String>> graphLaplacianResult = getGraphLaplacian(minRelation);
+        SimpleMatrix graphLaplacian = graphLaplacianResult.getFirst();
+
+        EigenDecomposition<DenseMatrix64F> eigenValueDecomposition = DecompositionFactory.eig(
+                graphLaplacian.getMatrix().getNumRows(), true
+        );
+        eigenValueDecomposition.decompose(graphLaplacian.getMatrix());
+
+        TS3UserGraphLaplacianEigenDecomposition laplacianEigenDecomposition =
+                new TS3UserGraphLaplacianEigenDecomposition();
+
+        List<Complex64F> eigenValues = new ArrayList<>();
+
+        for (int i = 0; i < eigenValueDecomposition.getNumberOfEigenvalues(); i++) {
+            eigenValues.add(eigenValueDecomposition.getEigenvalue(i));
+        }
+
+        return eigenValues;
+    }
+
+    private Pair<SimpleMatrix, List<String>> getGraphLaplacian(Double minRelation) {
         List<? extends UserRelation> relations = StreamSupport
                 .stream(userRelationService.getRelations(null, minRelation).spliterator(), false)
                 .collect(Collectors.toList());
@@ -62,12 +83,65 @@ public class SpectralClusteringService {
         List<String> usersWithRelations = filterUsersWithRelations(relations);
 
         Pair<SimpleMatrix, List<String>> adjacencyMatrixResult = adjacencyMatrix(usersWithRelations, relations);
+//        adjacencyMatrixResult = adjacencyMatrixOfUsersConnectedWith(adjacencyMatrixResult, "U5lc4kJ/JZQW908kxsJ+B64VSp4=");
         SimpleMatrix adjacencyMatrix = adjacencyMatrixResult.getFirst();
 
         SimpleMatrix graphLaplacian = degreeMatrix(adjacencyMatrix).minus(adjacencyMatrix);
         List<String> users = adjacencyMatrixResult.getSecond();
 
         return Pair.of(graphLaplacian, users);
+    }
+
+    private Pair<SimpleMatrix, List<String>> adjacencyMatrixOfUsersConnectedWith(
+            Pair<SimpleMatrix, List<String>> adjacencyMatrixResult, String userId
+    ) {
+        DenseMatrix64F adjacencyMatrix = adjacencyMatrixResult.getFirst().getMatrix();
+        List<String> users = adjacencyMatrixResult.getSecond();
+
+        Map<String, Integer> userToIndex = userToIndex(users);
+
+        Set<String> connectedUsers = new HashSet<>();
+        int userIdIndex = -1;
+
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).equals(userId)) {
+                userIdIndex = i;
+                break;
+            }
+        }
+
+        if (userIdIndex == -1) {
+            return null;
+        }
+
+        connectedUsers = connectedUserWithUser(connectedUsers, users, adjacencyMatrix, userIdIndex);
+
+        List<String> connectedUsersList = new ArrayList<>(connectedUsers);
+
+        SimpleMatrix adjacencyMatrixOfConnectedUsers = new SimpleMatrix(connectedUsersList.size(), connectedUsersList.size());
+
+        for (int i = 0; i < adjacencyMatrixOfConnectedUsers.getMatrix().getNumRows(); i++) {
+            for (int j = 0; j < adjacencyMatrixOfConnectedUsers.getMatrix().getNumCols(); j++) {
+                adjacencyMatrixOfConnectedUsers.set(i, j, adjacencyMatrix.get(
+                        userToIndex.get(connectedUsersList.get(i)), userToIndex.get(connectedUsersList.get(j))
+                ));
+            }
+        }
+
+        return Pair.of(adjacencyMatrixOfConnectedUsers, connectedUsersList);
+    }
+
+    private Set<String> connectedUserWithUser(
+            Set<String> connectedUsers, List<String> users, DenseMatrix64F adjacencyMatrix, int userIndex
+    ) {
+        for (int i = 0; i < adjacencyMatrix.getNumCols(); i++) {
+            String user = users.get(i);
+            if (adjacencyMatrix.get(userIndex, i) == 1 && !connectedUsers.contains(user)) {
+                connectedUsers.add(user);
+                connectedUsers = connectedUserWithUser(connectedUsers, users, adjacencyMatrix, i);
+            }
+        }
+        return connectedUsers;
     }
 
     private List<String> filterUsersWithRelations(List<? extends UserRelation> relations) {
