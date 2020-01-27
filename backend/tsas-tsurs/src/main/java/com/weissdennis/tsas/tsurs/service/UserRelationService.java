@@ -4,6 +4,8 @@ import com.weissdennis.tsas.common.ts3users.IpRelation;
 import com.weissdennis.tsas.common.ts3users.TS3User;
 import com.weissdennis.tsas.tsurs.model.Location;
 import com.weissdennis.tsas.tsurs.persistence.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Service
 public class UserRelationService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserRelationService.class);
 
     private final TS3UserInChannelRepository ts3UserInChannelRepository;
     private final UserRelationRepository userRelationRepository;
@@ -42,6 +46,8 @@ public class UserRelationService {
 
     private void getAndSaveRelation(TS3User user1, TS3User user2) {
         if (!user1.getUniqueId().equals(user2.getUniqueId())) {
+            LOGGER.info("Updating relation values for users " + user1.getUniqueId() + " and " + user2.getUniqueId());
+
             UserRelationIdentity userRelationIdentity = new UserRelationIdentity(user1.getUniqueId(), user2.getUniqueId());
 
             double channelRelation = getChannelRelation(user1, user2);
@@ -74,6 +80,7 @@ public class UserRelationService {
 
         if (userPair.isPresent()) {
             Double totalTimeInChannel = ts3UserPairTogetherRepository.getTotalTimeInChannel(user1.getUniqueId());
+            LOGGER.info(totalTimeInChannel.toString());
             if (totalTimeInChannel > 0) {
                 return userPair.get().getTimeTogether() / totalTimeInChannel;
             }
