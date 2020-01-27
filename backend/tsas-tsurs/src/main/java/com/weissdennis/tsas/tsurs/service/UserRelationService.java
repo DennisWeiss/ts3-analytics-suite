@@ -7,9 +7,8 @@ import com.weissdennis.tsas.tsurs.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserRelationService {
@@ -17,13 +16,16 @@ public class UserRelationService {
     private final TS3UserInChannelRepository ts3UserInChannelRepository;
     private final UserRelationRepository userRelationRepository;
     private final TS3UserRepository ts3UserRepository;
+    private final TS3UserPairTogetherRepository ts3UserPairTogetherRepository;
 
     @Autowired
     public UserRelationService(TS3UserInChannelRepository ts3UserInChannelRepository,
-                               UserRelationRepository userRelationRepository, TS3UserRepository ts3UserRepository) {
+                               UserRelationRepository userRelationRepository, TS3UserRepository ts3UserRepository,
+                               TS3UserPairTogetherRepository ts3UserPairTogetherRepository) {
         this.ts3UserInChannelRepository = ts3UserInChannelRepository;
         this.userRelationRepository = userRelationRepository;
         this.ts3UserRepository = ts3UserRepository;
+        this.ts3UserPairTogetherRepository = ts3UserPairTogetherRepository;
     }
 
     public void updateRelations() {
@@ -66,9 +68,17 @@ public class UserRelationService {
     }
 
     private double getChannelRelation(TS3User user1, TS3User user2) {
-        Double sameChannelWithThisUser = ts3UserInChannelRepository.weightedCountUsersInSameChannel(user1.getUniqueId(), user2.getUniqueId());
-        Double sameChannelWithAnyUser = ts3UserInChannelRepository.weightedCountTotalUsersInSameChannel(user1.getUniqueId());
-        return sameChannelWithThisUser != null && sameChannelWithAnyUser != null && sameChannelWithAnyUser != 0 ?
-                sameChannelWithThisUser / sameChannelWithAnyUser : 0;
+        Optional<TS3UserPairTogetherEntity> userPair = ts3UserPairTogetherRepository.findById(
+                new TS3UserPair(user1.getUniqueId(), user2.getUniqueId())
+        );
+
+        if (userPair.isPresent()) {
+            Double totalTimeInChannel = ts3UserPairTogetherRepository.getTotalTimeInChannel(user1.getUniqueId());
+            if (totalTimeInChannel > 0) {
+                return userPair.get().getTimeTogether() / totalTimeInChannel;
+            }
+        }
+
+        return 0;
     }
 }

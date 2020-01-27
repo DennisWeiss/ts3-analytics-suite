@@ -13,7 +13,7 @@ public class TsursApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(TsursApplication.class, args);
 
-        context.getBean(CreateUserPairTogetherTableService.class).createTable();
+//        context.getBean(CreateUserPairTogetherTableService.class).createTable();
 
         context.getBean(UserRelationService.class).updateRelations();
     }

@@ -34,8 +34,6 @@ public class UserInfoService implements InitializingBean {
     }
 
     private void retrieveUserInfo() {
-
-
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new TS3UserRetrievalTask(ts3Api, ts3PropertiesConfig, ts3UserRepository),
                 15, 300, TimeUnit.SECONDS);
