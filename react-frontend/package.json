@@ -42,7 +42,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "npm": "^5.10.0"
+    "npm": "^6.14.6"
   },
   "scripts": {
     "start": "set PORT=80 && react-scripts start",
